@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PF 奇物资料</title>
+  <link rel="stylesheet" href="browser.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <h1>PF 奇物资料</h1>
+      <nav class="tabs">
+        <a class="tab" href="spells.html">法术</a>
+        <a class="tab" href="feats.html">专长</a>
+        <a class="tab" href="classes.html">职业</a>
+        <a class="tab active" href="items.html">奇物</a>
+      </nav>
+      <p id="total-count" class="subtitle">加载中...</p>
+    </header>
+
+    <section class="panel">
+      <div class="controls class-controls">
+        <label for="item-search">奇物检索</label>
+        <input id="item-search" type="text" placeholder="输入奇物名称、英文名、出处或关键词" />
+        <button id="clear-search" type="button">清空</button>
+      </div>
+      <p id="result-count" class="hint"></p>
+    </section>
+
+    <section class="class-browser item-browser">
+      <aside class="book-sidebar class-sidebar" aria-label="奇物位置">
+        <div class="sidebar-title">位置</div>
+        <div id="slot-list" class="book-list class-list"></div>
+      </aside>
+
+      <section class="class-content-panel" aria-label="奇物列表">
+        <div id="slot-title" class="class-title-block"></div>
+        <div id="item-list" class="class-items"></div>
+      </section>
+
+      <aside id="item-detail" class="class-detail-panel" aria-label="奇物详情">
+        <div class="empty-detail">选择左侧奇物查看详情。</div>
+      </aside>
+    </section>
+  </main>
+  <script src="items.js?v=20260528-ioun-table-only"></script>
+</body>
+</html>

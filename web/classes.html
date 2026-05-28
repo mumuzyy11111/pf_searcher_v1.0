@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PF &#32844;&#19994;&#36164;&#26009;</title>
+  <link rel="stylesheet" href="browser.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <h1>PF &#32844;&#19994;&#36164;&#26009;</h1>
+      <nav class="tabs">
+        <a class="tab" href="spells.html">&#27861;&#26415;</a>
+        <a class="tab" href="feats.html">&#19987;&#38271;</a>
+        <a class="tab active" href="classes.html">&#32844;&#19994;</a>
+        <a class="tab" href="items.html">&#22855;&#29289;</a>
+      </nav>
+      <p id="total-count" class="subtitle">&#21152;&#36733;&#20013;...</p>
+    </header>
+
+    <section class="panel">
+      <div class="controls class-controls">
+        <label for="class-search">&#32844;&#19994;&#26816;&#32034;</label>
+        <input id="class-search" type="text" placeholder="&#36755;&#20837;&#32844;&#19994;&#12289;&#29305;&#24615;&#25110;&#21464;&#20307;&#21517;&#31216;" />
+        <button id="clear-search" type="button">&#28165;&#31354;</button>
+      </div>
+      <div id="class-section-switch" class="class-section-switch" aria-label="&#32844;&#19994;&#31867;&#22411;&#20999;&#25442;"></div>
+      <p id="result-count" class="hint"></p>
+    </section>
+
+    <section class="class-browser">
+      <aside class="book-sidebar class-sidebar" aria-label="&#32844;&#19994;&#21015;&#34920;">
+        <div class="sidebar-title">&#32844;&#19994;</div>
+        <div id="class-list" class="book-list class-list"></div>
+      </aside>
+
+      <section class="class-content-panel" aria-label="&#32844;&#19994;&#20869;&#23481;">
+        <div id="class-title" class="class-title-block"></div>
+        <div id="class-subtabs" class="class-subtabs"></div>
+        <div id="class-items" class="class-items"></div>
+      </section>
+
+      <aside id="class-detail" class="class-detail-panel" aria-label="&#20869;&#23481;&#35814;&#24773;">
+        <div class="empty-detail">&#36873;&#25321;&#24038;&#20391;&#32844;&#19994;&#26597;&#30475;&#35814;&#24773;&#12290;</div>
+      </aside>
+    </section>
+  </main>
+  <script src="classes.js?v=20260526-mythic"></script>
+</body>
+</html>

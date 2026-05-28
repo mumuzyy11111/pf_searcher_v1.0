@@ -1,0 +1,59 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PF 专长检索</title>
+  <link rel="stylesheet" href="browser.css" />
+</head>
+<body>
+  <main class="page">
+    <header class="topbar">
+      <h1>PF 专长检索</h1>
+      <nav class="tabs">
+        <a class="tab" href="spells.html">法术</a>
+        <a class="tab active" href="feats.html">专长</a>
+        <a class="tab" href="classes.html">职业</a>
+        <a class="tab" href="items.html">奇物</a>
+      </nav>
+      <p id="total-count" class="subtitle">加载中...</p>
+    </header>
+
+    <section class="panel">
+      <div class="controls">
+        <label for="search-mode">检索模式</label>
+        <select id="search-mode">
+          <option value="name">按名称</option>
+          <option value="keyword">按关键词</option>
+        </select>
+        <input id="search-input" type="text" placeholder="输入专长名称" />
+        <button id="search-btn" type="button">搜索</button>
+      </div>
+      <p id="result-count" class="hint"></p>
+    </section>
+
+    <section class="feat-browser">
+      <aside class="book-sidebar" aria-label="书籍筛选">
+        <div class="sidebar-title">筛选</div>
+        <div class="filter-section">
+          <div class="filter-title">专长类型</div>
+          <div id="type-list" class="book-list type-list"></div>
+        </div>
+        <div class="filter-section">
+          <div class="filter-title">书籍来源</div>
+          <div id="book-list" class="book-list"></div>
+        </div>
+      </aside>
+
+      <section class="feat-list-panel" aria-label="专长结果">
+        <div id="results" class="feat-list"></div>
+      </section>
+
+      <aside id="feat-detail" class="feat-detail-panel" aria-label="专长详情">
+        <div class="empty-detail">选择左侧专长查看详情。</div>
+      </aside>
+    </section>
+  </main>
+  <script src="feats.js"></script>
+</body>
+</html>

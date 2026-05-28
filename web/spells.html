@@ -1,0 +1,113 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PF 法术检索</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PF 法术检索</h1>
+            <p id="spell-count">加载中...</p>
+        </header>
+
+        <div class="search-panel">
+            <div class="mode-selector">
+                <label for="search-mode">搜索模式</label>
+                <select id="search-mode">
+                    <option value="name">按名称</option>
+                    <option value="keyword">按关键词</option>
+                    <option value="profession">按职业</option>
+                    <option value="rag" selected>智能问答</option>
+                </select>
+                <p class="mode-hint" id="mode-hint">按职业时点击职业按钮，再选环位</p>
+            </div>
+
+            <div id="name-search-box" class="name-search-box">
+                <label for="search-input">法术名称</label>
+                <div class="search-input-row">
+                    <input id="search-input" type="text" placeholder="输入法术名称或关键词">
+                    <button id="keyword-search-btn" class="keyword-search-btn hidden" type="button">搜索</button>
+                </div>
+            </div>
+
+            <div id="profession-selector" class="profession-selector hidden"></div>
+            <div id="level-selector" class="level-selector hidden"></div>
+
+            <div id="rag-panel" class="rag-panel hidden">
+                <div class="rag-api-key-row">
+                    <label for="rag-api-key">API Key</label>
+                    <input id="rag-api-key" type="password"
+                           autocomplete="off"
+                           placeholder="输入 API Key 后使用智能问答"
+                           class="rag-api-key-input">
+                </div>
+                <div class="rag-input-area">
+                    <input id="rag-input" type="text"
+                           placeholder="输入问题，如：有哪些3环以下的防护系法术？"
+                           class="rag-input">
+                    <button id="rag-submit" class="rag-submit">提问</button>
+                </div>
+                <div class="rag-filters-bar">
+                    <select id="rag-source-filter">
+                        <option value="">全部来源</option>
+                        <option value="CRB">CRB</option>
+                        <option value="APG">APG</option>
+                        <option value="ACG">ACG</option>
+                        <option value="ARG">ARG</option>
+                        <option value="UC">UC</option>
+                        <option value="UM">UM</option>
+                        <option value="UI">UI</option>
+                        <option value="OA">OA</option>
+                        <option value="AARCH">AARCH</option>
+                        <option value="COTR">COTR</option>
+                        <option value="FOB">FOB</option>
+                        <option value="FOC">FOC</option>
+                        <option value="FOP">FOP</option>
+                        <option value="ISG">ISG</option>
+                        <option value="ISI">ISI</option>
+                        <option value="ISM">ISM</option>
+                        <option value="ISWG">ISWG</option>
+                        <option value="MTT">MTT</option>
+                        <option value="RTT">RTT</option>
+                        <option value="TG">TG</option>
+                        <option value="AG">AG</option>
+                        <option value="MC">MC</option>
+                        <option value="MA">MA</option>
+                        <option value="VC">VC</option>
+                        <option value="HA">HA</option>
+                        <option value="UW">UW</option>
+                        <option value="PA">PA</option>
+                        <option value="BOTD">BotD</option>
+                    </select>
+                    <select id="rag-type-filter">
+                        <option value="">全部类型</option>
+                        <option value="normal">普通法术</option>
+                        <option value="mythic">神话法术</option>
+                    </select>
+                    <select id="rag-school-filter">
+                        <option value="">全部学派</option>
+                        <option value="防护">防护</option>
+                        <option value="塑能">塑能</option>
+                        <option value="咒法">咒法</option>
+                        <option value="预言">预言</option>
+                        <option value="惑控">惑控</option>
+                        <option value="死灵">死灵</option>
+                        <option value="变化">变化</option>
+                        <option value="幻术">幻术</option>
+                    </select>
+                    <input id="rag-level-filter" type="number" placeholder="最高环位" min="0" max="9">
+                </div>
+                <div id="rag-status" class="rag-status"></div>
+                <div id="rag-answer" class="rag-answer hidden"></div>
+            </div>
+        </div>
+
+        <div id="results-container" class="results-grid"></div>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>

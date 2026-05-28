@@ -1,0 +1,229 @@
+[
+  {
+    "spell_id": "col-0001",
+    "name": "领域惩戒 （ Realm Retribution ）",
+    "source_book": "col",
+    "school": "咒法系（传送）",
+    "level_raw": "牧师/先知 8，审判者 6，战斗祭司 6",
+    "level_by_class": [
+      {
+        "class": "牧师/先知",
+        "level": 8
+      },
+      {
+        "class": "审判者",
+        "level": 6
+      },
+      {
+        "class": "战斗祭司",
+        "level": 6
+      }
+    ],
+    "cast_time": "标准动作",
+    "components": "语言，姿势",
+    "range": "接触",
+    "target": "接触到的生物",
+    "duration": "1轮/等级",
+    "save": "意志无效（见下文）",
+    "spell_resistance": "否",
+    "effect": "目标进行的所有攻击都会符合你的阵营，视情况被视为混乱、邪恶、善良或守序。如果你的阵营包括多个阵营成分，例如守序善良，你可以选择一个阵营成分赋予目标。每当目标确认对一个生物确认重击或受到一个生物的伤害时，该生物必须尝试一次意志豁免。如果豁免失败，该生物将如同受到 异界传送 效果一样，被送往与你的阵营相匹配的外层位面，然后法术结束。战争祭司在以准备该法术、确定DC等为目的时将该法术视为6环牧师法术。 （ 译注 ：该法术的“Retribution”根据效果应有报复报偿之意，但这太难组词了；尤其是配合“Realm”国度/领域（应该是指被遣送到的单阵营位面），国度报偿？领域惩戒？等一个合适的译名）",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "领域惩戒 （ Realm Retribution ）",
+      "source_book": "col",
+      "效果": "目标进行的所有攻击都会符合你的阵营，视情况被视为混乱、邪恶、善良或守序。如果你的阵营包括多个阵营成分，例如守序善良，你可以选择一个阵营成分赋予目标。每当目标确认对一个生物确认重击或受到一个生物的伤害时，该生物必须尝试一次意志豁免。如果豁免失败，该生物将如同受到 异界传送 效果一样，被送往与你的阵营相匹配的外层位面，然后法术结束。战争祭司在以准备该法术、确定DC等为目的时将该法术视为6环牧师法术。 （ 译注 ：该法术的“Retribution”根据效果应有报复报偿之意，但这太难组词了；尤其是配合“Realm”国度/领域（应该是指被遣送到的单阵营位面），国度报偿？领域惩戒？等一个合适的译名）",
+      "学派": "咒法系（传送）",
+      "等级": "牧师/先知 8，审判者 6，战斗祭司 6",
+      "施法时间": "标准动作",
+      "成分": "语言，姿势",
+      "范围": "接触",
+      "目标": "接触到的生物",
+      "持续": "1轮/等级",
+      "豁免": "意志无效（见下文）",
+      "法术抗力": "否",
+      "法术类型": "普通法术",
+      "来源书名": "传奇编年史",
+      "目录缩写": "CoL"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "CoL",
+    "source_title": "传奇编年史"
+  },
+  {
+    "spell_id": "col-0002",
+    "name": "Rival's Weald",
+    "source_book": "col",
+    "school": "transmutation",
+    "level_raw": "druid 9, shaman 9, witch 9",
+    "level_by_class": [
+      {
+        "class": "druid",
+        "level": 9
+      },
+      {
+        "class": "shaman",
+        "level": 9
+      },
+      {
+        "class": "witch",
+        "level": 9
+      }
+    ],
+    "cast_time": "1 standard action",
+    "components": "V, S, M (a hardened piece of tree sap)",
+    "range": "close (25 ft. + 5 ft./2 levels)",
+    "target": "one creature/two levels, no two of which can be more than 30 ft. apart",
+    "duration": "permanent",
+    "save": "Fortitude negates, Will partial (see text)",
+    "spell_resistance": "yes",
+    "effect": "This spell transforms your targets into trees as per\ntree shape\n, except the targets transform into living trees that resemble their original forms. If a target is in a situation that would prove fatal to a tree created by this spell, such as off the ground or under water, the target receives a +4 bonus on its Fortitude save.\nIf the spell succeeds, the target must also attempt a Will save. On a failed save, the creature loses the ability to observe what transpires around it, and its mental capacity reverts to that of a tree, rendering it unable to take any kind of action. A target that succeeds at the saving throw can observe the area around it but can't take any actions other than communicate to those under the effects of a\nspeak with plants\nspell or to other trees. Over the span of 1 year, the target's appearance becomes more like a common tree and less like its original form.\nAny polymorph effects on a target are automatically dispelled when the target fails to resist the effects of\nrival's weald\n, and as long as\nrival's weald\nremains in effect, the target cannot use other polymorph spells or effects to assume a new form. Incorporeal, gaseous, and plant creatures are immune to\nrival's weald\n.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Rival's Weald",
+      "source_book": "col",
+      "学派": "transmutation",
+      "等级": "druid 9, shaman 9, witch 9",
+      "施法时间": "1 standard action",
+      "成分": "V, S, M (a hardened piece of tree sap)",
+      "范围": "close (25 ft. + 5 ft./2 levels)",
+      "目标": "one creature/two levels, no two of which can be more than 30 ft. apart",
+      "持续": "permanent",
+      "豁免": "Fortitude negates, Will partial (see text)",
+      "法术抗力": "yes",
+      "效果": "This spell transforms your targets into trees as per\ntree shape\n, except the targets transform into living trees that resemble their original forms. If a target is in a situation that would prove fatal to a tree created by this spell, such as off the ground or under water, the target receives a +4 bonus on its Fortitude save.\nIf the spell succeeds, the target must also attempt a Will save. On a failed save, the creature loses the ability to observe what transpires around it, and its mental capacity reverts to that of a tree, rendering it unable to take any kind of action. A target that succeeds at the saving throw can observe the area around it but can't take any actions other than communicate to those under the effects of a\nspeak with plants\nspell or to other trees. Over the span of 1 year, the target's appearance becomes more like a common tree and less like its original form.\nAny polymorph effects on a target are automatically dispelled when the target fails to resist the effects of\nrival's weald\n, and as long as\nrival's weald\nremains in effect, the target cannot use other polymorph spells or effects to assume a new form. Incorporeal, gaseous, and plant creatures are immune to\nrival's weald\n.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Rival%27s%20Weald",
+      "来源书名": "传奇编年史",
+      "目录缩写": "CoL"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "CoL",
+    "source_title": "传奇编年史"
+  },
+  {
+    "spell_id": "col-0003",
+    "name": "Song of Discord, Greater",
+    "source_book": "col",
+    "school": "enchantment",
+    "level_raw": "bard 6, mesmerist 6, psychic 8, skald 6",
+    "level_by_class": [
+      {
+        "class": "bard",
+        "level": 6
+      },
+      {
+        "class": "mesmerist",
+        "level": 6
+      },
+      {
+        "class": "psychic",
+        "level": 8
+      },
+      {
+        "class": "skald",
+        "level": 6
+      }
+    ],
+    "cast_time": "1 standard action",
+    "components": "V, S",
+    "range": "medium (100 ft. + 10 ft./level)",
+    "target": "creatures within a 20-ft. radius spread",
+    "duration": "1 round/level",
+    "save": "Will partial",
+    "spell_resistance": "yes",
+    "effect": "This spell functions as\nsong of discord\nexcept that affected creatures automatically attack the nearest target each round. In addition, all affected creatures gain a +4 morale bonus to Strength for the duration of the spell. A creature that succeeds at the Will save reduces the effect’s duration to 1 round.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Song of Discord, Greater",
+      "source_book": "col",
+      "学派": "enchantment",
+      "等级": "bard 6, mesmerist 6, psychic 8, skald 6",
+      "施法时间": "1 standard action",
+      "成分": "V, S",
+      "范围": "medium (100 ft. + 10 ft./level)",
+      "目标": "creatures within a 20-ft. radius spread",
+      "持续": "1 round/level",
+      "豁免": "Will partial",
+      "法术抗力": "yes",
+      "效果": "This spell functions as\nsong of discord\nexcept that affected creatures automatically attack the nearest target each round. In addition, all affected creatures gain a +4 morale bonus to Strength for the duration of the spell. A creature that succeeds at the Will save reduces the effect’s duration to 1 round.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Song%20of%20Discord%2C%20Greater",
+      "来源书名": "传奇编年史",
+      "目录缩写": "CoL"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "CoL",
+    "source_title": "传奇编年史"
+  },
+  {
+    "spell_id": "col-0004",
+    "name": "Uncanny Reminder",
+    "source_book": "col",
+    "school": "conjuration",
+    "level_raw": "arcanist 8, mesmerist 6, psychic 8, sorcerer 8, summoner 6, summoner (unchained) 6, wizard 8",
+    "level_by_class": [
+      {
+        "class": "arcanist",
+        "level": 8
+      },
+      {
+        "class": "mesmerist",
+        "level": 6
+      },
+      {
+        "class": "psychic",
+        "level": 8
+      },
+      {
+        "class": "sorcerer",
+        "level": 8
+      },
+      {
+        "class": "summoner",
+        "level": 6
+      },
+      {
+        "class": "summoner (unchained)",
+        "level": 6
+      },
+      {
+        "class": "wizard",
+        "level": 8
+      }
+    ],
+    "cast_time": "1 round",
+    "components": "V, S",
+    "range": "close (25 ft. + 5 ft./2 levels)",
+    "target": "one living creature",
+    "duration": "1 round/level",
+    "save": "Will negates",
+    "spell_resistance": "yes",
+    "effect": "This spell creates an animated replica of the target drawn from the target’s subconscious. This living memory is an animated form of the target’s negative thoughts and emotions and is intent on destroying the target entirely. The living memory appears to be an exact replica of the target creature, but upon inspection it is obviously a construct. It uses the statistics of a\nclockwork angel\nexcept that it has an Intelligence of 10 and does not have the clockwork trait, the enhance weapon ability, or vulnerability to electricity. If the living memory is destroyed, it vanishes entirely, including any replicas of equipment.\nYou do not control the living memory. The living memory constantly attacks the target. The nature of the living memory causes the target to become unsettled. Roll on the following table to determine how the target acts while the living memory is in sight. If the result offers a saving throw, the DC is equal to that of this spell. The result remains in effect for as long as the living memory is in sight. If the target loses sight of the living memory and then sees it again, roll on the chart again.\nd%\nBehavior\n1-20\nTarget is unaffected\n21-35\nTarget takes a –2 penalty on attack rolls\n36-50\nTarget takes a –2 penalty on saving throws\n51-65\nTarget takes a –4 penalty on ability checks, attack rolls, saving throws, skill checks, and weapon damage rolls\n66-75\nTarget is staggered (Fortitude negates)\n76-85\nTarget is fascinated by the living memory (Will negates)\n86-95\nTarget is frightened by the living memory (Will negates)\n96-100\nTarget is nauseated (Fortitude negates)",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Uncanny Reminder",
+      "source_book": "col",
+      "学派": "conjuration",
+      "等级": "arcanist 8, mesmerist 6, psychic 8, sorcerer 8, summoner 6, summoner (unchained) 6, wizard 8",
+      "施法时间": "1 round",
+      "成分": "V, S",
+      "范围": "close (25 ft. + 5 ft./2 levels)",
+      "目标": "one living creature",
+      "持续": "1 round/level",
+      "豁免": "Will negates",
+      "法术抗力": "yes",
+      "效果": "This spell creates an animated replica of the target drawn from the target’s subconscious. This living memory is an animated form of the target’s negative thoughts and emotions and is intent on destroying the target entirely. The living memory appears to be an exact replica of the target creature, but upon inspection it is obviously a construct. It uses the statistics of a\nclockwork angel\nexcept that it has an Intelligence of 10 and does not have the clockwork trait, the enhance weapon ability, or vulnerability to electricity. If the living memory is destroyed, it vanishes entirely, including any replicas of equipment.\nYou do not control the living memory. The living memory constantly attacks the target. The nature of the living memory causes the target to become unsettled. Roll on the following table to determine how the target acts while the living memory is in sight. If the result offers a saving throw, the DC is equal to that of this spell. The result remains in effect for as long as the living memory is in sight. If the target loses sight of the living memory and then sees it again, roll on the chart again.\nd%\nBehavior\n1-20\nTarget is unaffected\n21-35\nTarget takes a –2 penalty on attack rolls\n36-50\nTarget takes a –2 penalty on saving throws\n51-65\nTarget takes a –4 penalty on ability checks, attack rolls, saving throws, skill checks, and weapon damage rolls\n66-75\nTarget is staggered (Fortitude negates)\n76-85\nTarget is fascinated by the living memory (Will negates)\n86-95\nTarget is frightened by the living memory (Will negates)\n96-100\nTarget is nauseated (Fortitude negates)",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Uncanny%20Reminder",
+      "来源书名": "传奇编年史",
+      "目录缩写": "CoL"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "CoL",
+    "source_title": "传奇编年史"
+  }
+]

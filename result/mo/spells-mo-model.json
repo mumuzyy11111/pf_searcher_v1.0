@@ -1,0 +1,291 @@
+[
+  {
+    "spell_id": "mo-0001",
+    "name": "预支未来 Borrowed Time",
+    "source_book": "mo",
+    "school": "变化系",
+    "level_raw": "炼金术师6，吟游诗人6，魔战士6，法师/术士6",
+    "level_by_class": [
+      {
+        "class": "炼金术师",
+        "level": 6
+      },
+      {
+        "class": "吟游诗人",
+        "level": 6
+      },
+      {
+        "class": "魔战士",
+        "level": 6
+      },
+      {
+        "class": "法师/术士",
+        "level": 6
+      }
+    ],
+    "cast_time": "标准动作",
+    "components": "语言，姿势",
+    "range": "个人",
+    "target": "自己",
+    "duration": "1轮/等级 (可消解）",
+    "save": "",
+    "spell_resistance": "",
+    "effect": "该法术由大法师耐克斯（Nex）本人发明，它能让你用自己的健康作为代价，在时间流中快人一步，攫取来自未来的余裕。在法术持续时间内，你会额外获得一个只能在你回合内使用的迅捷动作。你不能将该迅捷动作用来在回合间进行第二次直觉动作，但你可以将其用于在使用过直觉动作的下一回合内进行迅捷动作。你每次用该效果进行额外的迅捷动作时，就会受到1点体质伤害。若你免疫属性伤害，则改为受到5点生命值伤害。当该法术结束时，你会因暂时性的反冲，而恍惚1d4+1轮。 神话：若你花费1次神话之力，取代获得一个额外的迅捷动作，你能转而每轮获得一个额外的移动动作或迅捷动作。你能使用该额外迅捷动作来在你回合间进行两次直觉动作；这会消耗掉你下一轮中的额外直觉动作。你以此效果所获得的每个额外动作依然会像上文所述般对你造成伤害。",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "预支未来 Borrowed Time",
+      "source_book": "mo",
+      "效果": "该法术由大法师耐克斯（Nex）本人发明，它能让你用自己的健康作为代价，在时间流中快人一步，攫取来自未来的余裕。在法术持续时间内，你会额外获得一个只能在你回合内使用的迅捷动作。你不能将该迅捷动作用来在回合间进行第二次直觉动作，但你可以将其用于在使用过直觉动作的下一回合内进行迅捷动作。你每次用该效果进行额外的迅捷动作时，就会受到1点体质伤害。若你免疫属性伤害，则改为受到5点生命值伤害。当该法术结束时，你会因暂时性的反冲，而恍惚1d4+1轮。 神话：若你花费1次神话之力，取代获得一个额外的迅捷动作，你能转而每轮获得一个额外的移动动作或迅捷动作。你能使用该额外迅捷动作来在你回合间进行两次直觉动作；这会消耗掉你下一轮中的额外直觉动作。你以此效果所获得的每个额外动作依然会像上文所述般对你造成伤害。",
+      "学派": "变化系",
+      "等级": "炼金术师6，吟游诗人6，魔战士6，法师/术士6",
+      "施法时间": "标准动作",
+      "成分": "语言，姿势",
+      "范围": "个人",
+      "目标": "自己",
+      "持续": "1轮/等级 (可消解）",
+      "法术类型": "普通法术",
+      "来源书名": "神话源始",
+      "目录缩写": "MO"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "MO",
+    "source_title": "神话源始"
+  },
+  {
+    "spell_id": "mo-0002",
+    "name": "Elemental Bombardment",
+    "source_book": "mo",
+    "school": "conjuration",
+    "level_raw": "arcanist 7, druid 7, sorcerer 7, wizard 7",
+    "level_by_class": [
+      {
+        "class": "arcanist",
+        "level": 7
+      },
+      {
+        "class": "druid",
+        "level": 7
+      },
+      {
+        "class": "sorcerer",
+        "level": 7
+      },
+      {
+        "class": "wizard",
+        "level": 7
+      }
+    ],
+    "cast_time": "1 round",
+    "components": "V, S",
+    "range": "long (400 ft. + 40 ft./level)",
+    "target": "Range",
+    "duration": "1 round/2 levels (D)",
+    "save": "none",
+    "spell_resistance": "no",
+    "effect": "You summon elementals from their elemental planes and hurl them onto your enemies with great force. You must have line of effect to a point at least 60 feet above your intended targets and within the spell’s range. You can summon one greater elemental, two Huge elementals, four Large elementals, or eight Medium elementals. You aim the elementals at targets within 60 feet of each other, no more than one elemental per target.\nEach elemental can strike only a single target, regardless of its size. When an elemental strikes a target, it makes a single slam attack at its full attack bonus with a +4 circumstance bonus. The elemental deals damage according to the table below. The type and amount of damage dealt varies by the size and type of elemental (see the table). Some elementals inflict an additional special ability upon successfully hitting a target; these additional special abilities are detailed in the elemental’s full stat block and are denoted with an asterisk (*). Whether or not it hits, the elemental takes bludgeoning damage according to its size. A summoned elemental acts on the same turn that it lands, starting prone in the nearest available space adjacent to its target.\nYou must select one type of elemental to summon when casting this spell (see the table). When you use a summoning spell to summon a creature with an elemental subtype, it is a spell of that type.\nElemental Size\nDamage\nMedium\n6d6\nLarge\n8d6\nHuge or larger\n12d6\nElemental Type\nDamage Type\nAir\nHalf slashing, half electricity\nEarth\nBludgeoning and earth mastery*\nFire\nFire and burn*\nIce\nB2\nHalf bludgeoning, half cold\nLightning\nB2\nElectricity and metal mastery*\nMagma\nB2\nHalf bludgeoning, half fire\nMud\nB2\nBludgeoning and entrap*\nWater\nBludgeoning and drench*\nMythic Elemental Bombardment\nSource\nMythic Origins pg. 14\nIf you expend one use of mythic power, you can summon a combination of differently sized elementals of up to two different types, as long as their total number does not exceed the original limit. For example, you could summon one Huge air elemental and two Large fire elementals, or one Large water elemental and six Medium earth elementals.\nAugmented (9th)\n: If you expend three uses of mythic power, you summon twice as many elementals as normal, each with the advanced simple template.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Elemental Bombardment",
+      "source_book": "mo",
+      "学派": "conjuration",
+      "等级": "arcanist 7, druid 7, sorcerer 7, wizard 7",
+      "施法时间": "1 round",
+      "成分": "V, S",
+      "范围": "long (400 ft. + 40 ft./level)",
+      "目标": "Range",
+      "持续": "1 round/2 levels (D)",
+      "豁免": "none",
+      "法术抗力": "no",
+      "效果": "You summon elementals from their elemental planes and hurl them onto your enemies with great force. You must have line of effect to a point at least 60 feet above your intended targets and within the spell’s range. You can summon one greater elemental, two Huge elementals, four Large elementals, or eight Medium elementals. You aim the elementals at targets within 60 feet of each other, no more than one elemental per target.\nEach elemental can strike only a single target, regardless of its size. When an elemental strikes a target, it makes a single slam attack at its full attack bonus with a +4 circumstance bonus. The elemental deals damage according to the table below. The type and amount of damage dealt varies by the size and type of elemental (see the table). Some elementals inflict an additional special ability upon successfully hitting a target; these additional special abilities are detailed in the elemental’s full stat block and are denoted with an asterisk (*). Whether or not it hits, the elemental takes bludgeoning damage according to its size. A summoned elemental acts on the same turn that it lands, starting prone in the nearest available space adjacent to its target.\nYou must select one type of elemental to summon when casting this spell (see the table). When you use a summoning spell to summon a creature with an elemental subtype, it is a spell of that type.\nElemental Size\nDamage\nMedium\n6d6\nLarge\n8d6\nHuge or larger\n12d6\nElemental Type\nDamage Type\nAir\nHalf slashing, half electricity\nEarth\nBludgeoning and earth mastery*\nFire\nFire and burn*\nIce\nB2\nHalf bludgeoning, half cold\nLightning\nB2\nElectricity and metal mastery*\nMagma\nB2\nHalf bludgeoning, half fire\nMud\nB2\nBludgeoning and entrap*\nWater\nBludgeoning and drench*\nMythic Elemental Bombardment\nSource\nMythic Origins pg. 14\nIf you expend one use of mythic power, you can summon a combination of differently sized elementals of up to two different types, as long as their total number does not exceed the original limit. For example, you could summon one Huge air elemental and two Large fire elementals, or one Large water elemental and six Medium earth elementals.\nAugmented (9th)\n: If you expend three uses of mythic power, you summon twice as many elementals as normal, each with the advanced simple template.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Elemental%20Bombardment",
+      "来源书名": "神话源始",
+      "目录缩写": "MO"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "MO",
+    "source_title": "神话源始"
+  },
+  {
+    "spell_id": "mo-0003",
+    "name": "Imbue with Flight",
+    "source_book": "mo",
+    "school": "transmutation",
+    "level_raw": "arcanist 4, redmantisassassin 4, sorcerer 4, wizard 4",
+    "level_by_class": [
+      {
+        "class": "arcanist",
+        "level": 4
+      },
+      {
+        "class": "redmantisassassin",
+        "level": 4
+      },
+      {
+        "class": "sorcerer",
+        "level": 4
+      },
+      {
+        "class": "wizard",
+        "level": 4
+      }
+    ],
+    "cast_time": "1 standard action",
+    "components": "V, M (handful of down)",
+    "range": "touch",
+    "target": "object touched",
+    "duration": "1 hour/level (D)",
+    "save": "Will negates (harmless, object)",
+    "spell_resistance": "yes (harmless, object)",
+    "effect": "You grant a touched Large or smaller object the ability to fly at a speed of 40 feet with average maneuverability. It can ascend at half speed and descend at double speed. The targeted object flies as you direct it, using your Fly skill for any difficult maneuvers. You must be within close range (25 ft. + 5 ft./2 levels) of the object to direct it, and moving it requires a move action. If not directed, the object hovers in place (no Fly check required). The maximum weight of the object and anything carried by it is 500 pounds per caster level (maximum 10,000 pounds).\nMythic Imbue with Flight\nSource\nMythic Origins pg. 15\nIf you expend one use of mythic power, you double the maximum weight of the object you can imbue with flight. You can expend additional uses of mythic power to increase the maximum size of the object you can imbue with flight. Imbuing a Huge object requires two uses of mythic power, imbuing a Gargantuan object requires four uses, and imbuing a Colossal object requires eight uses. These costs include the expenditure to cast a mythic spell, and count toward doubling the weight limit of the spell.\nTwo or more casters can cast this spell in concert to share the mythic power cost. Each caster must expend an additional use of mythic power to cooperate; this does not count toward the other costs or effects of the spell. The group chooses which caster has control of the flight. As a full-round action, the controlling caster can cede control to another caster involved in the original casting of the spell.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Imbue with Flight",
+      "source_book": "mo",
+      "学派": "transmutation",
+      "等级": "arcanist 4, redmantisassassin 4, sorcerer 4, wizard 4",
+      "施法时间": "1 standard action",
+      "成分": "V, M (handful of down)",
+      "范围": "touch",
+      "目标": "object touched",
+      "持续": "1 hour/level (D)",
+      "豁免": "Will negates (harmless, object)",
+      "法术抗力": "yes (harmless, object)",
+      "效果": "You grant a touched Large or smaller object the ability to fly at a speed of 40 feet with average maneuverability. It can ascend at half speed and descend at double speed. The targeted object flies as you direct it, using your Fly skill for any difficult maneuvers. You must be within close range (25 ft. + 5 ft./2 levels) of the object to direct it, and moving it requires a move action. If not directed, the object hovers in place (no Fly check required). The maximum weight of the object and anything carried by it is 500 pounds per caster level (maximum 10,000 pounds).\nMythic Imbue with Flight\nSource\nMythic Origins pg. 15\nIf you expend one use of mythic power, you double the maximum weight of the object you can imbue with flight. You can expend additional uses of mythic power to increase the maximum size of the object you can imbue with flight. Imbuing a Huge object requires two uses of mythic power, imbuing a Gargantuan object requires four uses, and imbuing a Colossal object requires eight uses. These costs include the expenditure to cast a mythic spell, and count toward doubling the weight limit of the spell.\nTwo or more casters can cast this spell in concert to share the mythic power cost. Each caster must expend an additional use of mythic power to cooperate; this does not count toward the other costs or effects of the spell. The group chooses which caster has control of the flight. As a full-round action, the controlling caster can cede control to another caster involved in the original casting of the spell.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Imbue%20with%20Flight",
+      "来源书名": "神话源始",
+      "目录缩写": "MO"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "MO",
+    "source_title": "神话源始"
+  },
+  {
+    "spell_id": "mo-0004",
+    "name": "Soulreaver",
+    "source_book": "mo",
+    "school": "necromancy",
+    "level_raw": "arcanist 8, cleric 8, oracle 8, sorcerer 8, witch 8, wizard 8",
+    "level_by_class": [
+      {
+        "class": "arcanist",
+        "level": 8
+      },
+      {
+        "class": "cleric",
+        "level": 8
+      },
+      {
+        "class": "oracle",
+        "level": 8
+      },
+      {
+        "class": "sorcerer",
+        "level": 8
+      },
+      {
+        "class": "witch",
+        "level": 8
+      },
+      {
+        "class": "wizard",
+        "level": 8
+      }
+    ],
+    "cast_time": "1 standard action",
+    "components": "V, S",
+    "range": "close (25 ft. + 5 ft./2 levels)",
+    "target": "living creatures in a 20-ft.-radius spread",
+    "duration": "instantaneous",
+    "save": "Fortitude half",
+    "spell_resistance": "yes",
+    "effect": "Favored by the necromancer Geb as a tool to turn his enemies’ armies against themselves, this potent death spell deals 1d6 points of damage per caster level (maximum 20d6) to living creatures in the area of effect.\nMythic Soulreaver\nSource\nMythic Origins pg. 15\nYou can expend one use of mythic power to raise creatures killed by this effect as undead thralls. You can animate a number of Hit Dice worth of undead up to double your tier as if you had animated them with\nanimate dead\n. The undead created by this spell count toward the total number of Hit Dice worth of undead you can control.\nAugmented (8th)\n: If you expend two uses of mythic power, you can raise slain foes as undead creatures chosen from the list of undead for\ncreate undead\n. By expending three uses of mythic power, you can select from the list for\ncreate greater undead\n. The total number of Hit Dice worth of undead created in this way can’t exceed double your tier. Created undead are not automatically under your control. If you are capable of commanding undead, you may attempt to command the undead creatures as they form.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Soulreaver",
+      "source_book": "mo",
+      "学派": "necromancy",
+      "等级": "arcanist 8, cleric 8, oracle 8, sorcerer 8, witch 8, wizard 8",
+      "施法时间": "1 standard action",
+      "成分": "V, S",
+      "范围": "close (25 ft. + 5 ft./2 levels)",
+      "目标": "living creatures in a 20-ft.-radius spread",
+      "持续": "instantaneous",
+      "豁免": "Fortitude half",
+      "法术抗力": "yes",
+      "效果": "Favored by the necromancer Geb as a tool to turn his enemies’ armies against themselves, this potent death spell deals 1d6 points of damage per caster level (maximum 20d6) to living creatures in the area of effect.\nMythic Soulreaver\nSource\nMythic Origins pg. 15\nYou can expend one use of mythic power to raise creatures killed by this effect as undead thralls. You can animate a number of Hit Dice worth of undead up to double your tier as if you had animated them with\nanimate dead\n. The undead created by this spell count toward the total number of Hit Dice worth of undead you can control.\nAugmented (8th)\n: If you expend two uses of mythic power, you can raise slain foes as undead creatures chosen from the list of undead for\ncreate undead\n. By expending three uses of mythic power, you can select from the list for\ncreate greater undead\n. The total number of Hit Dice worth of undead created in this way can’t exceed double your tier. Created undead are not automatically under your control. If you are capable of commanding undead, you may attempt to command the undead creatures as they form.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Soulreaver",
+      "来源书名": "神话源始",
+      "目录缩写": "MO"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "MO",
+    "source_title": "神话源始"
+  },
+  {
+    "spell_id": "mo-0005",
+    "name": "Sustaining Legend",
+    "source_book": "mo",
+    "school": "conjuration",
+    "level_raw": "bard 5, cleric 6, oracle 6, skald 5, warpriest 6",
+    "level_by_class": [
+      {
+        "class": "bard",
+        "level": 5
+      },
+      {
+        "class": "cleric",
+        "level": 6
+      },
+      {
+        "class": "oracle",
+        "level": 6
+      },
+      {
+        "class": "skald",
+        "level": 5
+      },
+      {
+        "class": "warpriest",
+        "level": 6
+      }
+    ],
+    "cast_time": "1 standard action",
+    "components": "V, S",
+    "range": "close (25 ft. + 5 ft./2 levels)",
+    "target": "one creature/level, no two of which can be more than 30 ft. apart",
+    "duration": "1 round/level",
+    "save": "Will negates (harmless)",
+    "spell_resistance": "yes",
+    "effect": "The rulers of Azlant are thought to have used this spell to amplify the mythic power of themselves and their most gifted lieutenants. You amplify the mythic power of the target creatures, bolstering them with healing energy each time they draw upon their mythic abilities. When a creature affected by this spell expends uses of mythic power for any ability, it immediately heals 2d8 points of damage + 1 point per caster level (maximum +25). In addition, the creature benefits from one of the following additional effects.\nRemove any one of the following conditions: dazzled, fatigued, shaken, sickened, or staggered.\nReduce the dazed or stunned condition to staggered.\nReduce the exhausted condition to fatigued.\nReduce the frightened condition to shaken, or the panicked condition to frightened.\nReduce the nauseated condition to sickened.\nA target can benefit from the effects of\nsustaining legend\nonly once per round, even if the target expends multiple uses of mythic power during that time.",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "Sustaining Legend",
+      "source_book": "mo",
+      "学派": "conjuration",
+      "等级": "bard 5, cleric 6, oracle 6, skald 5, warpriest 6",
+      "施法时间": "1 standard action",
+      "成分": "V, S",
+      "范围": "close (25 ft. + 5 ft./2 levels)",
+      "目标": "one creature/level, no two of which can be more than 30 ft. apart",
+      "持续": "1 round/level",
+      "豁免": "Will negates (harmless)",
+      "法术抗力": "yes",
+      "效果": "The rulers of Azlant are thought to have used this spell to amplify the mythic power of themselves and their most gifted lieutenants. You amplify the mythic power of the target creatures, bolstering them with healing energy each time they draw upon their mythic abilities. When a creature affected by this spell expends uses of mythic power for any ability, it immediately heals 2d8 points of damage + 1 point per caster level (maximum +25). In addition, the creature benefits from one of the following additional effects.\nRemove any one of the following conditions: dazzled, fatigued, shaken, sickened, or staggered.\nReduce the dazed or stunned condition to staggered.\nReduce the exhausted condition to fatigued.\nReduce the frightened condition to shaken, or the panicked condition to frightened.\nReduce the nauseated condition to sickened.\nA target can benefit from the effects of\nsustaining legend\nonly once per round, even if the target expends multiple uses of mythic power during that time.",
+      "法术类型": "普通法术",
+      "补充来源": "AoN SpellDisplay.aspx?ItemName=Sustaining%20Legend",
+      "来源书名": "神话源始",
+      "目录缩写": "MO"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "MO",
+    "source_title": "神话源始"
+  }
+]

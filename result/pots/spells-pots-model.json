@@ -1,0 +1,271 @@
+[
+  {
+    "spell_id": "pots-0001",
+    "name": "剑刃风暴(Storm of Blades)",
+    "source_book": "pots",
+    "school": "咒法 创造",
+    "level_raw": "牧师/先知/战斗祭司 3，魔战士 2，术士/法师/奥能师 2",
+    "level_by_class": [
+      {
+        "class": "牧师/先知/战斗祭司",
+        "level": 3
+      },
+      {
+        "class": "魔战士",
+        "level": 2
+      },
+      {
+        "class": "术士/法师/奥能师",
+        "level": 2
+      }
+    ],
+    "cast_time": "标准动作",
+    "components": "语言，姿势，材料（一把剑）",
+    "range": "近距（25尺+5尺/2等级）",
+    "target": "一个生物",
+    "duration": "立即",
+    "save": "无",
+    "spell_resistance": "无",
+    "effect": "你创造出一把类型与用于此法术材料成分的剑相同的浮空武器（例如细剑或弯刀），并用魔法驱动它们攻击目标。你每有2个施法者等级就可以创造出一把剑，在10级时最大5把。你和你的目标之间必须有效果线，并且目标必须在法术范围内。你为每把剑做一次远程攻击检定（没有射程增量和近战武器用于远程攻击的惩罚）；每次攻击使用相同的重击范围和重击倍率以及伤害骰，如同用于花费的剑的标准类型。以此法术创造的剑会在攻击（或失手）他们的目标后消失。",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "剑刃风暴(Storm of Blades)",
+      "source_book": "pots",
+      "效果": "你创造出一把类型与用于此法术材料成分的剑相同的浮空武器（例如细剑或弯刀），并用魔法驱动它们攻击目标。你每有2个施法者等级就可以创造出一把剑，在10级时最大5把。你和你的目标之间必须有效果线，并且目标必须在法术范围内。你为每把剑做一次远程攻击检定（没有射程增量和近战武器用于远程攻击的惩罚）；每次攻击使用相同的重击范围和重击倍率以及伤害骰，如同用于花费的剑的标准类型。以此法术创造的剑会在攻击（或失手）他们的目标后消失。",
+      "学派": "咒法 创造",
+      "等级": "牧师/先知/战斗祭司 3，魔战士 2，术士/法师/奥能师 2",
+      "施法时间": "标准动作",
+      "成分": "语言，姿势，材料（一把剑）",
+      "范围": "近距（25尺+5尺/2等级）",
+      "目标": "一个生物",
+      "持续": "立即",
+      "豁免": "无",
+      "法术抗力": "无",
+      "法术类型": "普通法术",
+      "来源书名": "沙之子民",
+      "目录缩写": "PotS"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "PotS",
+    "source_title": "沙之子民"
+  },
+  {
+    "spell_id": "pots-0002",
+    "name": "召唤巨灵，次级(Summon Genie, Lesser)",
+    "source_book": "pots",
+    "school": "咒法 召唤",
+    "level_raw": "牧师/先知/战斗祭司 4，术士/法师/奥能师 4，召唤师 3，女巫 4",
+    "level_by_class": [
+      {
+        "class": "牧师/先知/战斗祭司",
+        "level": 4
+      },
+      {
+        "class": "术士/法师/奥能师",
+        "level": 4
+      },
+      {
+        "class": "召唤师",
+        "level": 3
+      },
+      {
+        "class": "女巫",
+        "level": 4
+      }
+    ],
+    "cast_time": "1轮",
+    "components": "语言，姿势，器材/法器（一份至少价值50GP的灯油）",
+    "range": "近距（25尺+5尺/2等级）",
+    "target": "一个被召唤的巨灵",
+    "duration": "1轮/等级（D）",
+    "save": "无",
+    "spell_resistance": "无",
+    "effect": "这个法术类似 召唤怪物 I(summon monster I) ，除了你可以召唤1个小巨灵（janni）",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "召唤巨灵，次级(Summon Genie, Lesser)",
+      "source_book": "pots",
+      "效果": "这个法术类似 召唤怪物 I(summon monster I) ，除了你可以召唤1个小巨灵（janni）",
+      "学派": "咒法 召唤",
+      "等级": "牧师/先知/战斗祭司 4，术士/法师/奥能师 4，召唤师 3，女巫 4",
+      "施法时间": "1轮",
+      "成分": "语言，姿势，器材/法器（一份至少价值50GP的灯油）",
+      "范围": "近距（25尺+5尺/2等级）",
+      "目标": "一个被召唤的巨灵",
+      "持续": "1轮/等级（D）",
+      "豁免": "无",
+      "法术抗力": "无",
+      "法术类型": "普通法术",
+      "来源书名": "沙之子民",
+      "目录缩写": "PotS"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "PotS",
+    "source_title": "沙之子民"
+  },
+  {
+    "spell_id": "pots-0003",
+    "name": "召唤巨灵(Summon Genie)",
+    "source_book": "pots",
+    "school": "咒法 召唤",
+    "level_raw": "牧师/先知/战斗祭司 5，术士/法师/奥能师 5，召唤师 4，女巫 5",
+    "level_by_class": [
+      {
+        "class": "牧师/先知/战斗祭司",
+        "level": 5
+      },
+      {
+        "class": "术士/法师/奥能师",
+        "level": 5
+      },
+      {
+        "class": "召唤师",
+        "level": 4
+      },
+      {
+        "class": "女巫",
+        "level": 5
+      }
+    ],
+    "cast_time": "",
+    "components": "",
+    "range": "",
+    "target": "",
+    "duration": "",
+    "save": "",
+    "spell_resistance": "",
+    "effect": "这个法术类似 次级召唤巨灵(lesser summon genie) ，除了你可以召唤1D3个小巨灵（janni）或者1个风巨灵（djinni）",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "召唤巨灵(Summon Genie)",
+      "source_book": "pots",
+      "效果": "这个法术类似 次级召唤巨灵(lesser summon genie) ，除了你可以召唤1D3个小巨灵（janni）或者1个风巨灵（djinni）",
+      "学派": "咒法 召唤",
+      "等级": "牧师/先知/战斗祭司 5，术士/法师/奥能师 5，召唤师 4，女巫 5",
+      "法术类型": "普通法术",
+      "来源书名": "沙之子民",
+      "目录缩写": "PotS"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "PotS",
+    "source_title": "沙之子民"
+  },
+  {
+    "spell_id": "pots-0004",
+    "name": "召唤巨灵，高等(Summon Genie, Greater)",
+    "source_book": "pots",
+    "school": "咒法 召唤",
+    "level_raw": "牧师/先知/战斗祭司 6，术士/法师/奥能师 6，召唤师 5，女巫 6",
+    "level_by_class": [
+      {
+        "class": "牧师/先知/战斗祭司",
+        "level": 6
+      },
+      {
+        "class": "术士/法师/奥能师",
+        "level": 6
+      },
+      {
+        "class": "召唤师",
+        "level": 5
+      },
+      {
+        "class": "女巫",
+        "level": 6
+      }
+    ],
+    "cast_time": "",
+    "components": "",
+    "range": "",
+    "target": "",
+    "duration": "",
+    "save": "",
+    "spell_resistance": "",
+    "effect": "这个法术类似 次级召唤巨灵(lesser summon genie) ，除了你可以召唤1D4+1个小巨灵（janni）或者1D3个风巨灵（djinni）或者1个土巨灵（shaitan） 新法术 下面这个新法术，对在拉哈多姆(Rahadoum)的虔诚施法者来说是无价之宝，在那他们必须要掩藏他们魔法中的神圣本质。",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "召唤巨灵，高等(Summon Genie, Greater)",
+      "source_book": "pots",
+      "效果": "这个法术类似 次级召唤巨灵(lesser summon genie) ，除了你可以召唤1D4+1个小巨灵（janni）或者1D3个风巨灵（djinni）或者1个土巨灵（shaitan） 新法术 下面这个新法术，对在拉哈多姆(Rahadoum)的虔诚施法者来说是无价之宝，在那他们必须要掩藏他们魔法中的神圣本质。",
+      "学派": "咒法 召唤",
+      "等级": "牧师/先知/战斗祭司 6，术士/法师/奥能师 6，召唤师 5，女巫 6",
+      "法术类型": "普通法术",
+      "来源书名": "沙之子民",
+      "目录缩写": "PotS"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "PotS",
+    "source_title": "沙之子民"
+  },
+  {
+    "spell_id": "pots-0005",
+    "name": "内在法器(Inner focus)",
+    "source_book": "pots",
+    "school": "幻术 五官幻觉",
+    "level_raw": "导师2，反圣骑士1，牧师/先知/战斗祭司 2，德鲁伊2，审判者 2，圣骑士 1，游侠/猎人1",
+    "level_by_class": [
+      {
+        "class": "导师",
+        "level": 2
+      },
+      {
+        "class": "反圣骑士",
+        "level": 1
+      },
+      {
+        "class": "牧师/先知/战斗祭司",
+        "level": 2
+      },
+      {
+        "class": "德鲁伊",
+        "level": 2
+      },
+      {
+        "class": "审判者",
+        "level": 2
+      },
+      {
+        "class": "圣骑士",
+        "level": 1
+      },
+      {
+        "class": "游侠/猎人",
+        "level": 1
+      }
+    ],
+    "cast_time": "标准动作",
+    "components": "语言，姿势，法器",
+    "range": "个人",
+    "target": "自己",
+    "duration": "10分钟/等级",
+    "save": "无（无害）",
+    "spell_resistance": "无",
+    "effect": "此法术持续时间内，你可以忽视任何你的法术的法器成分（divine focus），这允许你在施展这类法术时不需要持有或展示你的圣徽或邪徽。",
+    "level_unparsed": [],
+    "raw_fields": {
+      "name": "内在法器(Inner focus)",
+      "source_book": "pots",
+      "效果": "此法术持续时间内，你可以忽视任何你的法术的法器成分（divine focus），这允许你在施展这类法术时不需要持有或展示你的圣徽或邪徽。",
+      "学派": "幻术 五官幻觉",
+      "等级": "导师2，反圣骑士1，牧师/先知/战斗祭司 2，德鲁伊2，审判者 2，圣骑士 1，游侠/猎人1",
+      "施法时间": "标准动作",
+      "成分": "语言，姿势，法器",
+      "范围": "个人",
+      "目标": "自己",
+      "持续": "10分钟/等级",
+      "豁免": "无（无害）",
+      "法术抗力": "无",
+      "法术类型": "普通法术",
+      "来源书名": "沙之子民",
+      "目录缩写": "PotS"
+    },
+    "spell_type": "normal",
+    "type_label": "普通法术",
+    "source_display": "PotS",
+    "source_title": "沙之子民"
+  }
+]

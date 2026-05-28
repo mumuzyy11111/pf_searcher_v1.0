@@ -1,0 +1,76 @@
+# Local secrets
+.env
+*.env
+!*.env.example
+config/app.env
+
+# Python caches and virtual environments
+__pycache__/
+*.py[cod]
+.venv/
+venv/
+
+# Logs
+*.log
+
+# Non-runtime local/assets
+97a39795-ae5e-4cf6-8658-fae119753303.png
+*.spec
+eval/
+
+# Build and packaging output
+build/
+dist/
+
+# Generated search indexes
+data/chroma_db/
+data/bm25_index/
+data/aon_source_spell_cache.json
+data/local_chm_only_sources.json
+data/player_companion_aon_supplements.json
+
+# Raw CHM/source dumps and extractor-only inputs
+*.chm
+*.chw
+spell/
+_chm_decompiled/
+_chm_extract/
+
+# CHM extraction and backfill tooling is not part of the runtime GitHub build
+convert_chm_to_html_viewer.py
+export_spell_html.py
+export_spell_index.py
+export_spell_markdown.py
+scripts/*
+!scripts/configure_api_keys.py
+
+# Keep only runtime-facing docs in the GitHub build
+docs/*
+!docs/API_KEY_CONFIGURATION.md
+
+# Generated viewer bundle; exceeds GitHub's regular file size limit
+result/Pathfinder-v2.14-SC-viewer.html
+result/Pathfinder-v2.14-SC-viewer-embedded.html
+
+# Large/intermediate page cache and extraction reports
+result/*.json
+result/index/
+result/pages/
+result/**/*.md
+result/**/*.tsv
+result/**/*.csv
+result/**/*report*.json
+result/**/*check*.json
+result/**/*qa.json
+result/**/*unparsed.json
+result/*/spells-*-*.json
+!result/*/spells-*-model.json
+result/feats/*
+!result/feats/
+!result/feats/feats-frontend.json
+result/classes/*
+!result/classes/
+!result/classes/classes-extracted.json
+result/items/*
+!result/items/
+!result/items/wondrous-items.json

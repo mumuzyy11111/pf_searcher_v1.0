@@ -1,0 +1,164 @@
+{
+  "basis": "Archives of Nethys SourceDisplay headings: Spells [x] or Mythic Spells [x].",
+  "checked_at": "2026-05-13",
+  "legacy_27_aon_total": 2461,
+  "notes": [
+    "ISG is Inner Sea Gods and should be compared against AoN Spells [65].",
+    "Inner Sea Intrigue has AoN Spells [26] and should use ISI, not ISG.",
+    "PA is ambiguous in Paizo abbreviations. This project uses PA for Planar Adventures and PA_1 with display PA for Psychic Anthology.",
+    "MA is compared against AoN Mythic Spells [270], not ordinary Spells."
+  ],
+  "sources": {
+    "AARCH": {
+      "aon_section": "Spells",
+      "aon_count": 10,
+      "local_count": 10
+    },
+    "ACG": {
+      "aon_section": "Spells",
+      "aon_count": 134,
+      "local_count": 134
+    },
+    "AG": {
+      "aon_section": "Spells",
+      "aon_count": 47,
+      "local_count": 47
+    },
+    "APG": {
+      "aon_section": "Spells",
+      "aon_count": 267,
+      "local_count": 267
+    },
+    "ARG": {
+      "aon_section": "Spells",
+      "aon_count": 92,
+      "local_count": 92
+    },
+    "BOTD": {
+      "aon_section": "Spells",
+      "aon_count": 12,
+      "local_count": 12
+    },
+    "COTR": {
+      "aon_section": "Spells",
+      "aon_count": 6,
+      "local_count": 6
+    },
+    "CRB": {
+      "aon_section": "Spells",
+      "aon_count": 623,
+      "local_count": 623
+    },
+    "FOB": {
+      "aon_section": "Spells",
+      "aon_count": 9,
+      "local_count": 9
+    },
+    "FOC": {
+      "aon_section": "Spells",
+      "aon_count": 7,
+      "local_count": 7
+    },
+    "FOP": {
+      "aon_section": "Spells",
+      "aon_count": 8,
+      "local_count": 8
+    },
+    "HA": {
+      "aon_section": "Spells",
+      "aon_count": 72,
+      "local_count": 72
+    },
+    "ISG": {
+      "title": "Inner Sea Gods",
+      "aon_section": "Spells",
+      "aon_count": 65,
+      "local_count": 65
+    },
+    "ISI": {
+      "title": "Inner Sea Intrigue",
+      "aon_section": "Spells",
+      "aon_count": 26,
+      "local_count": 26
+    },
+    "ISM": {
+      "aon_section": "Spells",
+      "aon_count": 39,
+      "local_count": 39
+    },
+    "ISWG": {
+      "aon_section": "Spells",
+      "aon_count": 16,
+      "local_count": 16
+    },
+    "MA": {
+      "title": "Mythic Adventures",
+      "aon_section": "Mythic Spells",
+      "aon_count": 270,
+      "local_count": 270
+    },
+    "MC": {
+      "aon_section": "Spells",
+      "aon_count": 24,
+      "local_count": 24
+    },
+    "MTT": {
+      "aon_section": "Spells",
+      "aon_count": 10,
+      "local_count": 10
+    },
+    "OA": {
+      "aon_section": "Spells",
+      "aon_count": 143,
+      "local_count": 143
+    },
+    "PA": {
+      "title": "Planar Adventures",
+      "aon_section": "Spells",
+      "aon_count": 23,
+      "local_count": 23
+    },
+    "PA_1": {
+      "display_source": "PA",
+      "title": "Psychic Anthology",
+      "aon_section": "Spells",
+      "aon_count": 16,
+      "local_count": 16
+    },
+    "RTT": {
+      "aon_section": "Spells",
+      "aon_count": 6,
+      "local_count": 6
+    },
+    "TG": {
+      "aon_section": "Spells",
+      "aon_count": 16,
+      "local_count": 16
+    },
+    "UC": {
+      "aon_section": "Spells",
+      "aon_count": 147,
+      "local_count": 147
+    },
+    "UI": {
+      "aon_section": "Spells",
+      "aon_count": 101,
+      "local_count": 101
+    },
+    "UM": {
+      "aon_section": "Spells",
+      "aon_count": 231,
+      "local_count": 231
+    },
+    "UW": {
+      "aon_section": "Spells",
+      "aon_count": 57,
+      "local_count": 57
+    },
+    "VC": {
+      "aon_section": "Spells",
+      "aon_count": 26,
+      "local_count": 26
+    }
+  }
+}

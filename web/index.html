@@ -1,0 +1,132 @@
+﻿<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PF 检索</title>
+    <style>
+        :root {
+            --bg: #f5f7fb;
+            --panel: #ffffff;
+            --line: #d7dce3;
+            --text: #1f2328;
+            --brand: #1a5fb4;
+        }
+        * { box-sizing: border-box; }
+        body {
+            margin: 0;
+            font-family: "Microsoft YaHei", "PingFang SC", sans-serif;
+            color: var(--text);
+            background: var(--bg);
+        }
+        .wrap {
+            max-width: 1320px;
+            margin: 0 auto;
+            padding: 14px;
+        }
+        .top {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            margin-bottom: 10px;
+        }
+        .title {
+            margin: 0;
+            font-size: 22px;
+        }
+        .tabs {
+            display: inline-flex;
+            gap: 8px;
+        }
+        .tab-btn {
+            border: 1px solid var(--line);
+            background: var(--panel);
+            color: var(--text);
+            border-radius: 999px;
+            padding: 8px 14px;
+            cursor: pointer;
+            font-size: 14px;
+        }
+        .tab-btn.active {
+            background: var(--brand);
+            border-color: var(--brand);
+            color: #fff;
+        }
+        .pane {
+            border: 1px solid var(--line);
+            border-radius: 10px;
+            overflow: hidden;
+            background: var(--panel);
+        }
+        .pane.hidden {
+            display: none;
+        }
+        .pane iframe {
+            width: 100%;
+            height: calc(100vh - 90px);
+            border: 0;
+            display: block;
+            background: #fff;
+        }
+    </style>
+</head>
+<body>
+    <div class="wrap">
+        <div class="top">
+            <h1 class="title">PF 检索</h1>
+            <div class="tabs">
+                <button id="tab-spells" class="tab-btn active" type="button">法术检索</button>
+                <button id="tab-feats" class="tab-btn" type="button">专长检索</button>
+                <button id="tab-classes" class="tab-btn" type="button">职业资料</button>
+                <button id="tab-items" class="tab-btn" type="button">奇物资料</button>
+            </div>
+        </div>
+
+        <section id="pane-spells" class="pane">
+            <iframe src="spells.html" title="法术检索"></iframe>
+        </section>
+        <section id="pane-feats" class="pane hidden">
+            <iframe src="feats.html" title="专长检索"></iframe>
+        </section>
+        <section id="pane-classes" class="pane hidden">
+            <iframe src="classes.html" title="职业资料"></iframe>
+        </section>
+        <section id="pane-items" class="pane hidden">
+            <iframe src="items.html" title="奇物资料"></iframe>
+        </section>
+    </div>
+
+    <script>
+        (function () {
+            const tabSpells = document.getElementById("tab-spells");
+            const tabFeats = document.getElementById("tab-feats");
+            const tabClasses = document.getElementById("tab-classes");
+            const tabItems = document.getElementById("tab-items");
+            const paneSpells = document.getElementById("pane-spells");
+            const paneFeats = document.getElementById("pane-feats");
+            const paneClasses = document.getElementById("pane-classes");
+            const paneItems = document.getElementById("pane-items");
+
+            function show(which) {
+                const spellsActive = which === "spells";
+                const featsActive = which === "feats";
+                const classesActive = which === "classes";
+                const itemsActive = which === "items";
+                tabSpells.classList.toggle("active", spellsActive);
+                tabFeats.classList.toggle("active", featsActive);
+                tabClasses.classList.toggle("active", classesActive);
+                tabItems.classList.toggle("active", itemsActive);
+                paneSpells.classList.toggle("hidden", !spellsActive);
+                paneFeats.classList.toggle("hidden", !featsActive);
+                paneClasses.classList.toggle("hidden", !classesActive);
+                paneItems.classList.toggle("hidden", !itemsActive);
+            }
+
+            tabSpells.addEventListener("click", function () { show("spells"); });
+            tabFeats.addEventListener("click", function () { show("feats"); });
+            tabClasses.addEventListener("click", function () { show("classes"); });
+            tabItems.addEventListener("click", function () { show("items"); });
+        })();
+    </script>
+</body>
+</html>
