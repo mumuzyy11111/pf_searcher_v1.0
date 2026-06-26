@@ -477,10 +477,10 @@
     "name": "野兽形态I（Beast Shape I）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 3, arcanist 3, bloodrager 3, investigator 3, magus 3, redmantisassassin 3, sorcerer 3, wizard 3",
+    "level_raw": "炼金术师 3,arcanist 3,血脉狂怒者 3,investigator 3,魔战士 3,redmantisassassin 3,sorcerer 3,法师 3",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 3
       },
       {
@@ -488,7 +488,7 @@
         "level": 3
       },
       {
-        "class": "bloodrager",
+        "class": "血脉狂怒者",
         "level": 3
       },
       {
@@ -496,7 +496,7 @@
         "level": 3
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 3
       },
       {
@@ -508,7 +508,7 @@
         "level": 3
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 3
       }
     ],
@@ -525,7 +525,7 @@
       "name": "野兽形态I（Beast Shape I）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 3, arcanist 3, bloodrager 3, investigator 3, magus 3, redmantisassassin 3, sorcerer 3, wizard 3",
+      "等级": "炼金术师 3,arcanist 3,血脉狂怒者 3,investigator 3,魔战士 3,redmantisassassin 3,sorcerer 3,法师 3",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -546,10 +546,10 @@
     "name": "野兽形态II（Beast Shape II）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+    "level_raw": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 4
       },
       {
@@ -557,7 +557,7 @@
         "level": 4
       },
       {
-        "class": "bloodrager",
+        "class": "血脉狂怒者",
         "level": 4
       },
       {
@@ -565,7 +565,7 @@
         "level": 4
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 4
       },
       {
@@ -577,7 +577,7 @@
         "level": 4
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 4
       }
     ],
@@ -594,7 +594,7 @@
       "name": "野兽形态II（Beast Shape II）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+      "等级": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -615,10 +615,10 @@
     "name": "野兽形态III（Beast Shape III）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+    "level_raw": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 5
       },
       {
@@ -630,7 +630,7 @@
         "level": 5
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 5
       },
       {
@@ -638,7 +638,7 @@
         "level": 5
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 5
       }
     ],
@@ -655,7 +655,7 @@
       "name": "野兽形态III（Beast Shape III）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+      "等级": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -676,10 +676,10 @@
     "name": "野兽形态IV（Beast Shape IV）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+    "level_raw": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 6
       },
       {
@@ -691,7 +691,7 @@
         "level": 6
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 6
       },
       {
@@ -699,7 +699,7 @@
         "level": 6
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 6
       }
     ],
@@ -716,7 +716,7 @@
       "name": "野兽形态IV（Beast Shape IV）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+      "等级": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -2177,10 +2177,10 @@
     "name": "不死身（Deathless）",
     "source_book": "ma",
     "school": "死灵系",
-    "level_raw": "炼金术士 4，牧师 4，审判者 4，术士/法师 4，女巫 4",
+    "level_raw": "炼金术师 4，牧师 4，审判者 4，术士/法师 4，女巫 4",
     "level_by_class": [
       {
-        "class": "炼金术士",
+        "class": "炼金术师",
         "level": 4
       },
       {
@@ -2214,7 +2214,7 @@
       "source_book": "ma",
       "效果": "目标的灵魂被强有力地固定在其身体之上，用于防止生命值伤害造成的死亡。不论目标的生命值有多低，他仍旧能够存活（尽管他并不一定能够保持意识）。 该法术并不能防止生命值伤害之外的其他来源带来的死亡——比如体质伤害、体质吸取、死亡效果、或者能量吸取。具有治疗生命值的效果的法术能够如常影响该名生物。 神话 ：若你在施放该法术时花费1次神话之力，你便能成为你与你的同伴的灵魂锚。法术范围增加至30尺，而且法术会影响以你为中心，30尺半径发散范围内的所有盟友，用以取代原本的只影响1个生物。 强化（8阶） ：若你花费3次神话之力，范围会增加至1英里，而且区域变为以你为中心，半径1英里发散区域。",
       "学派": "死灵系",
-      "等级": "炼金术士 4，牧师 4，审判者 4，术士/法师 4，女巫 4",
+      "等级": "炼金术师 4，牧师 4，审判者 4，术士/法师 4，女巫 4",
       "施法时间": "标准动作",
       "成分": "语言，姿势",
       "范围": "接触",
@@ -2864,10 +2864,10 @@
     "name": "元素形态I（Elemental Body I）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+    "level_raw": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 4
       },
       {
@@ -2875,7 +2875,7 @@
         "level": 4
       },
       {
-        "class": "bloodrager",
+        "class": "血脉狂怒者",
         "level": 4
       },
       {
@@ -2883,7 +2883,7 @@
         "level": 4
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 4
       },
       {
@@ -2895,7 +2895,7 @@
         "level": 4
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 4
       }
     ],
@@ -2912,7 +2912,7 @@
       "name": "元素形态I（Elemental Body I）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+      "等级": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
       "施法时间": "1 standard action",
       "成分": "V, S, M (the element you plan to assume)",
       "范围": "",
@@ -2933,10 +2933,10 @@
     "name": "元素形态II（Elemental Body II）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+    "level_raw": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 5
       },
       {
@@ -2948,7 +2948,7 @@
         "level": 5
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 5
       },
       {
@@ -2956,7 +2956,7 @@
         "level": 5
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 5
       }
     ],
@@ -2973,7 +2973,7 @@
       "name": "元素形态II（Elemental Body II）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+      "等级": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
       "施法时间": "1 standard action",
       "成分": "V, S, M (the element you plan to assume)",
       "范围": "",
@@ -2994,10 +2994,10 @@
     "name": "元素形态III（Elemental Body III）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+    "level_raw": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 6
       },
       {
@@ -3009,7 +3009,7 @@
         "level": 6
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 6
       },
       {
@@ -3017,7 +3017,7 @@
         "level": 6
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 6
       }
     ],
@@ -3034,7 +3034,7 @@
       "name": "元素形态III（Elemental Body III）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+      "等级": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
       "施法时间": "1 standard action",
       "成分": "V, S, M (the element you plan to assume)",
       "范围": "",
@@ -3055,7 +3055,7 @@
     "name": "元素形态IV（Elemental Body IV）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "arcanist 7, sorcerer 7, wizard 7",
+    "level_raw": "arcanist 7,sorcerer 7,法师 7",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -3066,7 +3066,7 @@
         "level": 7
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 7
       }
     ],
@@ -3083,7 +3083,7 @@
       "name": "元素形态IV（Elemental Body IV）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "arcanist 7, sorcerer 7, wizard 7",
+      "等级": "arcanist 7,sorcerer 7,法师 7",
       "施法时间": "1 standard action",
       "成分": "V, S, M (the element you plan to assume)",
       "范围": "",
@@ -3914,10 +3914,10 @@
     "name": "巨龙形态I（Form of the Dragon I）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+    "level_raw": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 6
       },
       {
@@ -3929,7 +3929,7 @@
         "level": 6
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 6
       },
       {
@@ -3937,7 +3937,7 @@
         "level": 6
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 6
       }
     ],
@@ -3954,7 +3954,7 @@
       "name": "巨龙形态I（Form of the Dragon I）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+      "等级": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a scale of the dragon type you plan to assume)",
       "范围": "",
@@ -3975,7 +3975,7 @@
     "name": "巨龙形态II（Form of the Dragon II）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "arcanist 7, sorcerer 7, wizard 7",
+    "level_raw": "arcanist 7,sorcerer 7,法师 7",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -3986,7 +3986,7 @@
         "level": 7
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 7
       }
     ],
@@ -4003,7 +4003,7 @@
       "name": "巨龙形态II（Form of the Dragon II）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "arcanist 7, sorcerer 7, wizard 7",
+      "等级": "arcanist 7,sorcerer 7,法师 7",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a scale of the dragon type you plan to assume)",
       "范围": "",
@@ -4024,7 +4024,7 @@
     "name": "巨龙形态III（Form of the Dragon III）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "arcanist 8, sorcerer 8, wizard 8",
+    "level_raw": "arcanist 8,sorcerer 8,法师 8",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -4035,7 +4035,7 @@
         "level": 8
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 8
       }
     ],
@@ -4052,7 +4052,7 @@
       "name": "巨龙形态III（Form of the Dragon III）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "arcanist 8, sorcerer 8, wizard 8",
+      "等级": "arcanist 8,sorcerer 8,法师 8",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a scale of the dragon type you plan to assume)",
       "范围": "",
@@ -5603,10 +5603,10 @@
     "name": "类人形态I（Monstrous Physique I）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 3, arcanist 3, bloodrager 3, investigator 3, magus 3, redmantisassassin 3, sorcerer 3, wizard 3",
+    "level_raw": "炼金术师 3,arcanist 3,血脉狂怒者 3,investigator 3,魔战士 3,redmantisassassin 3,sorcerer 3,法师 3",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 3
       },
       {
@@ -5614,7 +5614,7 @@
         "level": 3
       },
       {
-        "class": "bloodrager",
+        "class": "血脉狂怒者",
         "level": 3
       },
       {
@@ -5622,7 +5622,7 @@
         "level": 3
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 3
       },
       {
@@ -5634,7 +5634,7 @@
         "level": 3
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 3
       }
     ],
@@ -5651,7 +5651,7 @@
       "name": "类人形态I（Monstrous Physique I）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 3, arcanist 3, bloodrager 3, investigator 3, magus 3, redmantisassassin 3, sorcerer 3, wizard 3",
+      "等级": "炼金术师 3,arcanist 3,血脉狂怒者 3,investigator 3,魔战士 3,redmantisassassin 3,sorcerer 3,法师 3",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -5672,10 +5672,10 @@
     "name": "类人形态II（Monstrous Physique II）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+    "level_raw": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 4
       },
       {
@@ -5683,7 +5683,7 @@
         "level": 4
       },
       {
-        "class": "bloodrager",
+        "class": "血脉狂怒者",
         "level": 4
       },
       {
@@ -5691,7 +5691,7 @@
         "level": 4
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 4
       },
       {
@@ -5703,7 +5703,7 @@
         "level": 4
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 4
       }
     ],
@@ -5720,7 +5720,7 @@
       "name": "类人形态II（Monstrous Physique II）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 4, arcanist 4, bloodrager 4, investigator 4, magus 4, redmantisassassin 4, sorcerer 4, wizard 4",
+      "等级": "炼金术师 4,arcanist 4,血脉狂怒者 4,investigator 4,魔战士 4,redmantisassassin 4,sorcerer 4,法师 4",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -5741,10 +5741,10 @@
     "name": "类人形态III（Monstrous Physique III）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+    "level_raw": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 5
       },
       {
@@ -5756,7 +5756,7 @@
         "level": 5
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 5
       },
       {
@@ -5764,7 +5764,7 @@
         "level": 5
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 5
       }
     ],
@@ -5781,7 +5781,7 @@
       "name": "类人形态III（Monstrous Physique III）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 5, arcanist 5, investigator 5, magus 5, sorcerer 5, wizard 5",
+      "等级": "炼金术师 5,arcanist 5,investigator 5,魔战士 5,sorcerer 5,法师 5",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",
@@ -5802,10 +5802,10 @@
     "name": "类人形态IV（Monstrous Physique IV）",
     "source_book": "ma",
     "school": "变化系",
-    "level_raw": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+    "level_raw": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
     "level_by_class": [
       {
-        "class": "alchemist",
+        "class": "炼金术师",
         "level": 6
       },
       {
@@ -5817,7 +5817,7 @@
         "level": 6
       },
       {
-        "class": "magus",
+        "class": "魔战士",
         "level": 6
       },
       {
@@ -5825,7 +5825,7 @@
         "level": 6
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 6
       }
     ],
@@ -5842,7 +5842,7 @@
       "name": "类人形态IV（Monstrous Physique IV）",
       "source_book": "ma",
       "学派": "变化系",
-      "等级": "alchemist 6, arcanist 6, investigator 6, magus 6, sorcerer 6, wizard 6",
+      "等级": "炼金术师 6,arcanist 6,investigator 6,魔战士 6,sorcerer 6,法师 6",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a piece of the creature whose form you plan to assume)",
       "范围": "",

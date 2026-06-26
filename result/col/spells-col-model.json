@@ -55,7 +55,7 @@
     "name": "Rival's Weald",
     "source_book": "col",
     "school": "变化系",
-    "level_raw": "druid 9, shaman 9, witch 9",
+    "level_raw": "druid 9,shaman 9,witch 9",
     "level_by_class": [
       {
         "class": "druid",
@@ -83,7 +83,7 @@
       "name": "Rival's Weald",
       "source_book": "col",
       "学派": "变化系",
-      "等级": "druid 9, shaman 9, witch 9",
+      "等级": "druid 9,shaman 9,witch 9",
       "施法时间": "1 standard action",
       "成分": "V, S, M (a hardened piece of tree sap)",
       "范围": "close (25 ft. + 5 ft./2 levels)",
@@ -107,18 +107,18 @@
     "name": "Song of Discord, Greater",
     "source_book": "col",
     "school": "惑控系",
-    "level_raw": "bard 6, mesmerist 6, psychic 8, skald 6",
+    "level_raw": "吟游诗人 6,催眠师 6,异能者 8,skald 6",
     "level_by_class": [
       {
-        "class": "bard",
+        "class": "吟游诗人",
         "level": 6
       },
       {
-        "class": "mesmerist",
+        "class": "催眠师",
         "level": 6
       },
       {
-        "class": "psychic",
+        "class": "异能者",
         "level": 8
       },
       {
@@ -139,7 +139,7 @@
       "name": "Song of Discord, Greater",
       "source_book": "col",
       "学派": "惑控系",
-      "等级": "bard 6, mesmerist 6, psychic 8, skald 6",
+      "等级": "吟游诗人 6,催眠师 6,异能者 8,skald 6",
       "施法时间": "1 standard action",
       "成分": "V, S",
       "范围": "medium (100 ft. + 10 ft./level)",
@@ -163,18 +163,18 @@
     "name": "Uncanny Reminder",
     "source_book": "col",
     "school": "咒法系",
-    "level_raw": "arcanist 8, mesmerist 6, psychic 8, sorcerer 8, summoner 6, summoner (unchained) 6, wizard 8",
+    "level_raw": "arcanist 8,催眠师 6,异能者 8,sorcerer 8,召唤师 6,法师 8",
     "level_by_class": [
       {
         "class": "arcanist",
         "level": 8
       },
       {
-        "class": "mesmerist",
+        "class": "催眠师",
         "level": 6
       },
       {
-        "class": "psychic",
+        "class": "异能者",
         "level": 8
       },
       {
@@ -182,15 +182,11 @@
         "level": 8
       },
       {
-        "class": "summoner",
+        "class": "召唤师",
         "level": 6
       },
       {
-        "class": "summoner (unchained)",
-        "level": 6
-      },
-      {
-        "class": "wizard",
+        "class": "法师",
         "level": 8
       }
     ],
@@ -207,7 +203,7 @@
       "name": "Uncanny Reminder",
       "source_book": "col",
       "学派": "咒法系",
-      "等级": "arcanist 8, mesmerist 6, psychic 8, sorcerer 8, summoner 6, summoner (unchained) 6, wizard 8",
+      "等级": "arcanist 8,催眠师 6,异能者 8,sorcerer 8,召唤师 6,法师 8",
       "施法时间": "1 round",
       "成分": "V, S",
       "范围": "close (25 ft. + 5 ft./2 levels)",

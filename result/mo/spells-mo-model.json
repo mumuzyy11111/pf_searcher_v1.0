@@ -4,7 +4,7 @@
     "name": "预支未来 Borrowed Time",
     "source_book": "mo",
     "school": "变化系",
-    "level_raw": "炼金术师6，吟游诗人6，魔战士6，法师/术士6",
+    "level_raw": "炼金术师 6，吟游诗人 6，魔战士 6，法师/术士 6",
     "level_by_class": [
       {
         "class": "炼金术师",
@@ -37,7 +37,7 @@
       "source_book": "mo",
       "效果": "该法术由大法师耐克斯（Nex）本人发明，它能让你用自己的健康作为代价，在时间流中快人一步，攫取来自未来的余裕。在法术持续时间内，你会额外获得一个只能在你回合内使用的迅捷动作。你不能将该迅捷动作用来在回合间进行第二次直觉动作，但你可以将其用于在使用过直觉动作的下一回合内进行迅捷动作。你每次用该效果进行额外的迅捷动作时，就会受到1点体质伤害。若你免疫属性伤害，则改为受到5点生命值伤害。当该法术结束时，你会因暂时性的反冲，而恍惚1d4+1轮。 神话：若你花费1次神话之力，取代获得一个额外的迅捷动作，你能转而每轮获得一个额外的移动动作或迅捷动作。你能使用该额外迅捷动作来在你回合间进行两次直觉动作；这会消耗掉你下一轮中的额外直觉动作。你以此效果所获得的每个额外动作依然会像上文所述般对你造成伤害。",
       "学派": "变化系",
-      "等级": "炼金术师6，吟游诗人6，魔战士6，法师/术士6",
+      "等级": "炼金术师 6，吟游诗人 6，魔战士 6，法师/术士 6",
       "施法时间": "标准动作",
       "成分": "语言，姿势",
       "范围": "个人",
@@ -57,7 +57,7 @@
     "name": "Elemental Bombardment",
     "source_book": "mo",
     "school": "咒法系",
-    "level_raw": "arcanist 7, druid 7, sorcerer 7, wizard 7",
+    "level_raw": "arcanist 7,druid 7,sorcerer 7,法师 7",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -72,7 +72,7 @@
         "level": 7
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 7
       }
     ],
@@ -89,7 +89,7 @@
       "name": "Elemental Bombardment",
       "source_book": "mo",
       "学派": "咒法系",
-      "等级": "arcanist 7, druid 7, sorcerer 7, wizard 7",
+      "等级": "arcanist 7,druid 7,sorcerer 7,法师 7",
       "施法时间": "1 round",
       "成分": "V, S",
       "范围": "long (400 ft. + 40 ft./level)",
@@ -113,7 +113,7 @@
     "name": "Imbue with Flight",
     "source_book": "mo",
     "school": "变化系",
-    "level_raw": "arcanist 4, redmantisassassin 4, sorcerer 4, wizard 4",
+    "level_raw": "arcanist 4,redmantisassassin 4,sorcerer 4,法师 4",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -128,7 +128,7 @@
         "level": 4
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 4
       }
     ],
@@ -145,7 +145,7 @@
       "name": "Imbue with Flight",
       "source_book": "mo",
       "学派": "变化系",
-      "等级": "arcanist 4, redmantisassassin 4, sorcerer 4, wizard 4",
+      "等级": "arcanist 4,redmantisassassin 4,sorcerer 4,法师 4",
       "施法时间": "1 standard action",
       "成分": "V, M (handful of down)",
       "范围": "touch",
@@ -169,7 +169,7 @@
     "name": "Soulreaver",
     "source_book": "mo",
     "school": "死灵系",
-    "level_raw": "arcanist 8, cleric 8, oracle 8, sorcerer 8, witch 8, wizard 8",
+    "level_raw": "arcanist 8,cleric 8,oracle 8,sorcerer 8,witch 8,法师 8",
     "level_by_class": [
       {
         "class": "arcanist",
@@ -192,7 +192,7 @@
         "level": 8
       },
       {
-        "class": "wizard",
+        "class": "法师",
         "level": 8
       }
     ],
@@ -209,7 +209,7 @@
       "name": "Soulreaver",
       "source_book": "mo",
       "学派": "死灵系",
-      "等级": "arcanist 8, cleric 8, oracle 8, sorcerer 8, witch 8, wizard 8",
+      "等级": "arcanist 8,cleric 8,oracle 8,sorcerer 8,witch 8,法师 8",
       "施法时间": "1 standard action",
       "成分": "V, S",
       "范围": "close (25 ft. + 5 ft./2 levels)",
@@ -233,10 +233,10 @@
     "name": "Sustaining Legend",
     "source_book": "mo",
     "school": "咒法系",
-    "level_raw": "bard 5, cleric 6, oracle 6, skald 5, warpriest 6",
+    "level_raw": "吟游诗人 5,cleric 6,oracle 6,skald 5,战斗祭司 6",
     "level_by_class": [
       {
-        "class": "bard",
+        "class": "吟游诗人",
         "level": 5
       },
       {
@@ -252,7 +252,7 @@
         "level": 5
       },
       {
-        "class": "warpriest",
+        "class": "战斗祭司",
         "level": 6
       }
     ],
@@ -269,7 +269,7 @@
       "name": "Sustaining Legend",
       "source_book": "mo",
       "学派": "咒法系",
-      "等级": "bard 5, cleric 6, oracle 6, skald 5, warpriest 6",
+      "等级": "吟游诗人 5,cleric 6,oracle 6,skald 5,战斗祭司 6",
       "施法时间": "1 standard action",
       "成分": "V, S",
       "范围": "close (25 ft. + 5 ft./2 levels)",
