@@ -1,232 +1,128 @@
-:root {
-    --ink: #222;
-    --muted: #6a6a6a;
-    --line: #dddddd;
-    --soft: #f7f7f7;
-    --brand: #2f9cda;
-    --brand-dark: #217fb4;
-    --selected: #eef7fd;
-    --shadow: 0 10px 35px rgba(0, 0, 0, .12);
-}
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PF 法术检索</title>
+    <link rel="stylesheet" href="assets/css/spells.css?v=20260625-dual-v3">
+    <link rel="stylesheet" href="assets/css/spell-view-switch.css?v=20260625-dual-v3">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>PF 法术检索</h1>
+            <nav class="top-links">
+                <span class="nav-label">车卡器</span>
+                <a href="index.html#character" target="_top">角色卡</a>
+                <span class="nav-label">资料查询</span>
+                <a href="index.html#spells" target="_top" class="active">法术</a>
+                <a href="index.html#conditions" target="_top">状态</a>
+                <a href="index.html#feats" target="_top">专长</a>
+                <a href="index.html#classes" target="_top">职业</a>
+                <a href="index.html#items" target="_top">奇物</a>
+            </nav>
+            <div class="view-switch" aria-label="法术检索视图">
+                <a class="view-pill" href="spells_filter.html?v=20260625-dual-v3" target="_self">组合筛选</a>
+                <span class="view-pill active" aria-current="page">名称 / 关键词 / 智能问答</span>
+            </div>
+            <p id="spell-count">加载中...</p>
+        </header>
 
-* { box-sizing: border-box; }
-body {
-    margin: 0;
-    color: var(--ink);
-    background: #fff;
-    font-family: "Segoe UI", "PingFang SC", "Microsoft YaHei", sans-serif;
-}
-button, input { font: inherit; }
-button { color: inherit; }
-.hidden { display: none !important; }
+        <div class="search-panel">
+            <div class="mode-selector">
+                <label for="search-mode">搜索模式</label>
+                <select id="search-mode">
+                    <option value="name">按名称</option>
+                    <option value="keyword">按关键词</option>
+                    <option value="rag" selected>智能问答</option>
+                </select>
+                <p class="mode-hint" id="mode-hint">名称、关键词和智能问答；职业、学派与环位请使用上方“组合筛选”</p>
+            </div>
 
-.page-shell { width: 100%; min-height: 100vh; padding: 24px 30px 40px; }
-.hero { text-align: center; }
-.hero h1 { margin: 0 0 18px; color: #2c3e50; font-size: 30px; }
-.top-links, .view-switch { display: flex; flex-wrap: wrap; justify-content: center; align-items: center; gap: 8px; }
-.nav-label { color: #6b7280; font-size: 12px; font-weight: 700; padding-left: 8px; }
-.top-links a, .view-pill {
-    border: 1px solid #d7dce3;
-    border-radius: 999px;
-    background: #fff;
-    color: #2c3e50;
-    padding: 7px 12px;
-    text-decoration: none;
-    font-size: 14px;
-}
-.top-links a.active, .view-pill.active { background: var(--brand); border-color: var(--brand); color: #fff; }
-.view-switch { margin-top: 14px; }
+            <div id="name-search-box" class="name-search-box">
+                <label for="search-input">法术名称</label>
+                <div class="search-input-row">
+                    <input id="search-input" type="text" placeholder="输入法术名称或关键词">
+                    <button id="keyword-search-btn" class="keyword-search-btn hidden" type="button">搜索</button>
+                </div>
+            </div>
 
-.search-card {
-    position: sticky;
-    top: 0;
-    z-index: 10;
-    width: min(1180px, 100%);
-    margin: 24px auto 0;
-    padding: 14px 0 12px;
-    background: rgba(255, 255, 255, .96);
-    backdrop-filter: blur(10px);
-    border-bottom: 1px solid #ebebeb;
-}
-.search-row { display: flex; gap: 12px; align-items: center; }
-.name-search {
-    flex: 1;
-    display: flex;
-    align-items: center;
-    min-height: 52px;
-    border: 1px solid #b8b8b8;
-    border-radius: 999px;
-    padding: 0 18px;
-    background: #fff;
-}
-.name-search:focus-within { border-color: var(--ink); box-shadow: 0 0 0 1px var(--ink); }
-.search-icon { margin-right: 10px; font-size: 23px; line-height: 1; }
-.name-search input { width: 100%; border: 0; outline: 0; background: transparent; font-size: 16px; }
-.filter-main-btn, .quick-filter-btn, .clear-btn {
-    border: 1px solid #b8b8b8;
-    background: #fff;
-    border-radius: 999px;
-    cursor: pointer;
-    transition: border-color .18s, box-shadow .18s, background .18s;
-}
-.filter-main-btn {
-    min-height: 52px;
-    padding: 0 20px;
-    display: inline-flex;
-    align-items: center;
-    gap: 8px;
-    font-weight: 650;
-    white-space: nowrap;
-}
-.filter-main-btn:hover, .quick-filter-btn:hover { border-color: var(--ink); box-shadow: 0 2px 8px rgba(0, 0, 0, .09); }
-.filter-count-badge {
-    display: inline-grid;
-    place-items: center;
-    min-width: 23px;
-    height: 23px;
-    padding: 0 6px;
-    border-radius: 999px;
-    background: var(--ink);
-    color: #fff;
-    font-size: 12px;
-}
-.quick-filter-row { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 12px; }
-.quick-filter-btn, .clear-btn { padding: 10px 17px; }
-.clear-btn { border: 0; text-decoration: underline; font-weight: 650; }
-.active-filter-chips { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 10px; }
-.active-chip {
-    border: 1px solid var(--ink);
-    border-radius: 999px;
-    background: #fff;
-    padding: 7px 11px;
-    cursor: pointer;
-    display: inline-flex;
-    align-items: center;
-    gap: 7px;
-    font-size: 13px;
-}
-.active-chip .x { font-size: 16px; line-height: 1; }
+            <!-- 保留旧脚本读取的节点，但不再提供互斥的职业/学派模式。 -->
+            <div id="profession-selector" class="profession-selector hidden"></div>
+            <div id="level-selector" class="level-selector hidden"></div>
 
-.result-heading {
-    width: min(1180px, 100%);
-    margin: 28px auto 14px;
-    display: flex;
-    justify-content: space-between;
-    align-items: end;
-    gap: 18px;
-}
-.result-heading h2 { margin: 0 0 4px; font-size: 24px; }
-.result-heading p { margin: 0; color: var(--muted); }
-.pairing-note { text-align: right; font-size: 13px; }
+            <div id="rag-panel" class="rag-panel hidden">
+                <div class="rag-api-key-row">
+                    <label for="rag-api-key">API Key</label>
+                    <input id="rag-api-key" type="password"
+                           autocomplete="off"
+                           placeholder="输入 API Key 后使用智能问答"
+                           class="rag-api-key-input">
+                </div>
+                <div class="rag-input-area">
+                    <input id="rag-input" type="text"
+                           placeholder="输入问题，如：有哪些3环以下的防护系法术？"
+                           class="rag-input">
+                    <button id="rag-submit" class="rag-submit">提问</button>
+                </div>
+                <div class="rag-filters-bar">
+                    <select id="rag-source-filter">
+                        <option value="">全部来源</option>
+                        <option value="CRB">CRB</option>
+                        <option value="APG">APG</option>
+                        <option value="ACG">ACG</option>
+                        <option value="ARG">ARG</option>
+                        <option value="UC">UC</option>
+                        <option value="UM">UM</option>
+                        <option value="UI">UI</option>
+                        <option value="OA">OA</option>
+                        <option value="AARCH">AARCH</option>
+                        <option value="COTR">COTR</option>
+                        <option value="FOB">FOB</option>
+                        <option value="FOC">FOC</option>
+                        <option value="FOP">FOP</option>
+                        <option value="ISG">ISG</option>
+                        <option value="ISI">ISI</option>
+                        <option value="ISM">ISM</option>
+                        <option value="ISWG">ISWG</option>
+                        <option value="MTT">MTT</option>
+                        <option value="RTT">RTT</option>
+                        <option value="TG">TG</option>
+                        <option value="AG">AG</option>
+                        <option value="MC">MC</option>
+                        <option value="MA">MA</option>
+                        <option value="VC">VC</option>
+                        <option value="HA">HA</option>
+                        <option value="UW">UW</option>
+                        <option value="PA">PA</option>
+                        <option value="BOTD">BotD</option>
+                    </select>
+                    <select id="rag-type-filter">
+                        <option value="">全部类型</option>
+                        <option value="normal">普通法术</option>
+                        <option value="mythic">神话法术</option>
+                    </select>
+                    <select id="rag-school-filter">
+                        <option value="">全部学派</option>
+                        <option value="防护">防护</option>
+                        <option value="塑能">塑能</option>
+                        <option value="咒法">咒法</option>
+                        <option value="预言">预言</option>
+                        <option value="惑控">惑控</option>
+                        <option value="死灵">死灵</option>
+                        <option value="变化">变化</option>
+                        <option value="幻术">幻术</option>
+                    </select>
+                    <input id="rag-level-filter" type="number" placeholder="最高环位" min="0" max="9">
+                </div>
+                <div id="rag-status" class="rag-status"></div>
+                <div id="rag-answer" class="rag-answer hidden"></div>
+            </div>
+        </div>
 
-.result-workspace {
-    width: min(1180px, 100%);
-    margin: 0 auto;
-    display: grid;
-    grid-template-columns: minmax(340px, 42%) minmax(0, 1fr);
-    gap: 20px;
-    align-items: start;
-}
-.result-list-panel, .detail-panel {
-    border: 1px solid #e2e2e2;
-    border-radius: 16px;
-    background: #fff;
-}
-.result-list-panel { padding: 10px; }
-.spell-list { max-height: calc(100vh - 265px); overflow: auto; padding-right: 3px; }
-.spell-row {
-    width: 100%;
-    display: grid;
-    grid-template-columns: minmax(0, 1fr) auto;
-    gap: 12px;
-    padding: 13px 12px;
-    margin-bottom: 7px;
-    border: 1px solid #e6e6e6;
-    border-radius: 12px;
-    background: #fff;
-    text-align: left;
-    cursor: pointer;
-}
-.spell-row:hover, .spell-row.active { border-color: var(--ink); background: var(--selected); }
-.spell-row-name { display: block; font-weight: 700; color: #25384a; overflow-wrap: anywhere; }
-.spell-row-sub { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 7px; }
-.meta-tag { border-radius: 999px; padding: 3px 7px; background: #f2f2f2; color: #555; font-size: 12px; }
-.meta-tag.match { background: #e3f5ec; color: #16633e; }
-.spell-row-source { color: #555; font-size: 12px; font-weight: 700; padding-top: 2px; }
-.empty-results { padding: 56px 20px; text-align: center; color: var(--muted); }
-.load-more { width: 100%; margin-top: 8px; padding: 11px; border: 1px solid var(--ink); border-radius: 12px; background: #fff; cursor: pointer; font-weight: 700; }
-.detail-panel { position: sticky; top: 150px; min-height: 480px; max-height: calc(100vh - 170px); overflow: auto; padding: 22px; }
-.detail-empty { min-height: 430px; display: grid; place-content: center; text-align: center; gap: 8px; color: var(--muted); }
-.detail-card h2 { margin: 0 0 15px; color: #257fad; font-size: 23px; overflow-wrap: anywhere; }
-.detail-grid { display: grid; gap: 9px; }
-.detail-line { line-height: 1.55; }
-.detail-label { color: #737373; font-weight: 700; margin-right: 5px; }
-.detail-effect { margin-top: 18px; border-top: 1px dashed var(--line); padding-top: 16px; white-space: pre-wrap; line-height: 1.7; }
+        <div id="results-container" class="results-grid"></div>
+    </div>
 
-.filter-modal { position: fixed; inset: 0; z-index: 100; display: grid; place-items: center; padding: 24px; }
-.filter-backdrop { position: absolute; inset: 0; background: rgba(0, 0, 0, .48); }
-.filter-dialog {
-    position: relative;
-    width: min(820px, 100%);
-    max-height: min(86vh, 900px);
-    display: grid;
-    grid-template-rows: auto minmax(0, 1fr) auto;
-    background: #fff;
-    border-radius: 18px;
-    box-shadow: var(--shadow);
-    overflow: hidden;
-}
-.filter-dialog-header, .filter-dialog-footer { display: grid; align-items: center; min-height: 66px; padding: 0 22px; border-bottom: 1px solid var(--line); }
-.filter-dialog-header { grid-template-columns: 60px 1fr 60px; }
-.filter-dialog-header h2 { margin: 0; text-align: center; font-size: 18px; }
-.icon-btn, .text-btn { border: 0; background: transparent; cursor: pointer; }
-.icon-btn { width: 38px; height: 38px; border-radius: 50%; font-size: 27px; }
-.icon-btn:hover { background: var(--soft); }
-.text-btn { text-decoration: underline; font-weight: 700; }
-.filter-dialog-body { overflow: auto; padding: 0 25px; }
-.filter-section { padding: 26px 0; border-bottom: 1px solid var(--line); scroll-margin-top: 14px; }
-.filter-section:last-child { border-bottom: 0; }
-.section-heading { display: flex; justify-content: space-between; align-items: end; gap: 20px; margin-bottom: 16px; }
-.section-heading h3 { margin: 0 0 5px; font-size: 21px; }
-.section-heading p { margin: 0; color: var(--muted); font-size: 13px; }
-.mini-search { width: 190px; border: 1px solid #aaa; border-radius: 10px; padding: 9px 11px; }
-.option-grid { display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 10px; }
-.option-btn, .level-btn {
-    border: 1px solid var(--line);
-    background: #fff;
-    border-radius: 12px;
-    cursor: pointer;
-    min-height: 54px;
-}
-.option-btn { display: flex; justify-content: space-between; align-items: center; padding: 10px 12px; text-align: left; }
-.option-btn:hover, .level-btn:hover { border-color: var(--ink); }
-.option-btn.selected, .level-btn.selected { border: 2px solid var(--ink); background: var(--selected); }
-.option-count { color: var(--muted); font-size: 12px; }
-.level-grid { display: grid; grid-template-columns: repeat(10, minmax(48px, 1fr)); gap: 9px; }
-.level-btn { min-height: 58px; font-weight: 700; }
-.filter-dialog-footer { grid-template-columns: 1fr auto; border-top: 1px solid var(--line); border-bottom: 0; gap: 18px; }
-.filter-dialog-footer span { color: var(--muted); font-size: 14px; }
-.apply-btn { border: 0; border-radius: 10px; background: var(--ink); color: #fff; padding: 13px 22px; cursor: pointer; font-weight: 700; }
-.apply-btn:hover { background: #000; }
-
-@media (max-width: 900px) {
-    .page-shell { padding: 18px 14px 30px; }
-    .result-workspace { grid-template-columns: 1fr; }
-    .spell-list { max-height: none; }
-    .detail-panel { position: static; max-height: none; }
-    .option-grid { grid-template-columns: repeat(2, minmax(0, 1fr)); }
-    .level-grid { grid-template-columns: repeat(5, 1fr); }
-}
-
-@media (max-width: 600px) {
-    .search-row { align-items: stretch; flex-direction: column; }
-    .filter-main-btn { justify-content: center; }
-    .result-heading { align-items: flex-start; flex-direction: column; }
-    .pairing-note { text-align: left; }
-    .filter-modal { padding: 0; place-items: end center; }
-    .filter-dialog { width: 100%; max-height: 94vh; border-radius: 18px 18px 0 0; }
-    .filter-dialog-body { padding: 0 16px; }
-    .option-grid { grid-template-columns: 1fr; }
-    .section-heading { align-items: stretch; flex-direction: column; }
-    .mini-search { width: 100%; }
-}
+    <script src="assets/js/spell-rag.js?v=20260625-dual-v3"></script>
+</body>
+</html>

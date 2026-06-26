@@ -2,6 +2,7 @@
     const navButtons = Array.from(document.querySelectorAll("[data-tab]"));
     const panes = {
         spells: document.getElementById("pane-spells"),
+        conditions: document.getElementById("pane-conditions"),
         feats: document.getElementById("pane-feats"),
         classes: document.getElementById("pane-classes"),
         items: document.getElementById("pane-items"),

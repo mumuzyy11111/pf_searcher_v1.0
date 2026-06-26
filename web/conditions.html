@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>PF 状态检索</title>
+  <link rel="stylesheet" href="assets/css/conditions.css?v=20260626-condition-v1" />
+</head>
+<body>
+  <main class="conditions-page">
+    <header class="hero">
+      <div class="hero-copy">
+        <p class="eyebrow">Pathfinder Rules Reference</p>
+        <h1>PF 状态检索</h1>
+        <p id="condition-count" class="subtitle">正在加载状态数据……</p>
+      </div>
+      <nav class="top-links" aria-label="功能导航">
+        <span class="nav-label">车卡器</span>
+        <a href="index.html#character" target="_top">角色卡</a>
+        <span class="nav-label">资料查询</span>
+        <a href="index.html#spells" target="_top">法术</a>
+        <a class="active" href="index.html#conditions" target="_top">状态</a>
+        <a href="index.html#feats" target="_top">专长</a>
+        <a href="index.html#classes" target="_top">职业</a>
+        <a href="index.html#items" target="_top">奇物</a>
+      </nav>
+    </header>
+
+    <section class="rule-note" aria-label="状态叠加规则">
+      <span class="rule-icon" aria-hidden="true">i</span>
+      <div>
+        <strong>状态叠加规则</strong>
+        <p id="general-rule"></p>
+      </div>
+    </section>
+
+    <section class="search-panel" aria-label="状态搜索">
+      <label class="search-box" for="condition-search">
+        <span aria-hidden="true">⌕</span>
+        <input id="condition-search" type="search" autocomplete="off" placeholder="搜索中文名、英文名、别名、规则或数值" />
+      </label>
+      <button id="clear-search" class="clear-search hidden" type="button">清除</button>
+      <div id="category-filters" class="category-filters" aria-label="状态分类筛选"></div>
+      <p id="result-count" class="result-count"></p>
+    </section>
+
+    <section class="condition-workspace">
+      <aside class="condition-list-panel" aria-label="状态列表">
+        <div id="condition-list" class="condition-list"></div>
+      </aside>
+      <article id="condition-detail" class="condition-detail" aria-live="polite">
+        <div class="empty-detail">
+          <strong>选择一个状态</strong>
+          <span>点击左侧状态查看完整规则与关键效果。</span>
+        </div>
+      </article>
+    </section>
+  </main>
+  <script src="assets/js/conditions.js?v=20260626-condition-v1"></script>
+</body>
+</html>

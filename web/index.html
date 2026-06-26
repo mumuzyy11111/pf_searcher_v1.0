@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
     <meta charset="UTF-8">
@@ -21,6 +21,7 @@
             <section class="nav-group">
                 <div class="nav-group-title">资料查询</div>
                 <button class="nav-btn" type="button" data-tab="spells">法术</button>
+                <button class="nav-btn" type="button" data-tab="conditions">状态</button>
                 <button class="nav-btn" type="button" data-tab="feats">专长</button>
                 <button class="nav-btn" type="button" data-tab="classes">职业</button>
                 <button class="nav-btn" type="button" data-tab="items">奇物</button>
@@ -32,7 +33,10 @@
                 <iframe src="character.html?v=20260615-class-level" title="自动车卡"></iframe>
             </section>
             <section id="pane-spells" class="pane hidden">
-                <iframe src="spells.html" title="法术检索"></iframe>
+                <iframe src="spells_filter.html?v=20260625-dual-v3" title="法术检索"></iframe>
+            </section>
+            <section id="pane-conditions" class="pane hidden">
+                <iframe src="conditions.html?v=20260626-condition-v1" title="状态检索"></iframe>
             </section>
             <section id="pane-feats" class="pane hidden">
                 <iframe src="feats.html" title="专长检索"></iframe>
@@ -46,6 +50,6 @@
         </main>
     </div>
 
-    <script src="assets/js/index.js"></script>
+    <script src="assets/js/index.js?v=20260626-condition-v1"></script>
 </body>
 </html>

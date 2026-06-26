@@ -3,50 +3,38 @@
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>PF &#32844;&#19994;&#36164;&#26009;</title>
+  <title>PF 职业资料</title>
   <link rel="stylesheet" href="assets/css/browser.css" />
 </head>
 <body>
   <main class="page">
     <header class="topbar">
-      <h1>PF &#32844;&#19994;&#36164;&#26009;</h1>
+      <h1>PF 职业资料</h1>
       <nav class="tabs">
-        <span class="tab-label">&#36710;&#21345;&#22120;</span>
-        <a class="tab" href="index.html#character" target="_top">&#35282;&#33394;&#21345;</a>
-        <span class="tab-label">&#36164;&#26009;&#26597;&#35810;</span>
-        <a class="tab" href="index.html#spells" target="_top">&#27861;&#26415;</a>
-        <a class="tab" href="index.html#feats" target="_top">&#19987;&#38271;</a>
-        <a class="tab active" href="index.html#classes" target="_top">&#32844;&#19994;</a>
-        <a class="tab" href="index.html#items" target="_top">&#22855;&#29289;</a>
+        <span class="tab-label">车卡器</span>
+        <a class="tab" href="index.html#character" target="_top">角色卡</a>
+        <span class="tab-label">资料查询</span>
+        <a class="tab" href="index.html#spells" target="_top">法术</a>
+        <a class="tab" href="index.html#conditions" target="_top">状态</a>
+        <a class="tab" href="index.html#feats" target="_top">专长</a>
+        <a class="tab active" href="index.html#classes" target="_top">职业</a>
+        <a class="tab" href="index.html#items" target="_top">奇物</a>
       </nav>
-      <p id="total-count" class="subtitle">&#21152;&#36733;&#20013;...</p>
+      <p id="total-count" class="subtitle">加载中...</p>
     </header>
-
     <section class="panel">
       <div class="controls class-controls">
-        <label for="class-search">&#32844;&#19994;&#26816;&#32034;</label>
-        <input id="class-search" type="text" placeholder="&#36755;&#20837;&#32844;&#19994;&#12289;&#29305;&#24615;&#25110;&#21464;&#20307;&#21517;&#31216;" />
-        <button id="clear-search" type="button">&#28165;&#31354;</button>
+        <label for="class-search">职业检索</label>
+        <input id="class-search" type="text" placeholder="输入职业、特性或变体名称" />
+        <button id="clear-search" type="button">清空</button>
       </div>
-      <div id="class-section-switch" class="class-section-switch" aria-label="&#32844;&#19994;&#31867;&#22411;&#20999;&#25442;"></div>
+      <div id="class-section-switch" class="class-section-switch" aria-label="职业类型切换"></div>
       <p id="result-count" class="hint"></p>
     </section>
-
     <section class="class-browser">
-      <aside class="book-sidebar class-sidebar" aria-label="&#32844;&#19994;&#21015;&#34920;">
-        <div class="sidebar-title">&#32844;&#19994;</div>
-        <div id="class-list" class="book-list class-list"></div>
-      </aside>
-
-      <section class="class-content-panel" aria-label="&#32844;&#19994;&#20869;&#23481;">
-        <div id="class-title" class="class-title-block"></div>
-        <div id="class-subtabs" class="class-subtabs"></div>
-        <div id="class-items" class="class-items"></div>
-      </section>
-
-      <aside id="class-detail" class="class-detail-panel" aria-label="&#20869;&#23481;&#35814;&#24773;">
-        <div class="empty-detail">&#36873;&#25321;&#24038;&#20391;&#32844;&#19994;&#26597;&#30475;&#35814;&#24773;&#12290;</div>
-      </aside>
+      <aside class="book-sidebar class-sidebar" aria-label="职业列表"><div class="sidebar-title">职业</div><div id="class-list" class="book-list class-list"></div></aside>
+      <section class="class-content-panel" aria-label="职业内容"><div id="class-title" class="class-title-block"></div><div id="class-subtabs" class="class-subtabs"></div><div id="class-items" class="class-items"></div></section>
+      <aside id="class-detail" class="class-detail-panel" aria-label="内容详情"><div class="empty-detail">选择左侧职业查看详情。</div></aside>
     </section>
   </main>
   <script src="assets/js/classes.js?v=20260526-mythic"></script>

@@ -1,4 +1,4 @@
-﻿<!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="zh-CN">
 <head>
   <meta charset="UTF-8" />
@@ -15,6 +15,7 @@
         <a class="tab" href="index.html#character" target="_top">角色卡</a>
         <span class="tab-label">资料查询</span>
         <a class="tab" href="index.html#spells" target="_top">法术</a>
+        <a class="tab" href="index.html#conditions" target="_top">状态</a>
         <a class="tab active" href="index.html#feats" target="_top">专长</a>
         <a class="tab" href="index.html#classes" target="_top">职业</a>
         <a class="tab" href="index.html#items" target="_top">奇物</a>
@@ -38,23 +39,11 @@
     <section class="feat-browser">
       <aside class="book-sidebar" aria-label="书籍筛选">
         <div class="sidebar-title">筛选</div>
-        <div class="filter-section">
-          <div class="filter-title">专长类型</div>
-          <div id="type-list" class="book-list type-list"></div>
-        </div>
-        <div class="filter-section">
-          <div class="filter-title">书籍来源</div>
-          <div id="book-list" class="book-list"></div>
-        </div>
+        <div class="filter-section"><div class="filter-title">专长类型</div><div id="type-list" class="book-list type-list"></div></div>
+        <div class="filter-section"><div class="filter-title">书籍来源</div><div id="book-list" class="book-list"></div></div>
       </aside>
-
-      <section class="feat-list-panel" aria-label="专长结果">
-        <div id="results" class="feat-list"></div>
-      </section>
-
-      <aside id="feat-detail" class="feat-detail-panel" aria-label="专长详情">
-        <div class="empty-detail">选择左侧专长查看详情。</div>
-      </aside>
+      <section class="feat-list-panel" aria-label="专长结果"><div id="results" class="feat-list"></div></section>
+      <aside id="feat-detail" class="feat-detail-panel" aria-label="专长详情"><div class="empty-detail">选择左侧专长查看详情。</div></aside>
     </section>
   </main>
   <script src="assets/js/feats.js"></script>
