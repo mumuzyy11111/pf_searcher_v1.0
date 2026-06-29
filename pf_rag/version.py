@@ -1,1 +1,3 @@
-APP_VERSION = "1.2.1"
+APP_NAME = "pathfinder_tools"
+APP_VERSION = "1.2.2"
+APP_RELEASE_NAME = f"{APP_NAME}_v{APP_VERSION}"

@@ -4,12 +4,12 @@ from __future__ import annotations
 from fastapi import FastAPI
 
 from api.routers import health, rag, spells
-from pf_rag.version import APP_VERSION
+from pf_rag.version import APP_NAME, APP_VERSION
 
 
 app = FastAPI(
-    title="PF Spell RAG API",
-    description="Pathfinder spell search and retrieval-augmented Q&A API.",
+    title=f"{APP_NAME} API",
+    description="Pathfinder tools search and retrieval-augmented Q&A API.",
     version=APP_VERSION,
 )
 

@@ -1,7 +1,7 @@
-# PFSpellRAG v1.2.1
+# pathfinder_tools_v1.2.2
 
-Pathfinder（PF）法术检索与智能问答系统。  
-当前版本同时包含完整 RAG 运行形态和精简资料浏览/车卡器运行形态。
+Pathfinder（PF）本地工具台。
+当前版本包含资料查询、车卡器、人物卡状态记录器，以及完整 RAG 运行形态。
 
 ## 1. 项目能做什么
 
@@ -125,11 +125,11 @@ python run_lite.py
 
 ### 3.6 打包与分发
 
-- `packaging/legacy/PFSpellRAG.spec`：历史 PyInstaller 打包配置
+- `packaging/legacy/*.spec`：历史 PyInstaller 打包配置，保留作旧版本参考
 - `scripts/package/package_lite.py`：精简分发版打包脚本
-- `dist/PFSearcher_v1.2.1_portable.zip`：完整版本可分发便携包
-- `dist/PFSearcherLite_v1.2.1_portable.zip`：精简版本可分发便携包
-- `dist/PFSearcher_v1.2.1_portable/`、`dist/PFSearcherLite_v1.2.1_portable/`：便携运行目录（`exe + web + result + data`）
+- `dist/pathfinder_tools_v1.2.2_portable.zip`：完整版本可分发便携包
+- `dist/pathfinder_tools_lite_v1.2.2_portable.zip`：精简版本可分发便携包
+- `dist/pathfinder_tools_v1.2.2_portable/`、`dist/pathfinder_tools_lite_v1.2.2_portable/`：便携运行目录（`exe + web + result + data`）
 
 ## 4. 核心流程（简化）
 
@@ -154,4 +154,4 @@ python run_lite.py
 
 ## 7. 更新说明
 
-完整更新记录见 `CHANGELOG.md` 和 `docs/更新文档.md`。当前版本为 `v1.2.1`。
+完整更新记录见 `CHANGELOG.md` 和 `docs/更新文档.md`。当前项目发布名为 `pathfinder_tools_v1.2.2`。

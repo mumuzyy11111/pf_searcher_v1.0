@@ -75,7 +75,7 @@ def write_config(path: Path, values: dict[str, str]) -> None:
     extra_keys = [key for key in values if key not in DEFAULT_VALUES]
 
     lines = [
-        "# Local PFSpellRAG configuration.",
+        "# Local pathfinder_tools configuration.",
         "# This file may contain API keys and must not be committed.",
         "",
     ]
@@ -86,7 +86,7 @@ def write_config(path: Path, values: dict[str, str]) -> None:
 
 def main() -> int:
     parser = argparse.ArgumentParser(
-        description="Write local PFSpellRAG API settings to config/app.env."
+        description="Write local pathfinder_tools API settings to config/app.env."
     )
     parser.add_argument("--config", type=Path, default=DEFAULT_CONFIG)
     parser.add_argument("--llm-api-key", default="")
