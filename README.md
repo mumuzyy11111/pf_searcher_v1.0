@@ -9,6 +9,8 @@ Pathfinder（PF）法术检索与智能问答系统。
 - 按关键词检索（全字段）
 - 按职业/环位筛选法术
 - 按学派筛选法术，并将神话法术作为独立分类
+- 使用组合筛选页按职业、环位、学派、来源等条件检索法术
+- 浏览 PF 常见状态规则与关键效果
 - 浏览专长、职业、奇物资料
 - 使用车卡器记录本地角色卡草稿，并从资料库加入职业、专长、法术、奇物
 - 智能问答（RAG）：先检索再生成，返回带引用的回答
@@ -89,10 +91,16 @@ python run_lite.py
 ### 3.3 前端（`web/`）
 
 - `index.html`：页面结构（模式切换、筛选、结果区）
+- `spells_filter.html`：组合式法术筛选页面，面向资料查询中的快速筛选。
+- `conditions.html`：状态资料查询页面，读取 `assets/data/conditions.json`。
 - `assets/js/spell-rag.js`：法术检索与 RAG 前端核心逻辑
   - 名称搜索 / 关键词搜索 / 职业搜索 / RAG 提问
   - API 调用与结果渲染（含 Markdown 表格渲染）
+- `assets/js/spell-filter-core.js`、`assets/js/spell-filter.js`：组合筛选页的数据归一化、过滤与渲染逻辑。
+- `assets/js/conditions.js`：状态查询页的搜索、分类筛选和详情渲染逻辑。
 - `assets/css/spells.css`：法术页面样式
+- `assets/css/spell-filter.css`、`assets/css/spell-view-switch.css`：组合筛选页样式。
+- `assets/css/conditions.css`：状态查询页样式。
 - `assets/css/browser.css`：专长/职业/奇物浏览页面通用样式
 
 ### 3.4 数据与索引
@@ -108,6 +116,8 @@ python run_lite.py
 - `scripts/build/evaluate.py`：评估脚本（Retrieval@5、MRR、答案命中等）
 - `eval/gold_set.json`：评估题集
 - `scripts/extract_*.py` 等：数据抽取/清洗相关工具脚本（非日常运行必需）
+- `tools/repair_content_integrity.py`：GitHub 更新引入的内容完整性修复工具，用于修复法术职业别名、法术等级重复项和专长文本串联污染。
+- `Apply-Repair.ps1`：上述修复工具的 PowerShell 入口，默认 dry-run，传入 `-Apply` 后才写入修复结果。
 
 ### 3.6 打包与分发
 
@@ -128,6 +138,7 @@ python run_lite.py
 ## 5. 常见维护操作
 
 - 更新 `result/` 数据后：重新执行 `python scripts/build/build_index.py`
+- 检查法术/专长内容污染：先执行 `.\Apply-Repair.ps1` 生成 dry-run 审计报告，确认后再执行 `.\Apply-Repair.ps1 -Apply`
 - 更换模型/API：修改 `.env` 中 LLM 与 Embedding 相关变量
 - 验证服务：访问 `/api/health`
 
@@ -139,4 +150,4 @@ python run_lite.py
 
 ## 7. 更新说明
 
-完整更新记录见 `CHANGELOG.md`。当前版本为 `v1.2`。
+完整更新记录见 `CHANGELOG.md` 和 `docs/更新文档.md`。当前版本为 `v1.2.1`。

@@ -42,8 +42,10 @@ scripts/_scratch/*
 docs/*
 !docs/API_KEY_CONFIGURATION.md
 !docs/CHARACTER_SCHEMA_ZH.md
+!docs/CODEBASE_ORGANIZATION.md
 !docs/CODE_OVERVIEW_ZH.md
 !docs/README_RAG.md
+!docs/更新文档.md
 
 # Generated viewer bundle; exceeds GitHub's regular file size limit
 result/Pathfinder-v2.14-SC-viewer.html
