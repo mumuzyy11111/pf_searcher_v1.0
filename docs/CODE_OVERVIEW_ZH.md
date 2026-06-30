@@ -644,7 +644,7 @@ LLM 回答生成模块。
 
 `package_lite.py` 当前完成内容：
 
-- 使用 PyInstaller 构建 `PFSearcherLite.exe`。
+- 使用 PyInstaller 构建 `pathfinder_tools_lite.exe`。
 - 复制 `web/`。
 - 复制运行时需要的法术、专长、职业、奇物 JSON。
 - 复制 `data/aon_source_counts.json`。
@@ -653,7 +653,7 @@ LLM 回答生成模块。
   - `start.bat`
   - `install.bat`
   - `README_中文.txt`
-  - `dist/PFSearcherLite_portable.zip`
+  - `dist/pathfinder_tools_lite_v1.2.2_portable.zip`
 
 ## 9. 打包与分发
 
@@ -661,8 +661,7 @@ LLM 回答生成模块。
 
 相关文件：
 
-- `packaging/legacy/PFSpellRAG.spec`
-- `packaging/legacy/PFSearcher.spec`
+- `packaging/legacy/*.spec`：旧版历史配置
 - `scripts/package/package_portable.py`
 
 特点：
@@ -678,7 +677,7 @@ LLM 回答生成模块。
 
 - `run_lite.py`
 - `scripts/package/package_lite.py`
-- `dist/PFSearcherLite_portable.zip`
+- `dist/pathfinder_tools_lite_v1.2.2_portable.zip`
 
 特点：
 
@@ -724,7 +723,7 @@ LLM 回答生成模块。
 
 - 已新增轻量入口 `run_lite.py`。
 - 已新增精简打包脚本 `scripts/package/package_lite.py`。
-- 已生成 `dist/PFSearcherLite_portable.zip`。
+- 当前精简版目标产物为 `dist/pathfinder_tools_lite_v1.2.2_portable.zip`。
 - 已生成中文说明文件 `README_中文.txt`。
 - 已验证精简版 exe 能启动本地服务。
 - 已验证 `/api/health`、`/api/spell-sources`、`/api/spells/keyword` 正常响应。

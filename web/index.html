@@ -3,19 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>PF 工具台</title>
+    <title>pathfinder_tools_v1.2.2</title>
     <link rel="stylesheet" href="assets/css/index.css">
 </head>
 <body>
     <div class="wrap">
         <aside class="app-sidebar" aria-label="功能导航">
             <div class="brand-block">
-                <h1 class="title">PF 工具台</h1>
+                <h1 class="title">pathfinder_tools_v1.2.2</h1>
             </div>
 
             <section class="nav-group">
                 <div class="nav-group-title">车卡器</div>
                 <button class="nav-btn active" type="button" data-tab="character">角色卡</button>
+            </section>
+
+            <section class="nav-group">
+                <div class="nav-group-title">人物卡状态记录器</div>
+                <button class="nav-btn" type="button" data-tab="statusTracker">状态记录</button>
             </section>
 
             <section class="nav-group">
@@ -31,6 +36,9 @@
         <main class="app-main">
             <section id="pane-character" class="pane">
                 <iframe src="character.html?v=20260615-class-level" title="自动车卡"></iframe>
+            </section>
+            <section id="pane-status-tracker" class="pane hidden">
+                <iframe src="status_tracker.html?v=20260629-step1" title="人物卡状态记录"></iframe>
             </section>
             <section id="pane-spells" class="pane hidden">
                 <iframe src="spells_filter.html?v=20260625-dual-v3" title="法术检索"></iframe>

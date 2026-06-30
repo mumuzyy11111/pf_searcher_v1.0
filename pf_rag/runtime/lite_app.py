@@ -6,14 +6,14 @@ from fastapi.staticfiles import StaticFiles
 
 from pf_rag.runtime.paths import RuntimePaths
 from pf_rag.runtime.spell_catalog import SpellCatalog
-from pf_rag.version import APP_VERSION
+from pf_rag.version import APP_NAME, APP_VERSION
 
 
 def create_lite_app(paths: RuntimePaths) -> FastAPI:
     catalog = SpellCatalog(paths)
     app = FastAPI(
-        title="PF Searcher Lite API",
-        description="Local PF data browser without RAG/indexing dependencies.",
+        title=f"{APP_NAME} Lite API",
+        description="Local Pathfinder tools browser without RAG/indexing dependencies.",
         version=APP_VERSION,
     )
 

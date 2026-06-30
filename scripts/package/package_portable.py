@@ -11,15 +11,14 @@ if str(_PROJECT_ROOT) not in sys.path:
 import shutil
 import subprocess
 
-from pf_rag.version import APP_VERSION
+from pf_rag.version import APP_NAME, APP_RELEASE_NAME, APP_VERSION
 
 
 ROOT = Path(__file__).resolve().parents[2]
 DIST_DIR = ROOT / "dist"
-APP_NAME = "PFSearcher"
 BUILD_OUTPUT_DIR = DIST_DIR / APP_NAME
-PORTABLE_DIR = DIST_DIR / f"{APP_NAME}_v{APP_VERSION}_portable"
-ZIP_BASENAME = DIST_DIR / f"{APP_NAME}_v{APP_VERSION}_portable"
+PORTABLE_DIR = DIST_DIR / f"{APP_RELEASE_NAME}_portable"
+ZIP_BASENAME = DIST_DIR / f"{APP_RELEASE_NAME}_portable"
 COLLECT_ALL_PACKAGES = [
     "chromadb",
     "onnxruntime",
@@ -148,17 +147,17 @@ def write_portable_helpers(target_dir: Path) -> None:
     install_bat.write_text(
         "@echo off\n"
         "setlocal\n"
-        "set \"APP_DIR=%LOCALAPPDATA%\\PFSearcher\"\n"
-        "echo Installing PF Searcher to %APP_DIR% ...\n"
+        f"set \"APP_DIR=%LOCALAPPDATA%\\{APP_NAME}\"\n"
+        f"echo Installing {APP_RELEASE_NAME} to %APP_DIR% ...\n"
         "if not exist \"%APP_DIR%\" mkdir \"%APP_DIR%\"\n"
         "robocopy \"%~dp0\" \"%APP_DIR%\" /E /XF install.bat >nul\n"
         "powershell -NoProfile -ExecutionPolicy Bypass -Command "
         "\"$desktop=[Environment]::GetFolderPath('Desktop'); "
-        "$shortcut=(New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $desktop 'PF Searcher.lnk')); "
-        "$shortcut.TargetPath=(Join-Path $env:LOCALAPPDATA 'PFSearcher\\start.bat'); "
-        "$shortcut.WorkingDirectory=(Join-Path $env:LOCALAPPDATA 'PFSearcher'); "
+        "$shortcut=(New-Object -ComObject WScript.Shell).CreateShortcut((Join-Path $desktop 'pathfinder_tools.lnk')); "
+        f"$shortcut.TargetPath=(Join-Path $env:LOCALAPPDATA '{APP_NAME}\\start.bat'); "
+        f"$shortcut.WorkingDirectory=(Join-Path $env:LOCALAPPDATA '{APP_NAME}'); "
         "$shortcut.Save()\"\n"
-        "echo Done. Starting PF Searcher ...\n"
+        "echo Done. Starting pathfinder_tools ...\n"
         "start \"\" \"%APP_DIR%\\start.bat\"\n",
         encoding="utf-8",
     )
@@ -181,10 +180,10 @@ def write_portable_helpers(target_dir: Path) -> None:
 
     readme = target_dir / "README_PORTABLE.txt"
     readme.write_text(
-        "PF Searcher portable package\n\n"
+        f"{APP_RELEASE_NAME} portable package\n\n"
         "Usage:\n"
-        "1. Double-click install.bat to install to %LOCALAPPDATA%\\PFSearcher and create a desktop shortcut.\n"
-        "2. Or double-click start.bat / PFSearcher.exe to run directly from this folder.\n"
+        f"1. Double-click install.bat to install to %LOCALAPPDATA%\\{APP_NAME} and create a desktop shortcut.\n"
+        f"2. Or double-click start.bat / {APP_NAME}.exe to run directly from this folder.\n"
         "3. The app opens http://localhost:<port>/web/ automatically.\n"
         "4. Smart Q&A asks for an API key in the frontend. No key is bundled in this package.\n"
         "5. Optional local config: copy config/app.env.example to config/app.env.\n\n"
@@ -193,7 +192,8 @@ def write_portable_helpers(target_dir: Path) -> None:
         "- Feat search\n"
         "- Class browser\n"
         "- Wondrous item browser\n"
-        "- Character workbench\n",
+        "- Character workbench\n"
+        "- Character status tracker\n",
         encoding="utf-8",
     )
 

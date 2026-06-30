@@ -7,6 +7,7 @@
         classes: document.getElementById("pane-classes"),
         items: document.getElementById("pane-items"),
         character: document.getElementById("pane-character"),
+        statusTracker: document.getElementById("pane-status-tracker"),
     };
 
     function show(which) {

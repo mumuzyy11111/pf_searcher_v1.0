@@ -1,6 +1,6 @@
 (() => {
   const STORAGE_KEY = "pf_character_workbench_v1";
-  const APP_VERSION = "1.2.1";
+  const APP_VERSION = "1.2.2";
   const SCHEMA_VERSION = "0.1.0";
   const ABILITIES = [
     ["str", "力量"],

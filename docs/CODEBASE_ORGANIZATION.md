@@ -17,26 +17,26 @@
 ### 打包脚本与配置
 
 - `scripts/package/package_portable.py`
-  - 使用 PyInstaller 打包 `PFSpellRAG.exe`。
+  - 使用 PyInstaller 打包 `pathfinder_tools.exe`。
   - 复制 `web/`、`result/`、`data/chroma_db/`、`data/bm25_index/`。
-  - 生成 `dist/PFSpellRAG_portable/` 和 `dist/PFSpellRAG_portable.zip`。
+  - 生成 `dist/pathfinder_tools_v1.2.2_portable/` 和 `dist/pathfinder_tools_v1.2.2_portable.zip`。
   - 当前已收集 `chromadb`、`posthog`、`pypika`、`onnxruntime`、`tokenizers`，用于修复便携版 Chroma 加载问题。
 
-- `PFSpellRAG.spec`
+- `packaging/legacy/*.spec`
   - PyInstaller spec 文件。
-  - 如果直接用 spec 打包，需要保持它与 `package_portable.py` 的依赖收集一致。
+  - 历史打包配置。当前项目发布名已改为 `pathfinder_tools_v1.2.2`，新打包流程以 `scripts/package/package_portable.py` 为准。
 
 - `run_web.spec`
   - 旧的/备用打包配置。
-  - 当前主要分发应以 `PFSpellRAG.spec` 和 `scripts/package/package_portable.py` 为准。
+  - 当前主要分发应以 `scripts/package/package_portable.py` 为准，历史 spec 仅作旧版参考。
 
 ### 打包产物
 
-- `dist/PFSpellRAG_portable/`
+- `dist/pathfinder_tools_v1.2.2_portable/`
   - 当前可运行便携目录。
-  - 包含 `PFSpellRAG.exe`、`start.bat`、`web/`、`result/`、`data/`。
+  - 包含 `pathfinder_tools.exe`、`start.bat`、`web/`、`result/`、`data/`。
 
-- `dist/PFSpellRAG_portable.zip`
+- `dist/pathfinder_tools_v1.2.2_portable.zip`
   - 当前可分发 zip。
 
 - `build/`
@@ -170,11 +170,25 @@
 - `web/index.html`
   - 页面结构。
   - 作为车卡器和资料查询的总入口。
-  - 当前挂载角色卡、法术、状态、专长、职业和奇物页面。
+  - 当前挂载角色卡、人物卡状态记录器、法术、状态、专长、职业和奇物页面。
 
 - `web/assets/js/index.js`
   - 首页导航切换逻辑。
-  - 根据 hash 在车卡器、法术、状态、专长、职业、奇物之间切换。
+  - 根据 hash 在车卡器、人物卡状态记录器、法术、状态、专长、职业、奇物之间切换。
+
+- `web/status_tracker.html`
+  - 人物卡状态记录器页面。
+  - 与车卡器和资料查询并列，第一阶段独立维护状态数据，不读取当前车卡器。
+
+- `web/assets/js/status-tracker.js`
+  - 人物卡状态记录器核心逻辑。
+  - 使用 `localStorage` 维护多个角色状态档案。
+  - 支持基础数值、职业能力、法术、当前专长、当前 Buff、其他生物、奇物和剧情备注 8 个可填写栏位。
+  - 支持自动保存、角色档案切换、复制、删除、JSON 导入导出。
+
+- `web/assets/css/status-tracker.css`
+  - 人物卡状态记录器样式。
+  - 提供两栏布局、栏位导航、表单卡片、条目列表和移动端响应式布局。
 
 - `web/spells.html`
   - 旧版法术检索/RAG 页面入口。
@@ -356,7 +370,7 @@ PF_RAG/
 
 ## 当前最重要的边界
 
-- 便携版运行只需要：`PFSpellRAG.exe`、`web/`、`result/`、`data/`、`.env`。
+- 便携版运行只需要：`pathfinder_tools.exe`、`web/`、`result/`、`data/`、`.env`。
 - RAG 重新建索引需要：`api/`、`scripts/build/build_index.py`、`result/`、`.env`。
 - 重新抽取法术数据才需要：`spell/`、`Pathfinder v2.14 SC*`、`scripts/extract_*.py`、修复脚本。
 - `build/`、`__pycache__/`、大部分 `debug/tmp` 文件不是运行必需。

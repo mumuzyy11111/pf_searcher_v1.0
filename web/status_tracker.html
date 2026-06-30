@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>pathfinder_tools_v1.2.2 人物卡状态记录器</title>
+  <link rel="stylesheet" href="assets/css/status-tracker.css?v=20260629-step1" />
+</head>
+<body>
+  <main class="tracker-shell">
+    <header class="tracker-header">
+      <div>
+        <h1>pathfinder_tools_v1.2.2 人物卡状态记录器</h1>
+        <p id="save-status" class="save-status">未保存</p>
+        <nav class="section-links" aria-label="功能导航">
+          <span class="section-label">车卡器</span>
+          <a href="index.html#character" target="_top">角色卡</a>
+          <span class="section-label">人物卡状态记录器</span>
+          <a class="active" href="index.html#statusTracker" target="_top">状态记录</a>
+          <span class="section-label">资料查询</span>
+          <a href="index.html#spells" target="_top">法术</a>
+          <a href="index.html#conditions" target="_top">状态</a>
+          <a href="index.html#feats" target="_top">专长</a>
+          <a href="index.html#classes" target="_top">职业</a>
+          <a href="index.html#items" target="_top">奇物</a>
+        </nav>
+      </div>
+      <div class="profile-tools">
+        <label class="profile-select-label" for="profile-select">角色档案</label>
+        <select id="profile-select"></select>
+        <button type="button" data-action="new-profile">新建</button>
+        <button type="button" data-action="duplicate-profile">复制</button>
+        <button type="button" class="secondary-btn" data-action="delete-profile">删除</button>
+        <button type="button" data-action="export-profile">导出 JSON</button>
+        <label class="import-btn" for="import-profile-input">导入 JSON</label>
+        <input id="import-profile-input" type="file" accept="application/json" hidden />
+      </div>
+    </header>
+
+    <section class="tracker-layout">
+      <aside class="tracker-nav" aria-label="状态记录栏目">
+        <div class="nav-title">状态卡</div>
+        <div id="section-list" class="section-list"></div>
+      </aside>
+
+      <section class="tracker-panel" aria-label="状态记录编辑区">
+        <div class="panel-heading">
+          <div>
+            <h2 id="section-title">基础数值</h2>
+            <p id="section-subtitle">记录 HP、防御、豁免、速度、攻击加值、CMB/CMD、先攻、种族和属性。</p>
+          </div>
+          <div id="profile-summary" class="profile-summary"></div>
+        </div>
+        <div id="section-content" class="section-content"></div>
+      </section>
+    </section>
+  </main>
+
+  <script src="assets/js/status-tracker.js?v=20260629-step1"></script>
+</body>
+</html>
