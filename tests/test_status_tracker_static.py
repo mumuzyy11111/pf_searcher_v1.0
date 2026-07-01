@@ -61,3 +61,125 @@ def test_status_tracker_page_and_assets_cover_all_editable_sections():
         assert field in script
 
     assert ".tracker-shell" in style
+
+
+def test_basic_stats_use_overview_cards_and_detail_sidebar():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        "STATUS_DETAIL_CONFIGS",
+        "activeDetailId = null",
+        "renderBasicOverview",
+        "renderDetailSidebar",
+        "renderOverviewCard",
+        "data-detail-id",
+        "data-action=\"select-detail\"",
+        "data-action=\"close-detail\"",
+        "detail-drawer",
+        "detail-overlay",
+        "calculateAbilityScore",
+        "calculateArmorClass",
+        "calculateSaveTotal",
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    expected_detail_ids = [
+        "ability-str",
+        "ability-dex",
+        "hp",
+        "ac",
+        "save-fort",
+        "save-ref",
+        "save-will",
+        "attack-melee",
+        "attack-ranged",
+        "attack-cmb",
+        "attack-cmd",
+        "initiative",
+        "speed-land",
+    ]
+    for detail_id in expected_detail_ids:
+        assert detail_id in script
+
+    expected_style_markers = [
+        ".status-overview-grid",
+        ".overview-card",
+        ".detail-sidebar",
+        ".detail-sidebar.is-open",
+        ".detail-drawer",
+        ".detail-overlay",
+        ".detail-close-btn",
+        ".detail-breakdown",
+        ".detail-row",
+    ]
+    for marker in expected_style_markers:
+        assert marker in style
+
+
+def test_detail_sidebar_uses_modifier_sources_without_notes():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        "detailModifiers",
+        "renderModifierRows",
+        "modifier-value",
+        "modifier-source",
+        "add-detail-modifier",
+        "remove-detail-modifier",
+        "setModifierField",
+        "sumDetailModifiers",
+        "hpMaxBase",
+        "current HP",
+        "temporary HP",
+        "nonlethal damage",
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    detail_config = script.split("const STATUS_DETAIL_CONFIGS", 1)[1].split("function toNumber", 1)[0]
+    assert "noteField(" not in detail_config
+    assert "notes" not in detail_config
+
+    expected_style_markers = [
+        ".modifier-table",
+        ".modifier-row",
+        ".modifier-value",
+        ".modifier-source",
+        ".modifier-remove-btn",
+    ]
+    for marker in expected_style_markers:
+        assert marker in style
+
+def test_detail_modifier_actions_are_wired_to_click_handler():
+    script = read_text("web/assets/js/status-tracker.js")
+    click_handler = script.split('document.addEventListener("click"', 1)[1]
+
+    assert 'if (action === "add-detail-modifier")' in click_handler
+    assert 'addDetailModifier(actionTarget.dataset.detailId)' in click_handler
+    assert 'if (action === "remove-detail-modifier")' in click_handler
+    assert 'removeDetailModifier(actionTarget.dataset.detailId, actionTarget.dataset.modifierId)' in click_handler
+
+def test_detail_modifier_rows_include_value_type_and_wider_drawer():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        'type: ""',
+        'data-modifier-field="type"',
+        'modifier-type',
+        '数值类型',
+        '["value", "type", "source"]',
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    expected_style_markers = [
+        'width: min(520px, 96vw)',
+        'grid-template-columns: 92px 120px minmax(0, 1fr) 68px',
+        '.modifier-type',
+    ]
+    for marker in expected_style_markers:
+        assert marker in style

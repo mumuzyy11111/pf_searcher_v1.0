@@ -95,14 +95,14 @@ python run_lite.py
 - `status_tracker.html`：人物卡状态记录器，作为与车卡器、资料查询并列的独立模块。
 - `spells_filter.html`：组合式法术筛选页面，面向资料查询中的快速筛选。
 - `conditions.html`：状态资料查询页面，读取 `assets/data/conditions.json`。
-- `assets/js/status-tracker.js`：状态记录器逻辑，支持多角色档案、8 个状态栏位、自动保存、JSON 导入导出。
+- `assets/js/status-tracker.js`：状态记录器逻辑，支持多角色档案、8 个状态栏位、基础数值总览/可收缩详情栏/来源明细、自动保存、JSON 导入导出。
 - `assets/js/spell-rag.js`：法术检索与 RAG 前端核心逻辑
   - 名称搜索 / 关键词搜索 / 职业搜索 / RAG 提问
   - API 调用与结果渲染（含 Markdown 表格渲染）
 - `assets/js/spell-filter-core.js`、`assets/js/spell-filter.js`：组合筛选页的数据归一化、过滤与渲染逻辑。
 - `assets/js/conditions.js`：状态查询页的搜索、分类筛选和详情渲染逻辑。
 - `assets/css/spells.css`：法术页面样式
-- `assets/css/status-tracker.css`：人物卡状态记录器样式。
+- `assets/css/status-tracker.css`：人物卡状态记录器样式，包含基础数值总览卡片、可收缩详情抽屉和来源明细布局。
 - `assets/css/spell-filter.css`、`assets/css/spell-view-switch.css`：组合筛选页样式。
 - `assets/css/conditions.css`：状态查询页样式。
 - `assets/css/browser.css`：专长/职业/奇物浏览页面通用样式

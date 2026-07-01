@@ -34,6 +34,7 @@
   };
 
   let activeSection = "basic";
+  let activeDetailId = null;
   let profiles = loadProfiles();
   let activeProfileId = loadActiveProfileId(profiles);
 
@@ -253,9 +254,9 @@
       updatedAt: new Date().toISOString(),
       basicStats: {
         identity: { characterName: name, playerName: "", race: "", size: "中型", classes: "", alignment: "" },
-        hp: { max: "", current: "", temp: "", nonlethal: "", notes: "" },
+        hp: { max: "", hpMaxBase: "", current: "", temp: "", nonlethal: "", notes: "" },
         abilities: Object.fromEntries(ABILITIES.map(([key]) => [key, { base: "", enhancement: "", temporary: "", misc: "", notes: "" }])),
-        ac: { armor: "", shield: "", dex: "", natural: "", deflection: "", dodge: "", size: "", misc: "", notes: "" },
+        ac: { base: "10", armor: "", shield: "", dex: "", natural: "", deflection: "", dodge: "", size: "", misc: "", notes: "" },
         saves: {
           fortBase: "", fortAbility: "", fortResistance: "", fortMagic: "", fortMisc: "",
           refBase: "", refAbility: "", refResistance: "", refMagic: "", refMisc: "",
@@ -263,6 +264,7 @@
         },
         attacks: { bab: "", melee: "", ranged: "", cmb: "", cmd: "", initiative: "", misc: "", notes: "" },
         speed: { land: "30", fly: "", swim: "", climb: "", burrow: "", notes: "" },
+        detailModifiers: {},
       },
       classFeatures: [],
       spells: { casters: [], slots: [], known: [] },
@@ -280,9 +282,67 @@
     merged.id = merged.id || makeId("status-profile");
     merged.name = merged.name || merged.basicStats.identity.characterName || "新角色";
     merged.updatedAt = merged.updatedAt || new Date().toISOString();
+    migrateDetailModifiers(merged);
     return merged;
   }
 
+
+  function legacyModifier(value, source) {
+    return value === null || value === undefined || value === "" ? null : { id: makeId("modifier"), value, type: "", source };
+  }
+
+  function setLegacyModifiers(profile, detailId, entries) {
+    const modifiers = profile.basicStats.detailModifiers;
+    if (Array.isArray(modifiers[detailId]) && modifiers[detailId].length) return;
+    modifiers[detailId] = entries.filter(Boolean).map((item) => ({ ...item, type: item.type || "" }));
+  }
+
+  function migrateDetailModifiers(profile) {
+    profile.basicStats.detailModifiers = profile.basicStats.detailModifiers && typeof profile.basicStats.detailModifiers === "object"
+      ? profile.basicStats.detailModifiers
+      : {};
+    if (!profile.basicStats.hp.hpMaxBase && profile.basicStats.hp.max) profile.basicStats.hp.hpMaxBase = profile.basicStats.hp.max;
+    if (!profile.basicStats.ac.base) profile.basicStats.ac.base = "10";
+
+    Object.values(profile.basicStats.detailModifiers).forEach((rows) => {
+      if (Array.isArray(rows)) rows.forEach((item) => { if (item.type === undefined) item.type = ""; });
+    });
+    setLegacyModifiers(profile, "hp", []);
+    setLegacyModifiers(profile, "ac", [
+      legacyModifier(profile.basicStats.ac.armor, "盔甲"),
+      legacyModifier(profile.basicStats.ac.shield, "盾牌"),
+      legacyModifier(profile.basicStats.ac.dex, "敏捷"),
+      legacyModifier(profile.basicStats.ac.natural, "天生防御"),
+      legacyModifier(profile.basicStats.ac.deflection, "偏斜"),
+      legacyModifier(profile.basicStats.ac.dodge, "闪避"),
+      legacyModifier(profile.basicStats.ac.size, "体型"),
+      legacyModifier(profile.basicStats.ac.misc, "其他"),
+    ]);
+    ABILITIES.forEach(([key]) => {
+      const ability = profile.basicStats.abilities[key] || {};
+      setLegacyModifiers(profile, `ability-${key}`, [
+        legacyModifier(ability.enhancement, "增强加值"),
+        legacyModifier(ability.temporary, "临时加值"),
+        legacyModifier(ability.misc, "其他加值"),
+      ]);
+    });
+    [
+      ["save-fort", "fort"],
+      ["save-ref", "ref"],
+      ["save-will", "will"],
+    ].forEach(([detailId, prefix]) => {
+      const cap = prefix.charAt(0).toUpperCase() + prefix.slice(1);
+      setLegacyModifiers(profile, detailId, [
+        legacyModifier(profile.basicStats.saves[`${prefix}Ability`], "属性加值"),
+        legacyModifier(profile.basicStats.saves[`${prefix}Resistance`], "抗力加值"),
+        legacyModifier(profile.basicStats.saves[`${prefix}Magic`], "魔法加值"),
+        legacyModifier(profile.basicStats.saves[`${prefix}Misc`], "其他加值"),
+      ]);
+    });
+    ["attack-bab", "attack-melee", "attack-ranged", "attack-cmb", "attack-cmd", "initiative", "speed-land", "speed-fly", "speed-swim", "speed-climb", "speed-burrow"].forEach((detailId) => {
+      setLegacyModifiers(profile, detailId, []);
+    });
+  }
   function deepMerge(base, incoming) {
     if (Array.isArray(base)) return Array.isArray(incoming) ? incoming : base;
     if (!base || typeof base !== "object") return incoming === undefined ? base : incoming;
@@ -395,19 +455,270 @@
     ].map((text) => `<span class="summary-pill">${escapeHtml(text)}</span>`).join("");
   }
 
-  function renderBasic() {
-    const abilityCards = ABILITIES.map(([key, label]) => `
-      <div class="entry-card">
-        <div class="entry-title"><strong>${label}</strong></div>
-        <div class="form-grid">
-          ${renderField("基础值", `basicStats.abilities.${key}.base`, { type: "number" })}
-          ${renderField("增强", `basicStats.abilities.${key}.enhancement`, { type: "number" })}
-          ${renderField("临时", `basicStats.abilities.${key}.temporary`, { type: "number" })}
-          ${renderField("其他", `basicStats.abilities.${key}.misc`, { type: "number" })}
-          ${renderField("备注", `basicStats.abilities.${key}.notes`, { type: "textarea", full: true })}
-        </div>
+  const BASIC_DETAIL_ORDER = [
+    "hp",
+    "ac",
+    "ability-str",
+    "ability-dex",
+    "ability-con",
+    "ability-int",
+    "ability-wis",
+    "ability-cha",
+    "save-fort",
+    "save-ref",
+    "save-will",
+    "attack-bab",
+    "attack-melee",
+    "attack-ranged",
+    "attack-cmb",
+    "attack-cmd",
+    "initiative",
+    "speed-land",
+    "speed-fly",
+    "speed-swim",
+    "speed-climb",
+    "speed-burrow",
+  ];
+
+  function numberField(label, path) {
+    return { label, path, type: "number" };
+  }
+
+  function baseDetailConfig(title, baseLabel, basePath, options = {}) {
+    return {
+      title,
+      baseLabel,
+      basePath,
+      defaultBase: options.defaultBase || "",
+      totalLabel: options.totalLabel || title,
+      subtitle: options.subtitle || "最终值 = 基础值 + 下方每一条来源修正。",
+      extraFields: options.extraFields || [],
+      unit: options.unit || "",
+    };
+  }
+
+  function abilityDetailConfig(key, label) {
+    return baseDetailConfig(label, "基础值", `basicStats.abilities.${key}.base`, {
+      totalLabel: "最终属性",
+      subtitle: "属性最终值 = 基础值 + 每一条来源修正。",
+    });
+  }
+
+  function saveDetailConfig(title, basePath) {
+    return baseDetailConfig(title, "基础豁免", basePath, {
+      totalLabel: "豁免总值",
+      subtitle: "豁免总值 = 基础豁免 + 每一条来源修正。",
+    });
+  }
+
+  function attackDetailConfig(title, basePath) {
+    return baseDetailConfig(title, "基础值", basePath, {
+      totalLabel: "当前总值",
+      subtitle: "攻击和战技先以手填基础值为主，其他修正逐条记录来源。",
+    });
+  }
+
+  function speedDetailConfig(title, basePath) {
+    return baseDetailConfig(title, "基础速度", basePath, {
+      totalLabel: "当前速度",
+      subtitle: "速度最终值 = 基础速度 + 每一条来源修正。",
+      unit: " 尺",
+    });
+  }
+
+  const STATUS_DETAIL_CONFIGS = {
+    hp: baseDetailConfig("HP", "最大 HP 基础值", "basicStats.hp.hpMaxBase", {
+      totalLabel: "最大 HP",
+      subtitle: "最大 HP = 基础值 + 每一条来源修正；当前 HP、临时 HP 和非致命伤害独立记录。",
+      extraFields: [
+        numberField("当前 HP (current HP)", "basicStats.hp.current"),
+        numberField("临时 HP (temporary HP)", "basicStats.hp.temp"),
+        numberField("非致命伤害 (nonlethal damage)", "basicStats.hp.nonlethal"),
+      ],
+    }),
+    ac: baseDetailConfig("AC 防御", "基础 AC", "basicStats.ac.base", {
+      defaultBase: "10",
+      totalLabel: "总 AC",
+      subtitle: "AC 总值 = 基础 AC + 每一条来源修正。来源可以写盔甲、盾牌、敏捷、偏斜、Buff 等。",
+    }),
+    ...Object.fromEntries(ABILITIES.map(([key, label]) => [`ability-${key}`, abilityDetailConfig(key, label)])),
+    "save-fort": saveDetailConfig("强韧豁免", "basicStats.saves.fortBase"),
+    "save-ref": saveDetailConfig("反射豁免", "basicStats.saves.refBase"),
+    "save-will": saveDetailConfig("意志豁免", "basicStats.saves.willBase"),
+    "attack-bab": attackDetailConfig("BAB", "basicStats.attacks.bab"),
+    "attack-melee": attackDetailConfig("近战攻击", "basicStats.attacks.melee"),
+    "attack-ranged": attackDetailConfig("远程攻击", "basicStats.attacks.ranged"),
+    "attack-cmb": attackDetailConfig("CMB", "basicStats.attacks.cmb"),
+    "attack-cmd": attackDetailConfig("CMD", "basicStats.attacks.cmd"),
+    initiative: attackDetailConfig("先攻", "basicStats.attacks.initiative"),
+    "speed-land": speedDetailConfig("陆地速度", "basicStats.speed.land"),
+    "speed-fly": speedDetailConfig("飞行速度", "basicStats.speed.fly"),
+    "speed-swim": speedDetailConfig("游泳速度", "basicStats.speed.swim"),
+    "speed-climb": speedDetailConfig("攀爬速度", "basicStats.speed.climb"),
+    "speed-burrow": speedDetailConfig("掘穴速度", "basicStats.speed.burrow"),
+  };
+
+  function toNumber(value) {
+    if (value === null || value === undefined || value === "") return 0;
+    const parsed = Number(value);
+    return Number.isFinite(parsed) ? parsed : 0;
+  }
+
+  function getDetailModifiers(profile, detailId) {
+    const modifiers = profile.basicStats.detailModifiers || {};
+    return Array.isArray(modifiers[detailId]) ? modifiers[detailId] : [];
+  }
+
+  function sumDetailModifiers(profile, detailId) {
+    return getDetailModifiers(profile, detailId).reduce((total, item) => total + toNumber(item.value), 0);
+  }
+
+  function hasDetailValue(profile, detailId) {
+    const config = STATUS_DETAIL_CONFIGS[detailId];
+    if (!config) return false;
+    const baseValue = getByPath(profile, config.basePath);
+    return baseValue !== null && baseValue !== undefined && baseValue !== "" || getDetailModifiers(profile, detailId).some((item) => item.value !== "");
+  }
+
+  function calculateDetailTotal(profile, detailId) {
+    const config = STATUS_DETAIL_CONFIGS[detailId];
+    if (!config) return null;
+    const rawBase = getByPath(profile, config.basePath);
+    const baseValue = rawBase === "" || rawBase === null || rawBase === undefined ? config.defaultBase : rawBase;
+    if ((baseValue === "" || baseValue === null || baseValue === undefined) && !hasDetailValue(profile, detailId)) return null;
+    return toNumber(baseValue) + sumDetailModifiers(profile, detailId);
+  }
+
+  function calculateAbilityScore(profile, key) {
+    return calculateDetailTotal(profile, `ability-${key}`);
+  }
+
+  function calculateAbilityModifier(total) {
+    if (total === null || total === undefined || total === "") return null;
+    return Math.floor((Number(total) - 10) / 2);
+  }
+
+  function calculateArmorClass(profile) {
+    const total = calculateDetailTotal(profile, "ac");
+    return { total, touch: null, flatFooted: null };
+  }
+
+  function calculateSaveTotal(profile, saveKey) {
+    return calculateDetailTotal(profile, `save-${saveKey}`);
+  }
+
+  function formatPlain(value) {
+    if (value === null || value === undefined || value === "") return "-";
+    return String(value);
+  }
+
+  function formatSigned(value) {
+    if (value === null || value === undefined || value === "") return "-";
+    const number = toNumber(value);
+    return number > 0 ? `+${number}` : String(number);
+  }
+
+  function formatSpeed(value) {
+    if (value === null || value === undefined || value === "") return "-";
+    return `${value} 尺`;
+  }
+
+  function formatDetailTotal(profile, detailId) {
+    const config = STATUS_DETAIL_CONFIGS[detailId];
+    const total = calculateDetailTotal(profile, detailId);
+    if (config && config.unit && total !== null && total !== undefined) return `${total}${config.unit}`;
+    return ["hp", "ac"].includes(detailId) || detailId.startsWith("ability-") ? formatPlain(total) : formatSigned(total);
+  }
+
+  function renderOverviewCard(id, title, value, meta = "") {
+    return `
+      <button class="overview-card ${activeDetailId === id ? "active" : ""}" type="button" data-action="select-detail" data-detail-id="${id}">
+        <span class="overview-title">${escapeHtml(title)}</span>
+        <strong class="overview-value">${escapeHtml(value)}</strong>
+        ${meta ? `<span class="overview-meta">${escapeHtml(meta)}</span>` : ""}
+      </button>
+    `;
+  }
+
+  function renderDetailRows(rows) {
+    if (!rows || !rows.length) return "";
+    return `
+      <div class="detail-breakdown">
+        ${rows.map(([label, value]) => `
+          <div class="detail-row">
+            <span>${escapeHtml(label)}</span>
+            <strong>${escapeHtml(value)}</strong>
+          </div>
+        `).join("")}
       </div>
-    `).join("");
+    `;
+  }
+
+  function renderModifierRows(detailId) {
+    const rows = getDetailModifiers(activeProfile(), detailId);
+    const body = rows.length ? rows.map((item) => `
+      <div class="modifier-row" data-modifier-id="${escapeHtml(item.id)}">
+        <input class="modifier-value" type="number" data-detail-id="${detailId}" data-modifier-id="${escapeHtml(item.id)}" data-modifier-field="value" value="${escapeHtml(item.value)}" />
+        <input class="modifier-type" type="text" data-detail-id="${detailId}" data-modifier-id="${escapeHtml(item.id)}" data-modifier-field="type" value="${escapeHtml(item.type)}" placeholder="数值类型" />
+        <input class="modifier-source" type="text" data-detail-id="${detailId}" data-modifier-id="${escapeHtml(item.id)}" data-modifier-field="source" value="${escapeHtml(item.source)}" placeholder="来源" />
+        <button class="modifier-remove-btn secondary-btn" type="button" data-action="remove-detail-modifier" data-detail-id="${detailId}" data-modifier-id="${escapeHtml(item.id)}">删除</button>      </div>
+    `).join("") : `<div class="empty-state">还没有来源。点击“添加来源”记录加值或减值。</div>`;
+    return `
+      <div class="modifier-table">
+        <div class="modifier-header">
+          <span>数值</span>
+          <span>数值类型</span>
+          <span>来源</span>
+          <span></span>
+        </div>
+        ${body}
+      </div>
+      <button type="button" data-action="add-detail-modifier" data-detail-id="${detailId}">添加来源</button>
+    `;
+  }
+
+  function renderDetailSidebar() {
+    if (!activeDetailId) return "";
+    const config = STATUS_DETAIL_CONFIGS[activeDetailId] || STATUS_DETAIL_CONFIGS.hp;
+    const total = formatDetailTotal(activeProfile(), activeDetailId);
+    return `
+      <div class="detail-overlay" data-action="close-detail"></div>
+      <aside id="detail-sidebar" class="detail-sidebar is-open" aria-label="基础数值详情">
+        <div class="detail-drawer">
+          <div class="detail-heading">
+            <span>数值详情</span>
+            <button class="detail-close-btn" type="button" data-action="close-detail" aria-label="收起详情">×</button>
+            <h3>${escapeHtml(config.title)}</h3>
+            <p>${escapeHtml(config.subtitle || "")}</p>
+          </div>
+          ${renderDetailRows([[config.totalLabel || "最终值", total]])}
+          <div class="detail-fields form-grid">
+            ${renderField(config.baseLabel || "基础值", config.basePath, { type: "number" })}
+            ${(config.extraFields || []).map((field) => renderField(field.label, field.path, field)).join("")}
+          </div>
+          <div class="modifier-section">
+            <h4>来源明细</h4>
+            ${renderModifierRows(activeDetailId)}
+          </div>
+        </div>
+      </aside>
+    `;
+  }
+
+  function renderBasicOverview() {
+    const profile = activeProfile();
+    const hp = profile.basicStats.hp;
+    const hpMax = calculateDetailTotal(profile, "hp");
+    const ac = calculateArmorClass(profile);
+    const fort = calculateSaveTotal(profile, "fort");
+    const ref = calculateSaveTotal(profile, "ref");
+    const will = calculateSaveTotal(profile, "will");
+
+    const abilityCards = ABILITIES.map(([key, label]) => {
+      const total = calculateAbilityScore(profile, key);
+      const modifier = calculateAbilityModifier(total);
+      return renderOverviewCard(`ability-${key}`, label, formatPlain(total), `调整值 ${formatSigned(modifier)}`);
+    }).join("");
 
     return `
       <section class="card">
@@ -421,73 +732,60 @@
           ${renderField("阵营", "basicStats.identity.alignment")}
         </div>
       </section>
-      <section class="card">
-        <h3>HP</h3>
-        <div class="form-grid">
-          ${renderField("最大 HP", "basicStats.hp.max", { type: "number" })}
-          ${renderField("当前 HP", "basicStats.hp.current", { type: "number" })}
-          ${renderField("临时 HP", "basicStats.hp.temp", { type: "number" })}
-          ${renderField("非致命伤害", "basicStats.hp.nonlethal", { type: "number" })}
-          ${renderField("HP 备注", "basicStats.hp.notes", { type: "textarea", full: true })}
+      <div class="basic-workspace${activeDetailId ? " has-detail" : ""}">
+        <div class="basic-overview-column">
+          <section class="card">
+            <h3>生命与防御</h3>
+            <div class="status-overview-grid compact-grid">
+              ${renderOverviewCard("hp", "HP", `${formatPlain(hp.current)} / ${formatPlain(hpMax)}`, `临时 ${formatPlain(hp.temp)} · 非致命 ${formatPlain(hp.nonlethal)}`)}
+              ${renderOverviewCard("ac", "AC", formatPlain(ac.total), "点开查看来源")}
+            </div>
+          </section>
+          <section class="card">
+            <h3>属性</h3>
+            <div class="status-overview-grid ability-grid">
+              ${abilityCards}
+            </div>
+          </section>
+          <section class="card">
+            <h3>豁免</h3>
+            <div class="status-overview-grid save-grid">
+              ${renderOverviewCard("save-fort", "强韧", formatSigned(fort))}
+              ${renderOverviewCard("save-ref", "反射", formatSigned(ref))}
+              ${renderOverviewCard("save-will", "意志", formatSigned(will))}
+            </div>
+          </section>
+          <section class="card">
+            <h3>攻击、战技与先攻</h3>
+            <div class="status-overview-grid attack-grid">
+              ${renderOverviewCard("attack-bab", "BAB", formatSigned(calculateDetailTotal(profile, "attack-bab")))}
+              ${renderOverviewCard("attack-melee", "近战", formatSigned(calculateDetailTotal(profile, "attack-melee")))}
+              ${renderOverviewCard("attack-ranged", "远程", formatSigned(calculateDetailTotal(profile, "attack-ranged")))}
+              ${renderOverviewCard("attack-cmb", "CMB", formatSigned(calculateDetailTotal(profile, "attack-cmb")))}
+              ${renderOverviewCard("attack-cmd", "CMD", formatSigned(calculateDetailTotal(profile, "attack-cmd")))}
+              ${renderOverviewCard("initiative", "先攻", formatSigned(calculateDetailTotal(profile, "initiative")))}
+            </div>
+          </section>
+          <section class="card">
+            <h3>速度</h3>
+            <div class="status-overview-grid speed-grid">
+              ${renderOverviewCard("speed-land", "陆地", formatSpeed(calculateDetailTotal(profile, "speed-land")))}
+              ${renderOverviewCard("speed-fly", "飞行", formatSpeed(calculateDetailTotal(profile, "speed-fly")))}
+              ${renderOverviewCard("speed-swim", "游泳", formatSpeed(calculateDetailTotal(profile, "speed-swim")))}
+              ${renderOverviewCard("speed-climb", "攀爬", formatSpeed(calculateDetailTotal(profile, "speed-climb")))}
+              ${renderOverviewCard("speed-burrow", "掘穴", formatSpeed(calculateDetailTotal(profile, "speed-burrow")))}
+            </div>
+          </section>
         </div>
-      </section>
-      <section class="card">
-        <h3>属性</h3>
-        ${abilityCards}
-      </section>
-      <section class="card">
-        <h3>AC 防御</h3>
-        <div class="form-grid">
-          ${renderField("盔甲", "basicStats.ac.armor", { type: "number" })}
-          ${renderField("盾牌", "basicStats.ac.shield", { type: "number" })}
-          ${renderField("敏捷", "basicStats.ac.dex", { type: "number" })}
-          ${renderField("天生防御", "basicStats.ac.natural", { type: "number" })}
-          ${renderField("偏斜", "basicStats.ac.deflection", { type: "number" })}
-          ${renderField("闪避", "basicStats.ac.dodge", { type: "number" })}
-          ${renderField("体型", "basicStats.ac.size", { type: "number" })}
-          ${renderField("其他", "basicStats.ac.misc", { type: "number" })}
-          ${renderField("AC 备注", "basicStats.ac.notes", { type: "textarea", full: true })}
-        </div>
-      </section>
-      <section class="card">
-        <h3>豁免</h3>
-        <div class="form-grid">
-          ${renderField("强韧基础", "basicStats.saves.fortBase", { type: "number" })}
-          ${renderField("强韧属性", "basicStats.saves.fortAbility", { type: "number" })}
-          ${renderField("强韧抗力", "basicStats.saves.fortResistance", { type: "number" })}
-          ${renderField("强韧其他", "basicStats.saves.fortMisc", { type: "number" })}
-          ${renderField("反射基础", "basicStats.saves.refBase", { type: "number" })}
-          ${renderField("反射属性", "basicStats.saves.refAbility", { type: "number" })}
-          ${renderField("反射抗力", "basicStats.saves.refResistance", { type: "number" })}
-          ${renderField("反射其他", "basicStats.saves.refMisc", { type: "number" })}
-          ${renderField("意志基础", "basicStats.saves.willBase", { type: "number" })}
-          ${renderField("意志属性", "basicStats.saves.willAbility", { type: "number" })}
-          ${renderField("意志抗力", "basicStats.saves.willResistance", { type: "number" })}
-          ${renderField("意志其他", "basicStats.saves.willMisc", { type: "number" })}
-        </div>
-      </section>
-      <section class="card">
-        <h3>攻击、CMB/CMD、先攻与速度</h3>
-        <div class="form-grid">
-          ${renderField("BAB", "basicStats.attacks.bab", { type: "number" })}
-          ${renderField("近战攻击加值", "basicStats.attacks.melee", { type: "number" })}
-          ${renderField("远程攻击加值", "basicStats.attacks.ranged", { type: "number" })}
-          ${renderField("CMB", "basicStats.attacks.cmb", { type: "number" })}
-          ${renderField("CMD", "basicStats.attacks.cmd", { type: "number" })}
-          ${renderField("先攻", "basicStats.attacks.initiative", { type: "number" })}
-          ${renderField("攻击其他", "basicStats.attacks.misc", { type: "number" })}
-          ${renderField("陆地速度", "basicStats.speed.land", { type: "number" })}
-          ${renderField("飞行速度", "basicStats.speed.fly", { type: "number" })}
-          ${renderField("游泳速度", "basicStats.speed.swim", { type: "number" })}
-          ${renderField("攀爬速度", "basicStats.speed.climb", { type: "number" })}
-          ${renderField("掘穴速度", "basicStats.speed.burrow", { type: "number" })}
-          ${renderField("攻击与速度备注", "basicStats.attacks.notes", { type: "textarea", full: true })}
-          ${renderField("速度备注", "basicStats.speed.notes", { type: "textarea", full: true })}
-        </div>
-      </section>
+        ${renderDetailSidebar()}
+      </div>
     `;
   }
 
+  function renderBasic() {
+    if (activeDetailId && !STATUS_DETAIL_CONFIGS[activeDetailId]) activeDetailId = null;
+    return renderBasicOverview();
+  }
   function renderList(config) {
     const entries = getByPath(activeProfile(), config.collection) || [];
     const body = entries.length ? entries.map((entry, index) => `
@@ -553,6 +851,33 @@
     renderSummary();
   }
 
+  function setModifierField(detailId, modifierId, field, value) {
+    const modifiers = activeProfile().basicStats.detailModifiers || {};
+    const rows = Array.isArray(modifiers[detailId]) ? modifiers[detailId] : [];
+    const row = rows.find((item) => item.id === modifierId);
+    if (!row || !["value", "type", "source"].includes(field)) return;
+    row[field] = value;
+    modifiers[detailId] = rows;
+    activeProfile().basicStats.detailModifiers = modifiers;
+  }
+
+  function addDetailModifier(detailId) {
+    const profile = activeProfile();
+    profile.basicStats.detailModifiers = profile.basicStats.detailModifiers || {};
+    const rows = Array.isArray(profile.basicStats.detailModifiers[detailId]) ? profile.basicStats.detailModifiers[detailId] : [];
+    rows.push({ id: makeId("modifier"), value: "", type: "", source: "" });
+    profile.basicStats.detailModifiers[detailId] = rows;
+    saveProfiles();
+    renderSection();
+  }
+
+  function removeDetailModifier(detailId, modifierId) {
+    const profile = activeProfile();
+    const rows = getDetailModifiers(profile, detailId).filter((item) => item.id !== modifierId);
+    profile.basicStats.detailModifiers[detailId] = rows;
+    saveProfiles();
+    renderSection();
+  }
   function addEntry(collectionPath) {
     const config = Object.values(listConfigs).find((item) => item.collection === collectionPath);
     if (!config) return;
@@ -642,6 +967,11 @@
 
   document.addEventListener("input", (event) => {
     const target = event.target;
+    if (target.dataset.modifierField) {
+      setModifierField(target.dataset.detailId, target.dataset.modifierId, target.dataset.modifierField, target.value);
+      saveProfiles();
+      return;
+    }
     if (target.dataset.path) {
       const value = target.type === "number" ? target.value : target.value;
       setByPath(activeProfile(), target.dataset.path, value);
@@ -672,6 +1002,14 @@
       target.value = "";
       return;
     }
+    if (target.dataset.modifierField && activeSection === "basic") {
+      renderSection();
+      return;
+    }
+    if (target.dataset.path && activeSection === "basic") {
+      renderSection();
+      return;
+    }
     if (target.dataset.collection && target.type === "checkbox") {
       const collection = getByPath(activeProfile(), target.dataset.collection) || [];
       const entry = collection[Number(target.dataset.index)];
@@ -682,20 +1020,39 @@
   });
 
   document.addEventListener("click", (event) => {
-    const button = event.target.closest("button");
-    if (!button) return;
-    if (button.dataset.section) {
-      activeSection = button.dataset.section;
+    const actionTarget = event.target.closest("[data-action], [data-section]");
+    if (!actionTarget) return;
+    if (actionTarget.dataset.section) {
+      activeSection = actionTarget.dataset.section;
+      activeDetailId = null;
       renderSection();
       return;
     }
-    const action = button.dataset.action;
+    const action = actionTarget.dataset.action;
+    if (action === "select-detail") {
+      activeDetailId = actionTarget.dataset.detailId || activeDetailId;
+      renderSection();
+      return;
+    }
+    if (action === "close-detail") {
+      activeDetailId = null;
+      renderSection();
+      return;
+    }
+    if (action === "add-detail-modifier") {
+      addDetailModifier(actionTarget.dataset.detailId);
+      return;
+    }
+    if (action === "remove-detail-modifier") {
+      removeDetailModifier(actionTarget.dataset.detailId, actionTarget.dataset.modifierId);
+      return;
+    }
     if (action === "new-profile") newProfile();
     if (action === "duplicate-profile") duplicateProfile();
     if (action === "delete-profile") deleteProfile();
     if (action === "export-profile") exportProfile();
-    if (action === "add-entry") addEntry(button.dataset.collection);
-    if (action === "remove-entry") removeEntry(button.dataset.collection, button.dataset.index);
+    if (action === "add-entry") addEntry(actionTarget.dataset.collection);
+    if (action === "remove-entry") removeEntry(actionTarget.dataset.collection, actionTarget.dataset.index);
   });
 
   renderAll();
