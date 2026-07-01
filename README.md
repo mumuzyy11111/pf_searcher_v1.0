@@ -95,7 +95,7 @@ python run_lite.py
 - `status_tracker.html`：人物卡状态记录器，作为与车卡器、资料查询并列的独立模块。
 - `spells_filter.html`：组合式法术筛选页面，面向资料查询中的快速筛选。
 - `conditions.html`：状态资料查询页面，读取 `assets/data/conditions.json`。
-- `assets/js/status-tracker.js`：状态记录器逻辑，支持多角色档案、8 个状态栏位、基础数值总览/可收缩详情栏/来源明细、自动保存、JSON 导入导出。
+- `assets/js/status-tracker.js`：状态记录器逻辑，支持多角色档案、8 个状态栏位、基础数值总览/可收缩详情栏/来源明细/多攻击方式、自动保存、JSON 导入导出。
 - `assets/js/spell-rag.js`：法术检索与 RAG 前端核心逻辑
   - 名称搜索 / 关键词搜索 / 职业搜索 / RAG 提问
   - API 调用与结果渲染（含 Markdown 表格渲染）

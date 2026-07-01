@@ -183,3 +183,36 @@ def test_detail_modifier_rows_include_value_type_and_wider_drawer():
     ]
     for marker in expected_style_markers:
         assert marker in style
+
+def test_status_tracker_has_attack_profiles_section():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        '"attackProfiles"',
+        "攻击方式",
+        "renderAttackProfiles",
+        "addAttackProfile",
+        "duplicateAttackProfile",
+        "removeAttackProfile",
+        "addAttackLine",
+        "removeAttackLine",
+        "add-attack-profile",
+        "duplicate-attack-profile",
+        "remove-attack-profile",
+        "add-attack-line",
+        "remove-attack-line",
+        "attackBonus",
+        "damageType",
+        "reachOrRange",
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    expected_style_markers = [
+        ".attack-profile-card",
+        ".attack-lines-table",
+        ".attack-line-row",
+    ]
+    for marker in expected_style_markers:
+        assert marker in style

@@ -657,3 +657,65 @@ button,
     grid-template-columns: 1fr;
   }
 }
+.attack-profile-card {
+  border: 1px solid var(--line);
+  border-radius: 10px;
+  padding: 14px;
+  margin-bottom: 12px;
+  background: #fbfcfd;
+}
+
+.entry-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.attack-lines-table {
+  display: grid;
+  gap: 8px;
+  margin: 14px 0 10px;
+}
+
+.attack-lines-header,
+.attack-line-row {
+  display: grid;
+  grid-template-columns: 1fr 90px 110px 110px 110px 110px 68px;
+  gap: 8px;
+  align-items: center;
+}
+
+.attack-lines-header {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.attack-line-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  padding: 8px;
+}
+
+.attack-line-row .field {
+  gap: 0;
+}
+
+.attack-line-row .field label {
+  display: none;
+}
+
+@media (max-width: 980px) {
+  .attack-lines-header {
+    display: none;
+  }
+
+  .attack-line-row {
+    grid-template-columns: 1fr;
+  }
+
+  .attack-line-row .field label {
+    display: block;
+  }
+}

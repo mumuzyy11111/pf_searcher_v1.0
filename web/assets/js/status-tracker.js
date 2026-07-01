@@ -4,7 +4,8 @@
 
   const SECTIONS = [
     ["basic", "基础数值", "记录 HP、防御、豁免、速度、攻击加值、CMB/CMD、先攻、种族和属性。"],
-    ["classFeatures", "职业能力", "记录职业、等级，以及每一等级对应的职业能力。"],
+    ["attacks", "攻击方式", "记录多重攻击、全回合攻击、天生武器、远程攻击和其他常用攻击方案。"],
+    ["classFeatures", "职业能力", "记录职业、等级，以及每一等级对应的职业能力。"]
     ["spells", "法术", "记录法术列表、法术位、法术 DC 和施法职业备注。"],
     ["feats", "当前专长", "记录当前专长与专长效果。"],
     ["buffs", "当前 Buff", "记录当前生效的 Buff、来源、持续时间和效果。"],
@@ -266,6 +267,7 @@
         speed: { land: "30", fly: "", swim: "", climb: "", burrow: "", notes: "" },
         detailModifiers: {},
       },
+      "attackProfiles": [],
       classFeatures: [],
       spells: { casters: [], slots: [], known: [] },
       feats: [],
@@ -276,6 +278,43 @@
     };
   }
 
+
+  function defaultAttackLine(name = "") {
+    return {
+      id: makeId("attack-line"),
+      name,
+      attackBonus: "",
+      damage: "",
+      critical: "",
+      damageType: "",
+      reachOrRange: "",
+      notes: "",
+    };
+  }
+
+  function defaultAttackProfile() {
+    return {
+      id: makeId("attack-profile"),
+      name: "新攻击方式",
+      category: "近战",
+      actionType: "标准动作",
+      isCommon: true,
+      summary: "",
+      notes: "",
+      attacks: [defaultAttackLine("第一击")],
+    };
+  }
+
+  function normalizeAttackProfiles(profile) {
+    profile.attackProfiles = Array.isArray(profile.attackProfiles) ? profile.attackProfiles : [];
+    profile.attackProfiles.forEach((attackProfile) => {
+      attackProfile.id = attackProfile.id || makeId("attack-profile");
+      attackProfile.attacks = Array.isArray(attackProfile.attacks) ? attackProfile.attacks : [];
+      attackProfile.attacks.forEach((line) => {
+        line.id = line.id || makeId("attack-line");
+      });
+    });
+  }
   function normalizeProfile(profile) {
     const base = defaultProfile(profile && profile.name ? profile.name : "新角色");
     const merged = deepMerge(base, profile && typeof profile === "object" ? profile : {});
@@ -283,6 +322,7 @@
     merged.name = merged.name || merged.basicStats.identity.characterName || "新角色";
     merged.updatedAt = merged.updatedAt || new Date().toISOString();
     migrateDetailModifiers(merged);
+    normalizeAttackProfiles(merged);
     return merged;
   }
 
@@ -811,6 +851,67 @@
     `;
   }
 
+
+  function renderAttackLine(profileIndex, line, lineIndex) {
+    const base = `attackProfiles.${profileIndex}.attacks.${lineIndex}`;
+    return `
+      <div class="attack-line-row">
+        ${renderField("名称", `${base}.name`)}
+        ${renderField("命中加值", `${base}.attackBonus`)}
+        ${renderField("伤害", `${base}.damage`)}
+        ${renderField("重击", `${base}.critical`)}
+        ${renderField("伤害类型", `${base}.damageType`)}
+        ${renderField("触及/射程", `${base}.reachOrRange`)}
+        <button class="secondary-btn" type="button" data-action="remove-attack-line" data-profile-index="${profileIndex}" data-line-index="${lineIndex}">删除</button>
+      </div>
+    `;
+  }
+
+  function renderAttackProfiles() {
+    const profiles = activeProfile().attackProfiles || [];
+    const body = profiles.length ? profiles.map((profile, index) => `
+      <article class="attack-profile-card">
+        <div class="entry-title">
+          <strong>${escapeHtml(profile.name || `攻击方式 ${index + 1}`)}</strong>
+          <div class="entry-actions">
+            <button type="button" data-action="duplicate-attack-profile" data-profile-index="${index}">复制</button>
+            <button class="secondary-btn" type="button" data-action="remove-attack-profile" data-profile-index="${index}">删除</button>
+          </div>
+        </div>
+        <div class="form-grid">
+          ${renderField("名称", `attackProfiles.${index}.name`)}
+          ${renderField("类型", `attackProfiles.${index}.category`)}
+          ${renderField("动作", `attackProfiles.${index}.actionType`)}
+          ${renderField("常用", `attackProfiles.${index}.isCommon`, { type: "checkbox" })}
+          ${renderField("摘要", `attackProfiles.${index}.summary`, { full: true })}
+          ${renderField("备注", `attackProfiles.${index}.notes`, { type: "textarea", full: true })}
+        </div>
+        <div class="attack-lines-table">
+          <div class="attack-lines-header">
+            <span>名称</span>
+            <span>命中</span>
+            <span>伤害</span>
+            <span>重击</span>
+            <span>类型</span>
+            <span>触及/射程</span>
+            <span></span>
+          </div>
+          ${(profile.attacks || []).map((line, lineIndex) => renderAttackLine(index, line, lineIndex)).join("")}
+        </div>
+        <button type="button" data-action="add-attack-line" data-profile-index="${index}">添加攻击段</button>
+      </article>
+    `).join("") : `<div class="empty-state">还没有攻击方式。可以添加长剑全回合、弓箭齐射、爪爪咬、双武器等方案。</div>`;
+
+    return `
+      <section class="card">
+        <div class="list-header">
+          <h3>攻击方式</h3>
+          <button type="button" data-action="add-attack-profile">添加攻击方式</button>
+        </div>
+        ${body}
+      </section>
+    `;
+  }
   function renderSpells() {
     return renderList(listConfigs.casters) + renderList(listConfigs.spellSlots) + renderList(listConfigs.knownSpells);
   }
@@ -838,6 +939,7 @@
     els.sectionSubtitle.textContent = section[2];
     const renderers = {
       basic: renderBasic,
+      attacks: renderAttackProfiles,
       classFeatures: () => renderList(listConfigs.classFeatures),
       spells: renderSpells,
       feats: () => renderList(listConfigs.feats),
@@ -875,6 +977,47 @@
     const profile = activeProfile();
     const rows = getDetailModifiers(profile, detailId).filter((item) => item.id !== modifierId);
     profile.basicStats.detailModifiers[detailId] = rows;
+    saveProfiles();
+    renderSection();
+  }
+
+  function addAttackProfile() {
+    activeProfile().attackProfiles.push(defaultAttackProfile());
+    saveProfiles();
+    renderSection();
+  }
+
+  function duplicateAttackProfile(index) {
+    const source = activeProfile().attackProfiles[Number(index)];
+    if (!source) return;
+    const copy = JSON.parse(JSON.stringify(source));
+    copy.id = makeId("attack-profile");
+    copy.name = `${copy.name || "攻击方式"} 副本`;
+    copy.attacks = (copy.attacks || []).map((line) => ({ ...line, id: makeId("attack-line") }));
+    activeProfile().attackProfiles.splice(Number(index) + 1, 0, copy);
+    saveProfiles();
+    renderSection();
+  }
+
+  function removeAttackProfile(index) {
+    activeProfile().attackProfiles.splice(Number(index), 1);
+    saveProfiles();
+    renderSection();
+  }
+
+  function addAttackLine(profileIndex) {
+    const profile = activeProfile().attackProfiles[Number(profileIndex)];
+    if (!profile) return;
+    profile.attacks = Array.isArray(profile.attacks) ? profile.attacks : [];
+    profile.attacks.push(defaultAttackLine(`第 ${profile.attacks.length + 1} 击`));
+    saveProfiles();
+    renderSection();
+  }
+
+  function removeAttackLine(profileIndex, lineIndex) {
+    const profile = activeProfile().attackProfiles[Number(profileIndex)];
+    if (!profile || !Array.isArray(profile.attacks)) return;
+    profile.attacks.splice(Number(lineIndex), 1);
     saveProfiles();
     renderSection();
   }
@@ -973,7 +1116,7 @@
       return;
     }
     if (target.dataset.path) {
-      const value = target.type === "number" ? target.value : target.value;
+      const value = target.type === "checkbox" ? target.checked : target.value;
       setByPath(activeProfile(), target.dataset.path, value);
       if (target.dataset.path === "name") {
         activeProfile().basicStats.identity.characterName = value;
@@ -1047,6 +1190,11 @@
       removeDetailModifier(actionTarget.dataset.detailId, actionTarget.dataset.modifierId);
       return;
     }
+    if (action === "add-attack-profile") { addAttackProfile(); return; }
+    if (action === "duplicate-attack-profile") { duplicateAttackProfile(actionTarget.dataset.profileIndex); return; }
+    if (action === "remove-attack-profile") { removeAttackProfile(actionTarget.dataset.profileIndex); return; }
+    if (action === "add-attack-line") { addAttackLine(actionTarget.dataset.profileIndex); return; }
+    if (action === "remove-attack-line") { removeAttackLine(actionTarget.dataset.profileIndex, actionTarget.dataset.lineIndex); return; }
     if (action === "new-profile") newProfile();
     if (action === "duplicate-profile") duplicateProfile();
     if (action === "delete-profile") deleteProfile();
