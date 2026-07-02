@@ -247,3 +247,120 @@ def test_status_tracker_can_clear_section_or_current_profile_with_confirmation()
     ]
     for marker in expected_script_markers:
         assert marker in script
+
+def test_status_tracker_supports_entry_modifiers_as_automatic_basic_sources():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        "modifierTargets",
+        "modifierTypesByTarget",
+        "stackMode",
+        "collectAutomaticModifiers",
+        "calculateStackedModifierTotal",
+        "function sumAutomaticModifiers",
+        "getAutomaticModifiersForDetail",
+        "renderAutomaticModifierRows",
+        "renderAutomaticModifierRows(activeDetailId)",
+        "renderEntryModifierDrawer",
+        "open-entry-editor",
+        "close-entry-editor",
+        "add-entry-modifier",
+        "remove-entry-modifier",
+        "setEntryModifierField",
+        'data-modifier-target',
+        'data-action="open-entry-editor"',
+        'data-action="add-entry-modifier"',
+        'data-action="remove-entry-modifier"',
+        'data-entry-modifier-field="enabled"',
+        'data-entry-modifier-field="stackMode"',
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    expected_targets = [
+        '"ac"',
+        '"save-fort"',
+        '"ability-str"',
+        '"attack-melee"',
+        '"speed-land"',
+    ]
+    for marker in expected_targets:
+        assert marker in script
+
+    expected_style_markers = [
+        ".entry-modifier-drawer",
+        ".entry-modifier-row",
+        ".automatic-modifier-table",
+        ".automatic-modifier-row",
+        ".entry-modifier-actions",
+    ]
+    for marker in expected_style_markers:
+        assert marker in style
+
+def test_status_tracker_lists_use_summary_cards_and_editor_drawer():
+    script = read_text("web/assets/js/status-tracker.js")
+    style = read_text("web/assets/css/status-tracker.css")
+
+    expected_script_markers = [
+        "renderEntrySummary",
+        "renderEntryEditorDrawer",
+        "renderEntryModifierSummary",
+        "open-entry-editor",
+        "close-entry-editor",
+        'data-action="open-entry-editor"',
+        'data-action="close-entry-editor"',
+        "entry-summary-card",
+        "entry-summary-effect",
+        "entry-summary-modifiers",
+        "entry-editor-drawer",
+        "普通字段",
+        "数值影响",
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    expected_style_markers = [
+        ".entry-summary-card",
+        ".entry-summary-meta",
+        ".entry-summary-effect",
+        ".entry-summary-modifiers",
+        ".entry-editor-drawer",
+    ]
+    for marker in expected_style_markers:
+        assert marker in style
+
+def test_status_tracker_uses_temporary_session_with_manual_browser_save():
+    page = read_text("web/status_tracker.html")
+    script = read_text("web/assets/js/status-tracker.js")
+
+    expected_page_markers = [
+        'data-action="save-to-browser"',
+        'data-action="load-from-browser"',
+        'data-action="clear-browser-save"',
+    ]
+    for marker in expected_page_markers:
+        assert marker in page
+
+    expected_script_markers = [
+        "saveProfilesToBrowser",
+        "loadProfilesFromBrowser",
+        "clearBrowserSave",
+        "markProfilesDirty",
+        "function activeProfile",
+        "临时状态",
+        "有未保存改动",
+        "已保存到浏览器",
+        'action === "save-to-browser"',
+        'action === "load-from-browser"',
+        'action === "clear-browser-save"',
+    ]
+    for marker in expected_script_markers:
+        assert marker in script
+
+    load_profiles_block = script.split("function loadProfiles()", 1)[1].split("function loadActiveProfileId", 1)[0]
+    assert "localStorage.getItem" not in load_profiles_block
+    assert "return [defaultProfile()]" in load_profiles_block
+
+    save_profiles_block = script.split("function saveProfiles()", 1)[1].split("function saveProfilesToBrowser", 1)[0]
+    assert "localStorage.setItem" not in save_profiles_block

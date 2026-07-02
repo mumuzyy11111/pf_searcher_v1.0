@@ -23,6 +23,61 @@
     ["cha", "魅力 CHA"],
   ];
 
+
+  const modifierTargets = [
+    ["hp", "最大 HP"],
+    ["ac", "AC"],
+    ["ability-str", "力量"],
+    ["ability-dex", "敏捷"],
+    ["ability-con", "体质"],
+    ["ability-int", "智力"],
+    ["ability-wis", "感知"],
+    ["ability-cha", "魅力"],
+    ["save-fort", "强韧"],
+    ["save-ref", "反射"],
+    ["save-will", "意志"],
+    ["attack-bab", "BAB"],
+    ["attack-melee", "近战攻击"],
+    ["attack-ranged", "远程攻击"],
+    ["attack-cmb", "CMB"],
+    ["attack-cmd", "CMD"],
+    ["initiative", "先攻"],
+    ["speed-land", "陆地速度"],
+    ["speed-fly", "飞行速度"],
+    ["speed-swim", "游泳速度"],
+    ["speed-climb", "攀爬速度"],
+    ["speed-burrow", "掘穴速度"],
+  ];
+
+  const commonModifierTypes = [
+    ["untyped", "未命名"],
+    ["enhancement", "增强"],
+    ["morale", "士气"],
+    ["insight", "洞察"],
+    ["luck", "幸运"],
+    ["sacred", "神圣"],
+    ["profane", "亵渎"],
+    ["circumstance", "环境"],
+    ["dodge", "闪避"],
+    ["penalty", "减值"],
+  ];
+
+  const modifierTypesByTarget = {
+    ac: [["armor", "护甲"], ["shield", "盾牌"], ["natural", "天生护甲"], ["deflection", "偏斜"], ["dodge", "闪避"], ["size", "体型"], ...commonModifierTypes],
+    hp: [["untyped", "未命名"], ["favored", "天赋职业"], ["temporary", "临时"], ["penalty", "减值"]],
+    default: commonModifierTypes,
+  };
+
+  const stackModeOptions = [
+    ["default", "默认规则"],
+    ["stack", "总是叠加"],
+    ["highest", "同类型取最高"],
+    ["display", "只展示"],
+  ];
+
+  const modifierCollections = ["classFeatures", "feats", "buffs", "companions", "items"];
+  const alwaysStackTypes = new Set(["dodge", "circumstance", "untyped"]);
+
   const els = {
     saveStatus: document.getElementById("save-status"),
     profileSelect: document.getElementById("profile-select"),
@@ -36,6 +91,8 @@
 
   let activeSection = "basic";
   let activeDetailId = null;
+  let activeEntryModifier = null;
+  let hasUnsavedChanges = false;
   let profiles = loadProfiles();
   let activeProfileId = loadActiveProfileId(profiles);
 
@@ -323,10 +380,33 @@
     merged.updatedAt = merged.updatedAt || new Date().toISOString();
     migrateDetailModifiers(merged);
     normalizeAttackProfiles(merged);
+    normalizeEntryModifiers(merged);
     return merged;
   }
 
 
+
+  function normalizeEntryModifier(modifier) {
+    return {
+      id: modifier && modifier.id ? modifier.id : makeId("entry-modifier"),
+      target: modifier && modifier.target ? modifier.target : "ac",
+      value: modifier && modifier.value !== undefined ? modifier.value : "",
+      type: modifier && modifier.type !== undefined ? modifier.type : "untyped",
+      source: modifier && modifier.source !== undefined ? modifier.source : "",
+      enabled: modifier && modifier.enabled !== undefined ? Boolean(modifier.enabled) : true,
+      stackMode: modifier && modifier.stackMode ? modifier.stackMode : "default",
+    };
+  }
+
+  function normalizeEntryModifiers(profile) {
+    modifierCollections.forEach((collectionPath) => {
+      const collection = getByPath(profile, collectionPath);
+      if (!Array.isArray(collection)) return;
+      collection.forEach((entry) => {
+        entry.modifiers = Array.isArray(entry.modifiers) ? entry.modifiers.map(normalizeEntryModifier) : [];
+      });
+    });
+  }
   function legacyModifier(value, source) {
     return value === null || value === undefined || value === "" ? null : { id: makeId("modifier"), value, type: "", source };
   }
@@ -394,32 +474,73 @@
   }
 
   function loadProfiles() {
-    try {
-      const parsed = JSON.parse(localStorage.getItem(PROFILES_KEY) || "[]");
-      if (Array.isArray(parsed) && parsed.length) return parsed.map(normalizeProfile);
-    } catch (_) {
-      // Fall through to a clean profile.
-    }
     return [defaultProfile()];
   }
 
   function loadActiveProfileId(profileList) {
-    const stored = localStorage.getItem(ACTIVE_PROFILE_KEY);
-    return profileList.some((profile) => profile.id === stored) ? stored : profileList[0].id;
+    return profileList[0].id;
   }
 
   function activeProfile() {
     return profiles.find((profile) => profile.id === activeProfileId) || profiles[0];
   }
 
+  function setSaveStatus(message) {
+    els.saveStatus.textContent = message;
+  }
+
+  function markProfilesDirty() {
+    hasUnsavedChanges = true;
+    setSaveStatus("有未保存改动，请保存到浏览器或导出 JSON。");
+  }
+
   function saveProfiles() {
+    const profile = activeProfile();
+    profile.updatedAt = new Date().toISOString();
+    markProfilesDirty();
+    renderProfileSelect();
+    renderSummary();
+  }
+
+  function saveProfilesToBrowser() {
     const profile = activeProfile();
     profile.updatedAt = new Date().toISOString();
     localStorage.setItem(PROFILES_KEY, JSON.stringify(profiles));
     localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
-    els.saveStatus.textContent = `已保存 ${new Date().toLocaleTimeString()}`;
+    hasUnsavedChanges = false;
+    setSaveStatus(`已保存到浏览器 ${new Date().toLocaleTimeString()}`);
     renderProfileSelect();
     renderSummary();
+  }
+
+  function loadProfilesFromBrowser() {
+    const stored = localStorage.getItem(PROFILES_KEY);
+    if (!stored) {
+      window.alert("浏览器中没有已保存的状态卡。");
+      return;
+    }
+    if (hasUnsavedChanges && !window.confirm("读取浏览器存档会覆盖当前临时状态，是否继续？")) return;
+    try {
+      const parsed = JSON.parse(stored || "[]");
+      if (!Array.isArray(parsed) || !parsed.length) throw new Error("empty browser save");
+      profiles = parsed.map(normalizeProfile);
+      const storedActiveId = localStorage.getItem(ACTIVE_PROFILE_KEY);
+      activeProfileId = profiles.some((profile) => profile.id === storedActiveId) ? storedActiveId : profiles[0].id;
+      activeDetailId = null;
+      activeEntryModifier = null;
+      hasUnsavedChanges = false;
+      renderAll();
+      setSaveStatus(`已读取浏览器存档 ${new Date().toLocaleTimeString()}`);
+    } catch (_) {
+      window.alert("读取失败：浏览器存档不是有效的状态卡 JSON。");
+    }
+  }
+
+  function clearBrowserSave() {
+    if (!window.confirm("清除浏览器中的状态卡存档？当前页面中的临时状态不会被清空。")) return;
+    localStorage.removeItem(PROFILES_KEY);
+    localStorage.removeItem(ACTIVE_PROFILE_KEY);
+    setSaveStatus("已清除浏览器存档；当前状态仍是临时数据。");
   }
 
   function escapeHtml(value) {
@@ -604,6 +725,78 @@
     return Number.isFinite(parsed) ? parsed : 0;
   }
 
+
+  function getModifierTargetLabel(target) {
+    const item = modifierTargets.find(([id]) => id === target);
+    return item ? item[1] : target;
+  }
+
+  function getEntryTitle(entry, fallback = "条目") {
+    return entry.name || entry.featureName || entry.className || entry.type || fallback;
+  }
+
+  function getModifierTypeOptions(target) {
+    return modifierTypesByTarget[target] || modifierTypesByTarget.default;
+  }
+
+  function renderOptions(options, selected) {
+    return options.map(([value, label]) => `<option value="${escapeHtml(value)}" ${String(selected) === String(value) ? "selected" : ""}>${escapeHtml(label)}</option>`).join("");
+  }
+
+  function isEntryModifierActive(collectionPath, entry, modifier) {
+    if (!modifier || modifier.enabled === false) return false;
+    if (entry && entry.enabled === false) return false;
+    if (collectionPath === "items" && entry && entry.equipped === false && entry.enabled === false) return false;
+    return true;
+  }
+
+  function collectAutomaticModifiers(profile, detailId = null) {
+    const rows = [];
+    modifierCollections.forEach((collectionPath) => {
+      const collection = getByPath(profile, collectionPath);
+      if (!Array.isArray(collection)) return;
+      const config = Object.values(listConfigs).find((item) => item.collection === collectionPath);
+      collection.forEach((entry, entryIndex) => {
+        const modifiers = Array.isArray(entry.modifiers) ? entry.modifiers : [];
+        modifiers.forEach((modifier) => {
+          if (detailId && modifier.target !== detailId) return;
+          if (!isEntryModifierActive(collectionPath, entry, modifier)) return;
+          rows.push({
+            ...modifier,
+            collection: collectionPath,
+            collectionTitle: config ? config.title : collectionPath,
+            entryIndex,
+            entryName: getEntryTitle(entry, `条目 ${entryIndex + 1}`),
+            source: modifier.source || getEntryTitle(entry, `条目 ${entryIndex + 1}`),
+          });
+        });
+      });
+    });
+    return rows;
+  }
+
+  function getAutomaticModifiersForDetail(profile, detailId) {
+    return collectAutomaticModifiers(profile, detailId);
+  }
+
+  function calculateStackedModifierTotal(modifiers) {
+    let total = 0;
+    const highestByType = new Map();
+    (modifiers || []).forEach((modifier) => {
+      const value = toNumber(modifier.value);
+      if (!value || modifier.stackMode === "display") return;
+      const type = modifier.type || "untyped";
+      if (value < 0 || modifier.stackMode === "stack" || alwaysStackTypes.has(type)) {
+        total += value;
+        return;
+      }
+      const key = `${modifier.target || ""}:${type}`;
+      const current = highestByType.has(key) ? highestByType.get(key) : 0;
+      highestByType.set(key, Math.max(current, value));
+    });
+    highestByType.forEach((value) => { total += value; });
+    return total;
+  }
   function getDetailModifiers(profile, detailId) {
     const modifiers = profile.basicStats.detailModifiers || {};
     return Array.isArray(modifiers[detailId]) ? modifiers[detailId] : [];
@@ -613,11 +806,15 @@
     return getDetailModifiers(profile, detailId).reduce((total, item) => total + toNumber(item.value), 0);
   }
 
+  function sumAutomaticModifiers(profile, detailId) {
+    return calculateStackedModifierTotal(getAutomaticModifiersForDetail(profile, detailId));
+  }
+
   function hasDetailValue(profile, detailId) {
     const config = STATUS_DETAIL_CONFIGS[detailId];
     if (!config) return false;
     const baseValue = getByPath(profile, config.basePath);
-    return baseValue !== null && baseValue !== undefined && baseValue !== "" || getDetailModifiers(profile, detailId).some((item) => item.value !== "");
+    return baseValue !== null && baseValue !== undefined && baseValue !== "" || getDetailModifiers(profile, detailId).some((item) => item.value !== "") || getAutomaticModifiersForDetail(profile, detailId).some((item) => item.value !== "");
   }
 
   function calculateDetailTotal(profile, detailId) {
@@ -626,7 +823,7 @@
     const rawBase = getByPath(profile, config.basePath);
     const baseValue = rawBase === "" || rawBase === null || rawBase === undefined ? config.defaultBase : rawBase;
     if ((baseValue === "" || baseValue === null || baseValue === undefined) && !hasDetailValue(profile, detailId)) return null;
-    return toNumber(baseValue) + sumDetailModifiers(profile, detailId);
+    return toNumber(baseValue) + sumDetailModifiers(profile, detailId) + sumAutomaticModifiers(profile, detailId);
   }
 
   function calculateAbilityScore(profile, key) {
@@ -717,6 +914,29 @@
     `;
   }
 
+
+  function renderAutomaticModifierRows(detailId) {
+    const rows = getAutomaticModifiersForDetail(activeProfile(), detailId);
+    if (!rows.length) return `<div class="empty-state">暂无自动来源。可以在专长、Buff、职业能力、其他生物或奇物中添加数值影响。</div>`;
+    return `
+      <div class="automatic-modifier-table">
+        <div class="automatic-modifier-header">
+          <span>数值</span>
+          <span>类型</span>
+          <span>来源</span>
+          <span>叠加</span>
+        </div>
+        ${rows.map((item) => `
+          <div class="automatic-modifier-row" data-modifier-target="${escapeHtml(item.target)}">
+            <strong>${escapeHtml(formatSigned(item.value))}</strong>
+            <span>${escapeHtml(item.type || "untyped")}</span>
+            <span>${escapeHtml(item.collectionTitle)} / ${escapeHtml(item.source)}</span>
+            <span>${escapeHtml(item.stackMode || "default")}</span>
+          </div>
+        `).join("")}
+      </div>
+    `;
+  }
   function renderDetailSidebar() {
     if (!activeDetailId) return "";
     const config = STATUS_DETAIL_CONFIGS[activeDetailId] || STATUS_DETAIL_CONFIGS.hp;
@@ -737,8 +957,12 @@
             ${(config.extraFields || []).map((field) => renderField(field.label, field.path, field)).join("")}
           </div>
           <div class="modifier-section">
-            <h4>来源明细</h4>
+            <h4>手动来源</h4>
             ${renderModifierRows(activeDetailId)}
+          </div>
+          <div class="modifier-section">
+            <h4>自动来源</h4>
+            ${renderAutomaticModifierRows(activeDetailId)}
           </div>
         </div>
       </aside>
@@ -826,9 +1050,118 @@
     if (activeDetailId && !STATUS_DETAIL_CONFIGS[activeDetailId]) activeDetailId = null;
     return renderBasicOverview();
   }
+
+  function renderEntryModifierEditorRows(collection, index, entry) {
+    entry.modifiers = Array.isArray(entry.modifiers) ? entry.modifiers : [];
+    const rows = entry.modifiers.length ? entry.modifiers.map((modifier) => {
+      const target = modifier.target || "ac";
+      return `
+        <div class="entry-modifier-row" data-entry-modifier-id="${escapeHtml(modifier.id)}">
+          <input type="number" value="${escapeHtml(modifier.value)}" data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="value" placeholder="数值" />
+          <select data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="target">${renderOptions(modifierTargets, target)}</select>
+          <select data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="type">${renderOptions(getModifierTypeOptions(target), modifier.type || "untyped")}</select>
+          <input type="text" value="${escapeHtml(modifier.source)}" data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="source" placeholder="来源" />
+          <select data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="stackMode">${renderOptions(stackModeOptions, modifier.stackMode || "default")}</select>
+          <label class="inline-check"><input type="checkbox" ${modifier.enabled === false ? "" : "checked"} data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}" data-entry-modifier-field="enabled" />启用</label>
+          <button class="secondary-btn" type="button" data-action="remove-entry-modifier" data-collection="${escapeHtml(collection)}" data-index="${index}" data-entry-modifier-id="${escapeHtml(modifier.id)}">删除</button>
+        </div>
+      `;
+    }).join("") : `<div class="empty-state">暂无数值影响。添加后会自动计入基础数值。</div>`;
+    return `
+      <div class="entry-modifier-table">
+        <div class="entry-modifier-header">
+          <span>数值</span><span>目标</span><span>类型</span><span>来源</span><span>叠加</span><span>启用</span><span></span>
+        </div>
+        ${rows}
+      </div>
+      <button type="button" data-action="add-entry-modifier" data-collection="${escapeHtml(collection)}" data-index="${index}">添加数值影响</button>
+    `;
+  }
+
+  function renderEntryModifierSummary(entry) {
+    const modifiers = Array.isArray(entry.modifiers) ? entry.modifiers : [];
+    if (!modifiers.length) return `<span class="summary-chip muted-chip">无数值影响</span>`;
+    return modifiers.slice(0, 4).map((modifier) => `
+      <span class="summary-chip ${modifier.enabled === false ? "muted-chip" : ""}">
+        ${escapeHtml(getModifierTargetLabel(modifier.target || "ac"))} ${escapeHtml(formatSigned(modifier.value))} ${escapeHtml(modifier.type || "untyped")}
+      </span>
+    `).join("") + (modifiers.length > 4 ? `<span class="summary-chip muted-chip">+${modifiers.length - 4}</span>` : "");
+  }
+
+  function getEntryMetaParts(config, entry) {
+    const parts = [];
+    [entry.source, entry.type, entry.className, entry.slot, entry.duration, entry.remaining].forEach((value) => {
+      if (value) parts.push(value);
+    });
+    if (entry.enabled !== undefined) parts.push(entry.enabled ? "启用" : "未启用");
+    if (entry.alwaysOn !== undefined) parts.push(entry.alwaysOn ? "常驻" : "非常驻");
+    if (entry.equipped !== undefined) parts.push(entry.equipped ? "已装备" : "未装备");
+    return parts.length ? parts : [config.title];
+  }
+
+  function getEntryEffectSummary(entry) {
+    return entry.effect || entry.abilities || entry.currentState || entry.affectedStats || entry.notes || "未填写效果。";
+  }
+
+  function renderEntrySummary(config, entry, index) {
+    return `
+      <article class="entry-card entry-summary-card">
+        <div class="entry-title">
+          <div>
+            <strong>${escapeHtml(getEntryTitle(entry, `条目 ${index + 1}`))}</strong>
+            <div class="entry-summary-meta">${getEntryMetaParts(config, entry).map((part) => `<span>${escapeHtml(part)}</span>`).join("")}</div>
+          </div>
+          <div class="entry-actions entry-modifier-actions">
+            <button type="button" data-action="open-entry-editor" data-collection="${config.collection}" data-index="${index}">编辑</button>
+            <button class="secondary-btn" type="button" data-action="remove-entry" data-collection="${config.collection}" data-index="${index}">删除</button>
+          </div>
+        </div>
+        <p class="entry-summary-effect">${escapeHtml(getEntryEffectSummary(entry))}</p>
+        <div class="entry-summary-modifiers">${renderEntryModifierSummary(entry)}</div>
+      </article>
+    `;
+  }
+
+  function renderEntryEditorDrawer(config) {
+    if (!activeEntryModifier) return "";
+    const { collection, index } = activeEntryModifier;
+    const entry = (getByPath(activeProfile(), collection) || [])[Number(index)];
+    if (!entry) return "";
+    const drawerConfig = config || Object.values(listConfigs).find((item) => item.collection === collection);
+    if (!drawerConfig) return "";
+    return `
+      <div class="detail-overlay" data-action="close-entry-editor"></div>
+      <aside class="detail-sidebar entry-modifier-drawer entry-editor-drawer is-open" aria-label="条目编辑">
+        <div class="detail-drawer">
+          <div class="detail-heading">
+            <span>条目编辑</span>
+            <button class="detail-close-btn" type="button" data-action="close-entry-editor" aria-label="收起详情">×</button>
+            <h3>${escapeHtml(getEntryTitle(entry))}</h3>
+            <p>主界面只显示摘要；这里编辑完整字段和该条目对基础数值产生的影响。</p>
+          </div>
+          <section class="entry-editor-section">
+            <h4>普通字段</h4>
+            <div class="form-grid">
+              ${drawerConfig.fields.map((field) => renderEntryField(drawerConfig, Number(index), field)).join("")}
+            </div>
+          </section>
+          <section class="entry-editor-section">
+            <h4>数值影响</h4>
+            ${renderEntryModifierEditorRows(collection, Number(index), entry)}
+          </section>
+        </div>
+      </aside>
+    `;
+  }
+
+  function renderEntryModifierDrawer() {
+    return renderEntryEditorDrawer();
+  }
+
   function renderList(config) {
     const entries = getByPath(activeProfile(), config.collection) || [];
-    const body = entries.length ? entries.map((entry, index) => `
+    const useSummaryCards = modifierCollections.includes(config.collection);
+    const body = entries.length ? entries.map((entry, index) => useSummaryCards ? renderEntrySummary(config, entry, index) : `
       <article class="entry-card">
         <div class="entry-title">
           <strong>${escapeHtml(entry.name || entry.featureName || entry.className || `条目 ${index + 1}`)}</strong>
@@ -847,10 +1180,10 @@
           <button type="button" data-action="add-entry" data-collection="${config.collection}">${config.addText}</button>
         </div>
         ${body}
+        ${useSummaryCards && activeEntryModifier && activeEntryModifier.collection === config.collection ? renderEntryEditorDrawer(config) : ""}
       </section>
     `;
   }
-
 
   function renderAttackLine(profileIndex, line, lineIndex) {
     const base = `attackProfiles.${profileIndex}.attacks.${lineIndex}`;
@@ -981,6 +1314,47 @@
     renderSection();
   }
 
+
+  function getEntryModifier(collectionPath, index, modifierId) {
+    const collection = getByPath(activeProfile(), collectionPath) || [];
+    const entry = collection[Number(index)];
+    if (!entry) return null;
+    entry.modifiers = Array.isArray(entry.modifiers) ? entry.modifiers : [];
+    return entry.modifiers.find((item) => item.id === modifierId) || null;
+  }
+
+  function setEntryModifierField(collectionPath, index, modifierId, field, rawValue) {
+    const modifier = getEntryModifier(collectionPath, index, modifierId);
+    if (!modifier || !["value", "target", "type", "source", "enabled", "stackMode"].includes(field)) return;
+    modifier[field] = field === "enabled" ? Boolean(rawValue) : rawValue;
+  }
+
+  function addEntryModifier(collectionPath, index) {
+    const collection = getByPath(activeProfile(), collectionPath) || [];
+    const entry = collection[Number(index)];
+    if (!entry) return;
+    entry.modifiers = Array.isArray(entry.modifiers) ? entry.modifiers : [];
+    entry.modifiers.push({
+      id: makeId("entry-modifier"),
+      target: "ac",
+      value: "",
+      type: "untyped",
+      source: getEntryTitle(entry),
+      enabled: true,
+      stackMode: "default",
+    });
+    saveProfiles();
+    renderSection();
+  }
+
+  function removeEntryModifier(collectionPath, index, modifierId) {
+    const collection = getByPath(activeProfile(), collectionPath) || [];
+    const entry = collection[Number(index)];
+    if (!entry) return;
+    entry.modifiers = (Array.isArray(entry.modifiers) ? entry.modifiers : []).filter((item) => item.id !== modifierId);
+    saveProfiles();
+    renderSection();
+  }
   function addAttackProfile() {
     activeProfile().attackProfiles.push(defaultAttackProfile());
     saveProfiles();
@@ -1087,6 +1461,7 @@
     if (!window.confirm(`确定清空当前页面“${section[1]}”的所有内容吗？此操作不可撤销。`)) return;
     resetSection(activeProfile(), section[0]);
     activeDetailId = null;
+    activeEntryModifier = null;
     saveProfiles();
     renderAll();
   }
@@ -1103,6 +1478,7 @@
     const index = profiles.findIndex((item) => item.id === profile.id);
     if (index >= 0) profiles[index] = fresh;
     activeDetailId = null;
+    activeEntryModifier = null;
     saveProfiles();
     renderAll();
   }
@@ -1155,6 +1531,12 @@
 
   document.addEventListener("input", (event) => {
     const target = event.target;
+    if (target.dataset.entryModifierField) {
+      const value = target.type === "checkbox" ? target.checked : target.value;
+      setEntryModifierField(target.dataset.collection, target.dataset.index, target.dataset.entryModifierId, target.dataset.entryModifierField, value);
+      saveProfiles();
+      return;
+    }
     if (target.dataset.modifierField) {
       setModifierField(target.dataset.detailId, target.dataset.modifierId, target.dataset.modifierField, target.value);
       saveProfiles();
@@ -1181,13 +1563,20 @@
     const target = event.target;
     if (target === els.profileSelect) {
       activeProfileId = target.value;
-      localStorage.setItem(ACTIVE_PROFILE_KEY, activeProfileId);
+      markProfilesDirty();
       renderAll();
       return;
     }
     if (target === els.importInput && target.files && target.files[0]) {
       importProfile(target.files[0]);
       target.value = "";
+      return;
+    }
+    if (target.dataset.entryModifierField) {
+      const value = target.type === "checkbox" ? target.checked : target.value;
+      setEntryModifierField(target.dataset.collection, target.dataset.index, target.dataset.entryModifierId, target.dataset.entryModifierField, value);
+      saveProfiles();
+      renderSection();
       return;
     }
     if (target.dataset.modifierField && activeSection === "basic") {
@@ -1213,6 +1602,7 @@
     if (actionTarget.dataset.section) {
       activeSection = actionTarget.dataset.section;
       activeDetailId = null;
+      activeEntryModifier = null;
       renderSection();
       return;
     }
@@ -1224,6 +1614,7 @@
     }
     if (action === "close-detail") {
       activeDetailId = null;
+      activeEntryModifier = null;
       renderSection();
       return;
     }
@@ -1235,6 +1626,24 @@
       removeDetailModifier(actionTarget.dataset.detailId, actionTarget.dataset.modifierId);
       return;
     }
+    if (action === "open-entry-editor" || action === "open-entry-modifiers") {
+      activeEntryModifier = { collection: actionTarget.dataset.collection, index: actionTarget.dataset.index };
+      renderSection();
+      return;
+    }
+    if (action === "close-entry-editor" || action === "close-entry-modifiers") {
+      activeEntryModifier = null;
+      renderSection();
+      return;
+    }
+    if (action === "add-entry-modifier") {
+      addEntryModifier(actionTarget.dataset.collection, actionTarget.dataset.index);
+      return;
+    }
+    if (action === "remove-entry-modifier") {
+      removeEntryModifier(actionTarget.dataset.collection, actionTarget.dataset.index, actionTarget.dataset.entryModifierId);
+      return;
+    }
     if (action === "add-attack-profile") { addAttackProfile(); return; }
     if (action === "duplicate-attack-profile") { duplicateAttackProfile(actionTarget.dataset.profileIndex); return; }
     if (action === "remove-attack-profile") { removeAttackProfile(actionTarget.dataset.profileIndex); return; }
@@ -1242,14 +1651,17 @@
     if (action === "remove-attack-line") { removeAttackLine(actionTarget.dataset.profileIndex, actionTarget.dataset.lineIndex); return; }
     if (action === "clear-current-section") { clearCurrentSection(); return; }
     if (action === "clear-current-profile") { clearCurrentProfile(); return; }
-    if (action === "new-profile") newProfile();
-    if (action === "duplicate-profile") duplicateProfile();
-    if (action === "delete-profile") deleteProfile();
-    if (action === "export-profile") exportProfile();
+    if (action === "new-profile") { newProfile(); return; }
+    if (action === "duplicate-profile") { duplicateProfile(); return; }
+    if (action === "delete-profile") { deleteProfile(); return; }
+    if (action === "save-to-browser") { saveProfilesToBrowser(); return; }
+    if (action === "load-from-browser") { loadProfilesFromBrowser(); return; }
+    if (action === "clear-browser-save") { clearBrowserSave(); return; }
+    if (action === "export-profile") { exportProfile(); return; }
     if (action === "add-entry") addEntry(actionTarget.dataset.collection);
     if (action === "remove-entry") removeEntry(actionTarget.dataset.collection, actionTarget.dataset.index);
   });
 
   renderAll();
-  saveProfiles();
+  setSaveStatus("临时状态，关闭或刷新会丢失；请保存到浏览器或导出 JSON。");
 })();

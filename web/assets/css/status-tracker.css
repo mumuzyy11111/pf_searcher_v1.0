@@ -719,3 +719,147 @@ button,
     display: block;
   }
 }
+.entry-modifier-drawer {
+  width: min(720px, 96vw);
+}
+
+.entry-modifier-table,
+.automatic-modifier-table {
+  display: grid;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.entry-modifier-header,
+.entry-modifier-row {
+  display: grid;
+  grid-template-columns: 82px minmax(120px, 1fr) minmax(120px, 1fr) minmax(130px, 1fr) minmax(110px, 1fr) 72px 68px;
+  gap: 8px;
+  align-items: center;
+}
+
+.entry-modifier-header,
+.automatic-modifier-header {
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 800;
+}
+
+.entry-modifier-row,
+.automatic-modifier-row {
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #f8fafc;
+  padding: 8px;
+}
+
+.entry-modifier-row input,
+.entry-modifier-row select {
+  width: 100%;
+  border: 1px solid var(--line);
+  border-radius: 8px;
+  background: #fff;
+  color: var(--text);
+  padding: 8px 9px;
+}
+
+.inline-check {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  color: var(--muted);
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.inline-check input {
+  width: auto;
+}
+
+.automatic-modifier-header,
+.automatic-modifier-row {
+  display: grid;
+  grid-template-columns: 72px 110px minmax(0, 1fr) 96px;
+  gap: 8px;
+  align-items: center;
+}
+
+.automatic-modifier-row strong {
+  color: #102a24;
+}
+
+.entry-modifier-actions {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (max-width: 760px) {
+  .entry-modifier-header,
+  .automatic-modifier-header {
+    display: none;
+  }
+
+  .entry-modifier-row,
+  .automatic-modifier-row {
+    grid-template-columns: 1fr;
+  }
+}
+.entry-summary-card {
+  display: grid;
+  gap: 10px;
+}
+
+.entry-summary-meta {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-top: 6px;
+  color: var(--muted);
+  font-size: 12px;
+  font-weight: 700;
+}
+
+.entry-summary-meta span,
+.summary-chip {
+  display: inline-flex;
+  align-items: center;
+  min-height: 28px;
+  border-radius: 999px;
+  background: var(--brand-soft);
+  color: #12382e;
+  padding: 4px 9px;
+  line-height: 1.2;
+}
+
+.entry-summary-effect {
+  margin: 0;
+  color: var(--text);
+  line-height: 1.55;
+}
+
+.entry-summary-modifiers {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.summary-chip.muted-chip {
+  background: #eef2f5;
+  color: var(--muted);
+}
+
+.entry-editor-drawer {
+  width: min(760px, 96vw);
+}
+
+.entry-editor-section {
+  border-top: 1px solid var(--line);
+  padding-top: 14px;
+  margin-top: 14px;
+}
+
+.entry-editor-section h4 {
+  margin: 0 0 10px;
+  font-size: 15px;
+}

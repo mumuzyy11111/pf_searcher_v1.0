@@ -4,7 +4,7 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>pathfinder_tools_v1.2.3 人物卡状态记录器</title>
-  <link rel="stylesheet" href="assets/css/status-tracker.css?v=20260701-clear-v1" />
+  <link rel="stylesheet" href="assets/css/status-tracker.css?v=20260702-manual-browser-save-v1" />
 </head>
 <body>
   <main class="tracker-shell">
@@ -33,6 +33,9 @@
         <button type="button" class="secondary-btn" data-action="delete-profile">删除</button>
         <button type="button" class="secondary-btn" data-action="clear-current-section">清空本页</button>
         <button type="button" class="secondary-btn" data-action="clear-current-profile">清空状态卡</button>
+        <button type="button" data-action="save-to-browser">保存到浏览器</button>
+        <button type="button" data-action="load-from-browser">读取浏览器存档</button>
+        <button type="button" class="secondary-btn" data-action="clear-browser-save">清除浏览器存档</button>
         <button type="button" data-action="export-profile">导出 JSON</button>
         <label class="import-btn" for="import-profile-input">导入 JSON</label>
         <input id="import-profile-input" type="file" accept="application/json" hidden />
@@ -58,6 +61,6 @@
     </section>
   </main>
 
-  <script src="assets/js/status-tracker.js?v=20260701-clear-v1"></script>
+  <script src="assets/js/status-tracker.js?v=20260702-manual-browser-save-v1"></script>
 </body>
 </html>
